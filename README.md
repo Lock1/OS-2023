@@ -11,13 +11,13 @@ Notes - [Milestone 1 Notes](/Milestone%201%20Notes.md)
 - [ ] Initial kit / template milestone 1
 
 ## Milestone 2
-- Interrupt (IRQ kaya keyboard)
-- Memory management (memcpy, malloc, etc)
-- Basic process + monotasking
+- [ ] Interrupt (IRQ kaya keyboard)
+- [ ] Memory management (memcpy, malloc, etc)
+- [ ] Basic process + monotasking
 
 ## Milestone 3
-- Paging
-- Multitasking
+- [ ] Paging
+- [ ] Multitasking
 
 # Resources
 32 bit Resources
