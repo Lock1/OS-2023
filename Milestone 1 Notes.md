@@ -1,17 +1,25 @@
 # Milestone 1
 
 ## 0. Toolchains & dependencies
-- GRUB -> Bootloader
+- qemu -> Main execution environment
 - gcc  -> Main compiler, bonus bisa inline asm
 - nasm -> Optional asm compiler (?)
-- qemu -> Main execution environment
+- GRUB -> Bootloader
 
 
 ## 1. Initial setup & toolchain install
-WIP
+- gcc, nasm
+
+`sudo apt-get install gcc nasm`
+
+- QEMU 
+
+Jika menggunakan ubuntu, jalankan `sudo apt update`
+https://www.qemu.org/download/#linux
+
 
 ## 2. Bootloader
-WIP
+WIP, Grub QEMU
 
 
 ## 3. Global Descriptor Table (GDT) + Protected Mode
