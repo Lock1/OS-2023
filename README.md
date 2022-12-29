@@ -1,6 +1,8 @@
 # OS-2023
 Testing spesifikasi IF2130 Sistem Operasi 2023
 
+[Link to main google drive folder](https://drive.google.com/drive/u/1/folders/1LdYtswwx7qoXmI2DoEF8Yux-QSzXqU8v)
+
 # Planned Roadmap
 ## Milestone 1
 Notes - [Milestone 1 Notes](/Milestone%201%20Notes.md)

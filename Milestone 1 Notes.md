@@ -1,4 +1,5 @@
 # Milestone 1
+[Link to milestone 1 document](https://docs.google.com/document/d/1ebhX-D_bNafray9C6T8cmgAy8_E58i_uWkngrNWHjr4/edit#)
 
 ## 0. Toolchains & dependencies
 - qemu -> Main execution environment
@@ -12,7 +13,7 @@
 
 `sudo apt-get install gcc nasm`
 
-- QEMU 
+- QEMU
 
 Jika menggunakan ubuntu, jalankan `sudo apt update`
 https://www.qemu.org/download/#linux
