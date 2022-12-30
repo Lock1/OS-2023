@@ -24,6 +24,8 @@ Notes - [Milestone 1 Notes](/Milestone%201%20Notes.md)
 # Resources
 32 bit Resources
 
+- Bootloader & GRUB : http://www.jamesmolloy.co.uk/tutorial_html/index.html + https://littleosbook.github.io/
+
 Possibly main resource : https://539kernel.com/
 - https://github.com/tuhdo/os01
 - https://github.com/HazemGabr232/Simple_OS
