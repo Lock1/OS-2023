@@ -6,17 +6,17 @@
 - gcc  -> Main compiler, bonus bisa inline asm
 - nasm -> Optional asm compiler (?)
 - GRUB -> Bootloader
+- make -> Build system
 
 
 ## 1. Initial setup & toolchain install
-- gcc, nasm
+- Recommended Host : Ubuntu 20.04
+- Untested : Any linux-based system
 
-`sudo apt-get install gcc nasm`
+- gcc, nasm, make, qemu
 
-- QEMU
-
-Jika menggunakan ubuntu, jalankan `sudo apt update`
-https://www.qemu.org/download/#linux
+`sudo apt-get update`
+`sudo apt-get install gcc nasm make qemu`
 
 
 ## 2. Bootloader
