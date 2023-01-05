@@ -14,11 +14,12 @@ Notes - [Milestone 1 Notes](/Milestone%201%20Notes.md)
 
 ## Milestone 2
 - [ ] Interrupt (IRQ kaya keyboard)
-- [ ] Memory management (memcpy, malloc, etc)
+- [ ] Filesystem
 - [ ] Basic process + monotasking
 
 ## Milestone 3
 - [ ] Paging
+- [ ] Memory management (memcpy, malloc, etc)
 - [ ] Multitasking
 
 # Resources

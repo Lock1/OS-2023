@@ -20,6 +20,9 @@
 
 
 ## 2. Bootloader
+Source
+1. http://www.jamesmolloy.co.uk/tutorial_html/index.html
+2. https://littleosbook.github.io/
 WIP, Grub QEMU
 
 
