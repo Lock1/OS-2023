@@ -19,7 +19,8 @@
                     "ignoreFailures": true
                 }
             ],
-            // "preLaunchTask": "Launch QEMU",
+            "preLaunchTask": "Launch QEMU",
+            "postDebugTask": "Exit QEMU",
             "targetArchitecture": "x86",
             "customLaunchSetupCommands": [
                 {

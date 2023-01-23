@@ -19,18 +19,12 @@
         {
             "type": "shell",
             "label": "Launch QEMU",
-            "command": "qemu-system-i386",
+            "command": "echo Starting QEMU&qemu-system-i386 -s -S -cdrom os2023.iso",
             "isBackground": true,
-            "args": [
-                "-S",
-                "-s",
-                "-cdrom",
-                "os2023.iso"
-            ],
+            "dependsOn": "Build OS",
             "options": {
                 "cwd": "${workspaceFolder}/bin"
             },
-            "dependsOn": "Build OS",
             "problemMatcher": {
                 "pattern": [
                     {
@@ -46,6 +40,11 @@
                     "endsPattern": ".",
                 }
             }
+        },
+        {
+            "type": "shell",
+            "label": "Exit QEMU",
+            "command": "pkill -f qemu"
         }
     ],
 }

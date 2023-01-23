@@ -1,9 +1,6 @@
 # Milestone 1
 [Link to milestone 1 document](https://docs.google.com/document/d/1ebhX-D_bNafray9C6T8cmgAy8_E58i_uWkngrNWHjr4/edit#)
 
-## Current Issues
-- Launch qemu inside VSCode, frictionless F5
-
 
 ## 0. Toolchains & dependencies
 - qemu        -> Main execution environment
