@@ -16,12 +16,12 @@ WARNING_CFLAG = -Wall -Wextra -Werror
 DEBUG_CFLAG   = -ffreestanding -fshort-wchar -g
 STRIP_CFLAG   = -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs
 CFLAGS        = $(DEBUG_CFLAG) $(WARNING_CFLAG) $(STRIP_CFLAG) -m32 -c
-AFLAGS        = -g -f elf32
+AFLAGS        = -f elf32 -g -F dwarf
 LFLAGS        = -T $(SOURCE_FOLDER)/linker.ld -melf_i386
 
 
 run: all
-	qemu-system-x86_64 -s -cdrom bin/$(ISO_NAME).iso
+	qemu-system-i386 -s -S -cdrom bin/$(ISO_NAME).iso
 all: build
 build: iso
 clean:

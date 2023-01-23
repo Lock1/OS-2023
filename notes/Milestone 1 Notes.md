@@ -1,13 +1,20 @@
 # Milestone 1
 [Link to milestone 1 document](https://docs.google.com/document/d/1ebhX-D_bNafray9C6T8cmgAy8_E58i_uWkngrNWHjr4/edit#)
 
-## 0. Toolchains & dependencies
-- qemu -> Main execution environment
-- gcc  -> Main compiler, bonus bisa inline asm
-- nasm -> Optional asm compiler (?)
-- GRUB -> Bootloader
-- make -> Build system
+## Current Issues
+- Launch qemu inside VSCode, frictionless F5
 
+
+## 0. Toolchains & dependencies
+- qemu        -> Main execution environment
+- gcc         -> Main compiler, bonus bisa inline asm
+- nasm        -> Optional asm compiler (?)
+- GRUB        -> Bootloader
+- make        -> Build system
+- genisoimage -> Creating system image
+
+- gdb    -> Debugger
+- vscode -> Editor + Debugger integration
 
 ## 1. Initial setup & toolchain install
 - Recommended Host : Ubuntu 20.04
@@ -46,6 +53,13 @@ Currently not used
 
 Running OS
 `qemu-system-x86_64 -s -cdrom bin/os2023.iso`
+
+Debugger
+`-exec` prefix for gdb command in VSCode Debug Console
+Example: `-exec set $rax=5`
+
+Note with watchpoint: `int` will be treated as such, signed integer,
+be careful with expression `a > 0` or `a < 0`. Make sure to remember variable type declaration.
 
 ## 3. Global Descriptor Table (GDT) + Protected Mode
 WIP

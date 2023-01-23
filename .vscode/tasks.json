@@ -17,9 +17,10 @@
             }
         },
         {
-            "type": "process",
+            "type": "shell",
             "label": "Launch QEMU",
-            "command": "qemu-system-x86_64",
+            "command": "qemu-system-i386",
+            "isBackground": true,
             "args": [
                 "-S",
                 "-s",
@@ -29,7 +30,22 @@
             "options": {
                 "cwd": "${workspaceFolder}/bin"
             },
-            "dependsOn": "Build OS"
+            "dependsOn": "Build OS",
+            "problemMatcher": {
+                "pattern": [
+                    {
+                        "regexp": ".",
+                        "file": 1,
+                        "location": 2,
+                        "message": 3
+                    }
+                ],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".",
+                    "endsPattern": ".",
+                }
+            }
         }
     ],
 }
