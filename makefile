@@ -1,21 +1,43 @@
-ASM           = nasm
-LINKER        = ld
+# Object files
+OBJECTS = kernel.o loader.o
+
+# Compiler & linker
+ASM = nasm
+LIN = ld
+CC  = gcc
+
+# Directory
 SOURCE_FOLDER = src
 OUTPUT_FOLDER = bin
-CFLAGS        = -ffreestanding -fshort-wchar -g -m32
 ISO_NAME      = os2023
 
-build: iso
+# Flags
+WARNING_CFLAG = -Wall -Wextra -Werror
+DEBUG_CFLAG   = -ffreestanding -fshort-wchar -g
+STRIP_CFLAG   = -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs
+CFLAGS        = $(DEBUG_CFLAG) $(WARNING_CFLAG) $(STRIP_CFLAG) -m32 -c
+AFLAGS        = -g -f elf32
+LFLAGS        = -T $(SOURCE_FOLDER)/linker.ld -melf_i386
 
-kernel:
-	$(ASM) -g -f elf32 $(SOURCE_FOLDER)/loader.s -o $(OUTPUT_FOLDER)/loader.o
-	$(LINKER) -T $(SOURCE_FOLDER)/linker.ld -melf_i386 $(OUTPUT_FOLDER)/loader.o -o $(OUTPUT_FOLDER)/kernel
+
+run: all
+	qemu-system-x86_64 -s -cdrom bin/$(ISO_NAME).iso
+all: build
+build: iso
+clean:
+	rm -rf *.o *.iso bin/kernel
+
+
+
+kernel: $(OBJECTS)
+	$(LIN) $(LFLAGS) $(OBJECTS) -o $(OUTPUT_FOLDER)/kernel
+	rm -f *.o
 
 iso: kernel
 	mkdir -p $(OUTPUT_FOLDER)/iso/boot/grub
-	cp $(OUTPUT_FOLDER)/kernel $(OUTPUT_FOLDER)/iso/boot/
+	cp $(OUTPUT_FOLDER)/kernel     $(OUTPUT_FOLDER)/iso/boot/
 	cp other/grub1_stage2_eltorito $(OUTPUT_FOLDER)/iso/boot/grub/
-	cp $(SOURCE_FOLDER)/menu.lst $(OUTPUT_FOLDER)/iso/boot/grub/
+	cp $(SOURCE_FOLDER)/menu.lst   $(OUTPUT_FOLDER)/iso/boot/grub/
 	genisoimage -R                          \
 		-b boot/grub/grub1_stage2_eltorito  \
 		-no-emul-boot                       \
@@ -26,6 +48,10 @@ iso: kernel
 		-boot-info-table                    \
 		-o $(OUTPUT_FOLDER)/$(ISO_NAME).iso \
 		$(OUTPUT_FOLDER)/iso
+	rm -r $(OUTPUT_FOLDER)/iso/
 
-clean:
-	rm -f *.o
+%.o: $(SOURCE_FOLDER)/%.c
+	$(CC)  $(CFLAGS) $< -o $@
+
+%.o: $(SOURCE_FOLDER)/%.s
+	$(ASM) $(AFLAGS) $< -o $@
