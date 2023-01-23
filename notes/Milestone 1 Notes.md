@@ -16,7 +16,7 @@
 - gcc, nasm, make, qemu
 
 `sudo apt-get update`
-`sudo apt-get install gcc nasm make qemu`
+`sudo apt-get install gcc nasm make qemu genisoimage`
 
 
 ## 2. Bootloader
