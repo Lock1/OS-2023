@@ -1,0 +1,35 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "Build OS",
+            "command": "make",
+            "args": [
+                "build",
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "process",
+            "label": "Launch QEMU",
+            "command": "qemu-system-x86_64",
+            "args": [
+                "-S",
+                "-s",
+                "-cdrom",
+                "os2023.iso"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/bin"
+            },
+            "dependsOn": "Build OS"
+        }
+    ],
+}
