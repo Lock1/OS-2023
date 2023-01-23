@@ -6,7 +6,7 @@ Testing spesifikasi IF2130 Sistem Operasi 2023
 # Planned Roadmap
 ## Milestone 1
 1-5
-Notes - [Milestone 1 Notes](/notes/Milestone%201%20Notes.md)
+Notes - [Milestone 1 Notes](/other/notes/Milestone%201%20Notes.md)
 - [x] Initial setup & toolchain install
 - [ ] Bootloader
 - [ ] Global Descriptor Table (GDT) + Protected Mode
