@@ -5,7 +5,8 @@ Testing spesifikasi IF2130 Sistem Operasi 2023
 
 # Planned Roadmap
 ## Milestone 1
-Notes - [Milestone 1 Notes](/Milestone%201%20Notes.md)
+1-5
+Notes - [Milestone 1 Notes](/other/notes/Milestone%201%20Notes.md)
 - [x] Initial setup & toolchain install
 - [ ] Bootloader
 - [ ] Global Descriptor Table (GDT) + Protected Mode
@@ -13,11 +14,13 @@ Notes - [Milestone 1 Notes](/Milestone%201%20Notes.md)
 - [ ] Initial kit / template milestone 1
 
 ## Milestone 2
+6-11
 - [ ] Interrupt (IRQ kaya keyboard)
 - [ ] Filesystem
 - [ ] Basic process + monotasking
 
 ## Milestone 3
+12-End
 - [ ] Paging
 - [ ] Memory management (memcpy, malloc, etc)
 - [ ] Multitasking
@@ -27,7 +30,8 @@ Notes - [Milestone 1 Notes](/Milestone%201%20Notes.md)
 
 - Bootloader & GRUB : http://www.jamesmolloy.co.uk/tutorial_html/index.html + https://littleosbook.github.io/
 
-Possibly main resource : https://539kernel.com/
+Possibly main resource : https://littleosbook.github.io/
+- https://539kernel.com/
 - https://github.com/tuhdo/os01
 - https://github.com/HazemGabr232/Simple_OS
 - http://www.cs.bham.ac.uk/~exr/lectures/opsys/10_11/lectures/os-dev.pdf
