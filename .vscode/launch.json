@@ -30,6 +30,10 @@
                 {
                     "text": "symbol-file kernel",
                     "description": "Get kernel symbols"
+                },
+                {
+                    "text": "set output-radix 16",
+                    "description": "Use hexadecimal output"
                 }
             ],
             "avoidWindowsConsoleRedirection": true

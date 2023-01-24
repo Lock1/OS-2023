@@ -56,6 +56,8 @@ Open WSL in root and type `code .`
 `-exec` prefix for gdb command in VSCode Debug Console
 Example: `-exec set $rax=5`
 
+By default, vscode configuration included is set to hexadecimal view
+
 Note with watchpoint: `int` will be treated as such, signed integer,
 be careful with expression `a > 0` or `a < 0`. Make sure to remember variable type declaration.
 
@@ -95,6 +97,7 @@ struct example {
 void out(unsigned short port, unsigned char data);
 ```
 
+4. If really need some unused variable for very specific purpose, learn to use `volatile` keyword
 
 This section will create "driver" for the screen. 
 - The screen is text mode with resolution 80x25 character
