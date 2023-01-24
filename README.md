@@ -8,9 +8,9 @@ Testing spesifikasi IF2130 Sistem Operasi 2023
 1-5
 Notes - [Milestone 1 Notes](/other/notes/Milestone%201%20Notes.md)
 - [x] Initial setup & toolchain install
-- [ ] Bootloader
+- [x] Bootloader
+- [x] I/O Memory Map (VGA)
 - [ ] Global Descriptor Table (GDT) + Protected Mode
-- [ ] I/O Memory Map (VGA)
 - [ ] Initial kit / template milestone 1
 
 ## Milestone 2

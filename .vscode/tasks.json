@@ -44,7 +44,7 @@
         {
             "type": "shell",
             "label": "Exit QEMU",
-            "command": "pkill -f qemu"
+            "command": "pkill -f qemu || test $? -eq 1"
         }
     ],
 }
