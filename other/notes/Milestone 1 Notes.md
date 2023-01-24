@@ -61,6 +61,7 @@ be careful with expression `a > 0` or `a < 0`. Make sure to remember variable ty
 
 `F5` to start debugging
 `Shift + F5` to stop debugging
+`Ctrl + Shift + B` for build task
 
 Right click at call stack to see assembly form
 ![VSCode asm](/other/img/disassembly.jpg)
@@ -68,6 +69,7 @@ Right click at call stack to see assembly form
 
 ## 3. I/O Memory Map (VGA)
 `gcc` guidelines
+0. Preface: This is kernel dev, no handholding, no memory safeguard, `gcc -Werror` is recommended. Disable `-Werror` only when debugging
 1. Any struct will use `__attribute__((packed))`
 ```c
 struct example {
