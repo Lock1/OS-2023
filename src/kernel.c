@@ -1,5 +1,6 @@
-#include "lib-header/io.h"
-#include "lib-header/stdint.h"
+#include "lib-header/portio.h"
+#include "lib-header/stdtype.h"
+#include "lib-header/memory.h"
 
 void kernel_setup(void) {
     uint32_t a;

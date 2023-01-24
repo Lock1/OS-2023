@@ -1,5 +1,10 @@
-#ifndef _STDINT
-#define _STDINT
+#ifndef _STDTYPE
+#define _STDTYPE
+
+/**
+ * Unsigned integer representing object size
+*/
+typedef unsigned int size_t;
 
 /**
  * 32-bit unsigned integer
@@ -30,5 +35,12 @@ typedef signed short int16_t;
  * 8-bit signed integer
  */
 typedef signed char int8_t;
+
+/**
+ * Naive implementation of boolean (uint8_t)
+*/
+typedef uint8_t bool;
+#define TRUE 1
+#define FALSE 0
 
 #endif
