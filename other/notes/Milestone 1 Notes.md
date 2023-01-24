@@ -78,8 +78,13 @@ struct example {
     unsigned char index;    /* bit 24 - 31 */
 } __attribute__((packed));
 ```
-2. If needed, `gcc` inline asm can be useful (https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html)
-3. Add comment like this, in order to add definition to Intellisense
+2. If needed, `gcc` inline asm can be useful
+    - https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html
+    - https://wiki.osdev.org/Inline_Assembly/Examples
+    - https://ibiblio.org/gferg/ldp/GCC-Inline-Assembly-HOWTO.html#s3
+    - Usually "a" "b" "c" "d" constraint denote register `ax`, `bx`, `cx`, `dx`
+
+3. Add comment like this (Doxygen format https://devblogs.microsoft.com/cppblog/visual-studio-code-c-extension-july-2020-update-doxygen-comments-and-logpoints/), in order to add definition to Intellisense
 ```c
 /** out:
  *  Sends the given data to the given I/O port

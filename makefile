@@ -1,5 +1,5 @@
 # Object files
-OBJECTS = kernel.o loader.o
+OBJECTS = kernel.o loader.o io.o
 
 # Compiler & linker
 ASM = nasm
@@ -15,7 +15,7 @@ ISO_NAME      = os2023
 WARNING_CFLAG = -Wall -Wextra -Werror
 DEBUG_CFLAG   = -ffreestanding -fshort-wchar -g
 STRIP_CFLAG   = -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs
-CFLAGS        = $(DEBUG_CFLAG) $(WARNING_CFLAG) $(STRIP_CFLAG) -m32 -c
+CFLAGS        = $(DEBUG_CFLAG) $(WARNING_CFLAG) $(STRIP_CFLAG) -m32 -c -I$(SOURCE_FOLDER)
 AFLAGS        = -f elf32 -g -F dwarf
 LFLAGS        = -T $(SOURCE_FOLDER)/linker.ld -melf_i386
 
