@@ -34,6 +34,7 @@ Main editor: Visual Studio Code
 Source
 1. http://www.jamesmolloy.co.uk/tutorial_html/index.html
 2. https://littleosbook.github.io/
+3. https://wiki.osdev.org/Meaty_Skeleton
 
 Note : Win10 WSL still need to manual install xserver, refer to this repo: https://github.com/Sister19/WSL-Troubleshoot 
 
