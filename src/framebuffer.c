@@ -1,6 +1,6 @@
 #include "lib-header/framebuffer.h"
 #include "lib-header/stdtype.h"
-#include "lib-header/memory.h"
+#include "lib-header/stdmem.h"
 #include "lib-header/portio.h"
 
 enum cursor_command {
