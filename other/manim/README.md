@@ -1,3 +1,0 @@
-# Manim Sources
-
-**TBA**

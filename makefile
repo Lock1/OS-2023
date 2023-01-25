@@ -1,15 +1,34 @@
-ASM = nasm
+ASM = nasm -f elf32
+CC = gcc -m32 -c -ffreestanding -fno-stack-protector -fno-pie -fno-asynchronous-unwind-tables -nostartfiles -Wall -Wextra -Werror
+LINKER = ld -Tlinker.ld -melf_i386
 SOURCE_FOLDER = src
 OUTPUT_FOLDER = bin
-BOOTSTRAP_FILE = $(SOURCE_FOLDER)/bootstrap.asm 
-KERNEL_FILE = $(SOURCE_FOLDER)/simple_kernel.asm
+FINAL_IMAGE = os.iso
 
-build: $(BOOTSTRAP_FILE) $(KERNEL_FILE)
-	$(ASM) -f bin $(BOOTSTRAP_FILE) -o $(OUTPUT_FOLDER)/bootstrap.o
-	$(ASM) -f bin $(KERNEL_FILE) -o $(OUTPUT_FOLDER)/kernel.o
-	dd if=$(OUTPUT_FOLDER)/bootstrap.o of=$(OUTPUT_FOLDER)/kernel.img
-	dd seek=1 conv=sync if=$(OUTPUT_FOLDER)/kernel.o of=$(OUTPUT_FOLDER)/kernel.img bs=512
-	qemu-system-x86_64 -s $(OUTPUT_FOLDER)/kernel.img
+kernel:
+	$(ASM) $(SOURCE_FOLDER)/loader.asm
+	$(CC) $(SOURCE_FOLDER)/kernel.c -o $(SOURCE_FOLDER)/kernel.o
+	$(LINKER) $(SOURCE_FOLDER)/loader.o $(SOURCE_FOLDER)/kernel.o -o $(OUTPUT_FOLDER)/boot/kernel.o
 
-clean:
-	rm -f *.o
+kernel-debug:
+	$(ASM) $(SOURCE_FOLDER)/loader.asm -g -F dwarf
+	$(CC) $(SOURCE_FOLDER)/kernel.c -o $(SOURCE_FOLDER)/kernel.o -g
+	$(LINKER) $(SOURCE_FOLDER)/loader.o $(SOURCE_FOLDER)/kernel.o -o $(OUTPUT_FOLDER)/boot/kernel.o -g
+
+build:
+	genisoimage -R                              \
+				-b boot/grub/grub               \
+				-no-emul-boot                   \
+				-boot-load-size 4               \
+				-A os                           \
+				-input-charset utf8             \
+				-quiet                          \
+				-boot-info-table                \
+				-o $(FINAL_IMAGE)               \
+				$(OUTPUT_FOLDER)
+
+run: kernel build
+	qemu-system-i386 -boot d -cdrom os.iso
+
+debug: kernel-debug build
+	qemu-system-i386 -boot d -cdrom os.iso -s -S -daemonize

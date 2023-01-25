@@ -1,0 +1,5 @@
+default=0
+timeout=0
+
+title OS2023
+kernel /boot/kernel.o
