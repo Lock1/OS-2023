@@ -1,5 +1,5 @@
 global loader                   ; the entry symbol for ELF
-global load_gdt
+global enter_protected_mode
 extern kmain
 
 MAGIC_NUMBER equ 0x1BADB002     ; define the magic number constant
@@ -22,7 +22,21 @@ loader:                         ; the loader label (defined as entry point in li
 	mov esp, kernel_stack + KERNEL_STACK_SIZE   ; point esp to the start of the stack (end of memory area)
 	call kmain
 
-load_gdt:
+enter_protected_mode:
 	cli
-	lgdt [esp+4]
+	lgdt [ebp+8]
+	mov eax, cr0
+	or eax, 1
+	mov cr0, eax
+	
+	mov eax, 10h
+    mov ds, eax
+    mov ss, eax
+    mov es, eax
+
+	jmp 0x8:flush_cs
+
 	ret
+
+flush_cs:
+	

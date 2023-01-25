@@ -1,7 +1,7 @@
 typedef unsigned char uint8;
 typedef unsigned short uint16;
 typedef unsigned int uint32;
-typedef struct gdt_data {
+typedef struct gdt {
     uint16 limit_low;
     uint16 base_low;
     uint8 base_mid;
@@ -13,15 +13,12 @@ typedef struct gdt_data {
     uint8 dpl: 2; // descriptor level privilege, PL0 = kernel/most privilege, PL3 = user/least privilege
     uint8 present: 1;
     uint8 limit_up: 4;
-    uint8 available: 1;
-
+    uint8 reserved: 1; // always 0
+    uint8 long_mode: 1;
+    uint8 db_size: 1;
     uint8 granularity: 1;
+    uint8 base_hi;
 } __attribute__((packed)) gdt;
-
-union gdt
-{
-    
-};
 
 
 typedef struct gdtr {
@@ -34,15 +31,24 @@ int check() {
     return sizeof(a);
 }
 gdt gdt_records[5] = {
-
+    {0},
+    {
+        .accessed = 1,
+        .base_hi = 0x10
+    },
+    {
+        .dpl = 0
+    }
 };
-extern int load_gdt(gdtr* i);
+
+extern void enter_protected_mode(gdtr* gdt_r);
+
 gdtr gdtreg = {
     .address = gdt_records,
     .size = sizeof(gdt_records),
 };
 int kmain() {
-    load_gdt(&gdtreg);
+    enter_protected_mode(&gdtreg);
     check();
     while (1);
     return 0xdeadbeef;

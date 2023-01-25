@@ -31,4 +31,5 @@ run: kernel build
 	qemu-system-i386 -boot d -cdrom os.iso
 
 debug: kernel-debug build
+	killall qemu 2>/dev/null || true
 	qemu-system-i386 -boot d -cdrom os.iso -s -S -daemonize
