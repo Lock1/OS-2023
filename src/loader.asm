@@ -12,7 +12,7 @@ section .bss
 kernel_stack:                   ; label points to beginning of memory
 	resb KERNEL_STACK_SIZE      ; reserve stack for the kernel
 
-section .text:                  ; start of the text (code) section
+section .text                   ; start of the text (code) section
 align 4
 	dd MAGIC_NUMBER             ; write the magic number to the machine code,
 	dd FLAGS                    ; the flags,
@@ -24,11 +24,12 @@ loader:                         ; the loader label (defined as entry point in li
 
 enter_protected_mode:
 	cli
-	lgdt [ebp+8]
+	mov eax, [esp+4]
+	lgdt [eax]
 	mov eax, cr0
 	or eax, 1
 	mov cr0, eax
-	
+
 	mov eax, 10h
     mov ds, eax
     mov ss, eax
