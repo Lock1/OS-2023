@@ -1,7 +1,6 @@
 global loader                        ; the entry symbol for ELF
 global launch_protected_mode         ; go to protected mode
 extern kernel_setup                  ; kernel
-extern gdt
 
 
 KERNEL_STACK_SIZE equ 4096           ; size of stack in bytes
@@ -29,10 +28,11 @@ loader:                                       ; the loader label (defined as ent
     jmp .loop                                 ; loop forever
 
 launch_protected_mode:
-    mov eax, gdt
+    cli
+    mov eax, [esp+4]
     lgdt [eax]
     mov eax, cr0
-    or eax, 1
+    or  eax, 1
     mov cr0, eax
 
     mov ax, 10h
@@ -42,4 +42,5 @@ launch_protected_mode:
 
     jmp 0x8:flush_cs
 flush_cs:
+    sti
     ret

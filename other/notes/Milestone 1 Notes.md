@@ -107,6 +107,9 @@ This section will create "driver" for the screen.
     - Memory-mapped I/O filled with framebuffer (in character), located at 0xB8000
     - I/O ports for controlling cursor, located at 0x3D4 and 0x3D5
 
+5. Even using gcc bitfield, total struct size still aligned to nearest upper (ceiled) 8-bit / 1 byte. This can be affect alignment sensitive struct such GDT
+
+
 For main document : Show memory layout, from empty, loading kernel into memory, and continued
 
 ## 4. Global Descriptor Table (GDT) + Protected Mode
