@@ -8,14 +8,14 @@
 extern struct GDTDescriptor _memory_gdt_descriptor;
 
 /**
- * Global Descriptor access byte
+ * Segment Descriptor access byte
  * 
  * @param type_bit   4-bit carrying R/W/X, direction, and accessed flag
  * @param non_system 1-bit descriptor type bit, 0 for system segment and 1 for code/data segment (inc. kernel)
  * @param privilege  2-bit privilege level field, PL0 = Maximum, PL3 = User / minimum privilege
  * @param valid_bit  1-bit indicating whether segment is valid
  */
-struct GDAccessByte {
+struct SDAccessByte {
     uint8_t type_bit   : 4;
     uint8_t non_system : 1;
     uint8_t privilege  : 2;
@@ -23,9 +23,10 @@ struct GDAccessByte {
 } __attribute__((packed));
 
 /**
- * Global Descriptor storing system segment information. 
+ * Segment Descriptor storing system segment information.
  * Struct defined exactly as Intel Manual Segment Descriptor definition (Figure 3-8 Segment Descriptor).
- * 
+ * Manual can be downloaded at www.intel.com/content/www/us/en/architecture-and-technology/64-ia-32-architectures-software-developer-vol-3a-part-1-manual.html/ 
+ *
  * @param segment_low  16-bit lower-bit segment limit
  * @param base_low     16-bit lower-bit base address
  * @param base_mid     8-bit middle-bit base address
@@ -37,14 +38,14 @@ struct GDAccessByte {
  * @param granularity  1-bit whether using block granularity (if 1) or byte-level
  * @param base_high    8-bit upper-bit base address
  */
-struct GlobalDescriptor {
+struct SegmentDescriptor {
     // First 32-bit
     uint16_t segment_low;
     uint16_t base_low;
 
     // Next 16-bit (Bit 32 to 47)
     uint8_t             base_mid;
-    struct GDAccessByte access;
+    struct SDAccessByte access;
 
     // Next 8-bit (Bit 48 to 55)
     uint8_t segment_high : 4;
@@ -58,13 +59,13 @@ struct GlobalDescriptor {
 } __attribute__((packed));
 
 /**
- * Global Descriptor Table containing list of global descriptor. One GDT already defined in memory.c.
+ * Global Descriptor Table containing list of segment descriptor. One GDT already defined in memory.c.
  * Table entry : [{Null Descriptor}, {Kernel Code},  {Kernel Data (variable, etc)}, ...].
  * More details at https://wiki.osdev.org/GDT_Tutorial
- * @param table Fixed-width array of GlobalDescriptor with size GDT_MAX_ENTRY_COUNT
+ * @param table Fixed-width array of SegmentDescriptor with size GDT_MAX_ENTRY_COUNT
  */
 struct GlobalDescriptorTable {
-    struct GlobalDescriptor table[GDT_MAX_ENTRY_COUNT];
+    struct SegmentDescriptor table[GDT_MAX_ENTRY_COUNT];
 } __attribute__((packed));
 
 /**
