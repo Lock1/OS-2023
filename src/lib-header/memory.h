@@ -60,7 +60,6 @@ struct SegmentDescriptor {
 
 /**
  * Global Descriptor Table containing list of segment descriptor. One GDT already defined in memory.c.
- * Table entry : [{Null Descriptor}, {Kernel Code},  {Kernel Data (variable, etc)}, ...].
  * More details at https://wiki.osdev.org/GDT_Tutorial
  * @param table Fixed-width array of SegmentDescriptor with size GDT_MAX_ENTRY_COUNT
  */

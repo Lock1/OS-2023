@@ -123,4 +123,6 @@ Main document : Describe & illustrate GDT, littleosbook does pretty good job des
 - https://www.intel.com/content/www/us/en/architecture-and-technology/64-ia-32-architectures-software-developer-vol-3a-part-1-manual.html.html
 - http://www.osdever.net/bkerndev/Docs/gdt.htm
 
-
+Due very sensitive nature of GDT, in my opinion, best left only GDT definition to student. 
+But also due integral nature of GDT in memory management, this section should force them to read manual.
+We will provide `launch_protected_mode` declaration and definition, student instead should figure out to fill proper GDT according to Intel Manual / OSDev.
