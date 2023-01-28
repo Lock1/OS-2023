@@ -85,6 +85,7 @@ struct example {
     - https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html
     - https://wiki.osdev.org/Inline_Assembly/Examples
     - https://ibiblio.org/gferg/ldp/GCC-Inline-Assembly-HOWTO.html#s3
+    - https://dmalcolm.fedorapeople.org/gcc/2015-08-31/rst-experiment/how-to-use-inline-assembly-language-in-c-code.html#goto-labels
     - Usually "a" "b" "c" "d" constraint denote register `ax`, `bx`, `cx`, `dx`
 
 3. Add comment like this (Doxygen format https://devblogs.microsoft.com/cppblog/visual-studio-code-c-extension-july-2020-update-doxygen-comments-and-logpoints/), in order to add definition to Intellisense
@@ -109,7 +110,12 @@ This section will create "driver" for the screen.
 For main document : Show memory layout, from empty, loading kernel into memory, and continued
 
 ## 4. Global Descriptor Table (GDT) + Protected Mode
-WIP
-
+Main document : Describe & illustrate GDT, littleosbook does pretty good job describing them already
+- https://forum.osdev.org/viewtopic.php?f=1&t=11117
+- https://wiki.osdev.org/Global_Descriptor_Table
+- https://wiki.osdev.org/GDT_Tutorial
+- https://wiki.osdev.org/Segment_Selector
+- https://www.intel.com/content/www/us/en/architecture-and-technology/64-ia-32-architectures-software-developer-vol-3a-part-1-manual.html.html
+- http://www.osdever.net/bkerndev/Docs/gdt.htm
 
 

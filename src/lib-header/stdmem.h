@@ -1,5 +1,5 @@
-#ifndef _MEMORY_H
-#define _MEMORY_H
+#ifndef _STDMEM_H
+#define _STDMEM_H
 
 #include "lib-header/stdtype.h"
 
