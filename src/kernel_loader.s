@@ -42,5 +42,4 @@ launch_protected_mode:
 
     jmp 0x8:flush_cs
 flush_cs:
-    sti
     ret
