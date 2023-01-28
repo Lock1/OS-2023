@@ -15,6 +15,7 @@ Notes - [Milestone 1 Notes](/other/notes/Milestone%201%20Notes.md)
 
 ## Milestone 2
 6-11
+**WIP**
 - [ ] Interrupt (IRQ kaya keyboard)
 - [ ] Filesystem
 - [ ] Basic process + monotasking
