@@ -3,7 +3,7 @@
 
 #include "lib-header/stdtype.h"
 
-/** memset:
+/**
  * C standard memset, check man memset or
  * https://man7.org/linux/man-pages/man3/memset.3.html for more details
  * 
@@ -15,7 +15,7 @@
 */
 void* memset(void *s, int c, size_t n);
 
-/** memcpy:
+/**
  * C standard memcpy, check man memcpy or
  * https://man7.org/linux/man-pages/man3/memcpy.3.html for more details
  * 
@@ -27,7 +27,7 @@ void* memset(void *s, int c, size_t n);
 */
 void* memcpy(void* restrict dest, const void* restrict src, size_t n);
 
-/** memcmp:
+/**
  * C standard memcmp, check man memcmp or
  * https://man7.org/linux/man-pages/man3/memcmp.3.html for more details
  * 
@@ -39,7 +39,7 @@ void* memcpy(void* restrict dest, const void* restrict src, size_t n);
 */
 int memcmp(const void *s1, const void *s2, size_t n);
 
-/** memmove:
+/**
  * C standard memmove, check man memmove or
  * https://man7.org/linux/man-pages/man3/memmove.3.html for more details
  * 

@@ -3,6 +3,18 @@
 
 #include "lib-header/stdtype.h"
 
+#define GDT_MAX_ENTRY_COUNT 32
+
+extern struct GDTDescriptor _memory_gdt_descriptor;
+
+/**
+ * Global Descriptor access byte
+ * 
+ * @param type_bit   4-bit carrying R/W/X, direction, and accessed flag
+ * @param non_system 1-bit descriptor type bit, 0 for system segment and 1 for code/data segment (inc. kernel)
+ * @param privilege  2-bit privilege level field, PL0 = Maximum, PL3 = User / minimum privilege
+ * @param valid_bit  1-bit indicating whether segment is valid
+ */
 struct GDAccessByte {
     uint8_t type_bit   : 4;
     uint8_t non_system : 1;
@@ -10,13 +22,28 @@ struct GDAccessByte {
     uint8_t valid_bit  : 1;
 } __attribute__((packed));
 
+/**
+ * Global Descriptor storing system segment information. 
+ * Struct defined exactly as Intel Manual Segment Descriptor definition (Figure 3-8 Segment Descriptor).
+ * 
+ * @param segment_low  16-bit lower-bit segment limit
+ * @param base_low     16-bit lower-bit base address
+ * @param base_mid     8-bit middle-bit base address
+ * @param access       8-bit GDAccessByte structure, contain access flags
+ * @param segment_high 4-bit upper-bit segment limit
+ * @param _reserved    1-bit unused / reserved for future
+ * @param long_mode    1-bit flag indicate 64-bit code segment
+ * @param opr_32_bit   1-bit indicating using 32-bit or 16-bit operand mode
+ * @param granularity  1-bit whether using block granularity (if 1) or byte-level
+ * @param base_high    8-bit upper-bit base address
+ */
 struct GlobalDescriptor {
     // First 32-bit
     uint16_t segment_low;
     uint16_t base_low;
 
     // Next 16-bit (Bit 32 to 47)
-    uint8_t  base_mid;
+    uint8_t             base_mid;
     struct GDAccessByte access;
 
     // Next 8-bit (Bit 48 to 55)
@@ -30,9 +57,26 @@ struct GlobalDescriptor {
     uint8_t base_high;
 } __attribute__((packed));
 
+/**
+ * Global Descriptor Table containing list of global descriptor. One GDT already defined in memory.c.
+ * Table entry : [{Null Descriptor}, {Kernel Code},  {Kernel Data (variable, etc)}, ...].
+ * More details at https://wiki.osdev.org/GDT_Tutorial
+ * @param table Fixed-width array of GlobalDescriptor with size GDT_MAX_ENTRY_COUNT
+ */
+struct GlobalDescriptorTable {
+    struct GlobalDescriptor table[GDT_MAX_ENTRY_COUNT];
+} __attribute__((packed));
+
+/**
+ * GDT Descriptor, carrying information where's the GDT located and GDT size.
+ * Global kernel variable defined at memory.c.
+ * 
+ * @param size    Global Descriptor Table size, use sizeof operator
+ * @param address GDT address, GDT should already defined properly
+ */
 struct GDTDescriptor {
-    uint16_t size;
-    struct GlobalDescriptor *address;
+    uint16_t                     size;
+    struct GlobalDescriptorTable *address;
 } __attribute__((packed));
 
 #endif

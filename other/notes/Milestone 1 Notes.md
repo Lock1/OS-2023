@@ -109,6 +109,8 @@ This section will create "driver" for the screen.
 
 5. Even using gcc bitfield, total struct size still aligned to nearest upper (ceiled) 8-bit / 1 byte. This can be affect alignment sensitive struct such GDT
 
+6. Use leading underscore and filename for global kernel variable (Ex. `_memory_gdtr`)
+
 
 For main document : Show memory layout, from empty, loading kernel into memory, and continued
 
