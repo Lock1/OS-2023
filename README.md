@@ -10,7 +10,7 @@ Notes - [Milestone 1 Notes](/other/notes/Milestone%201%20Notes.md)
 - [x] Initial setup & toolchain install
 - [x] Bootloader
 - [x] I/O Memory Map (VGA)
-- [ ] Global Descriptor Table (GDT) + Protected Mode
+- [x] Global Descriptor Table (GDT) + Protected Mode
 - [ ] Initial kit / template milestone 1
 
 ## Milestone 2
