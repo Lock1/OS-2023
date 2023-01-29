@@ -12,18 +12,20 @@
  * Resolution: 80x25
  * Starting at MEMORY_FRAMEBUFFER,
  * - Even number memory: Character, 8-bit
- * - Odd number memory:  Foreground color upper 4-bit, Background color lower 4-bit
+ * - Odd number memory:  Character color lower 4-bit, Background color upper 4-bit
 */
 
 /** framebuffer_write:
- * Set framebuffer character and color with corresponding parameter values
- * 
- * @param i  Location in the framebuffer
- * @param c  Character
- * @param fg Foreground color
- * @param bg Background color
-*/
-void framebuffer_write(uint16_t i, char c, uint8_t fg, uint8_t bg);
+ * Set framebuffer character and color with corresponding parameter values.
+ * More details: https://en.wikipedia.org/wiki/BIOS_color_attributes
+ *
+ * @param row Vertical location (index start 0)
+ * @param col Horizontal location (index start 0)
+ * @param c   Character
+ * @param fg  Foreground / Character color
+ * @param bg  Background color
+ */
+void framebuffer_write(uint8_t row, uint8_t col, char c, uint8_t fg, uint8_t bg);
 
 /** framebuffer_set_cursor:
  * Set cursor to specified location. Row and column starts from 0

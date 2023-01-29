@@ -50,7 +50,7 @@ Currently not used
 - `simple_kernel.asm` not from LittleOS
 
 Running OS
-`qemu-system-x86_64 -s -cdrom bin/os2023.iso`
+`qemu-system-i386 -s -cdrom bin/os2023.iso`
 
 Debugger
 Open WSL in root and type `code .`
@@ -122,6 +122,7 @@ Main document : Describe & illustrate GDT, littleosbook does pretty good job des
 - https://wiki.osdev.org/Segment_Selector
 - https://www.intel.com/content/www/us/en/architecture-and-technology/64-ia-32-architectures-software-developer-vol-3a-part-1-manual.html.html
 - http://www.osdever.net/bkerndev/Docs/gdt.htm
+- Intel Manual 9.9.1. Switching to Protected Mode
 
 Due very sensitive nature of GDT, in my opinion, best left only GDT definition to student. 
 But also due integral nature of GDT in memory management, this section should force them to read manual.

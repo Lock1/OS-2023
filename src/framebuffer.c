@@ -16,9 +16,10 @@ void framebuffer_set_cursor(uint8_t r, uint8_t c) {
     out(CURSOR_PORT_DATA, location & 0x00FFu);
 }
 
-void framebuffer_write(uint16_t i, char c, uint8_t fg, uint8_t bg) {
-    uint8_t high = (fg & 0xF) << 4;
-    uint8_t low  = (bg & 0xF);
-    memset(MEMORY_FRAMEBUFFER + i, c, 1);
-    memset(MEMORY_FRAMEBUFFER + i + 1, high | low, 1);
+void framebuffer_write(uint8_t row, uint8_t col, char c, uint8_t fg, uint8_t bg) {
+    uint8_t  back_color = (bg & 0xF) << 4;
+    uint8_t  char_color = (fg & 0xF);
+    uint16_t offset     = 2*(80*row + col);
+    memset(MEMORY_FRAMEBUFFER + offset, c, 1);
+    memset(MEMORY_FRAMEBUFFER + offset + 1, back_color | char_color, 1);
 }
