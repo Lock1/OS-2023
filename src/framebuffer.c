@@ -23,3 +23,10 @@ void framebuffer_write(uint8_t row, uint8_t col, char c, uint8_t fg, uint8_t bg)
     memset(MEMORY_FRAMEBUFFER + offset, c, 1);
     memset(MEMORY_FRAMEBUFFER + offset + 1, back_color | char_color, 1);
 }
+
+void framebuffer_clear(void) {
+    memset(MEMORY_FRAMEBUFFER, 0, 80*25*2);
+    for (size_t i = 0; i < 80; i++)
+        for (size_t j = 0; j < 25; j++)
+            memset(MEMORY_FRAMEBUFFER + 2*(i+80*j), 0x07, 1);
+}

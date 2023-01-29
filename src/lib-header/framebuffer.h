@@ -15,7 +15,7 @@
  * - Odd number memory:  Character color lower 4-bit, Background color upper 4-bit
 */
 
-/** framebuffer_write:
+/**
  * Set framebuffer character and color with corresponding parameter values.
  * More details: https://en.wikipedia.org/wiki/BIOS_color_attributes
  *
@@ -27,12 +27,19 @@
  */
 void framebuffer_write(uint8_t row, uint8_t col, char c, uint8_t fg, uint8_t bg);
 
-/** framebuffer_set_cursor:
+/**
  * Set cursor to specified location. Row and column starts from 0
  * 
  * @param r row
  * @param c column
 */
 void framebuffer_set_cursor(uint8_t r, uint8_t c);
+
+/** 
+ * Set all cell in framebuffer character to 0x00 (empty character)
+ * and color to 0x07 (gray character & black background)
+ * 
+ */
+void framebuffer_clear(void);
 
 #endif
