@@ -5,7 +5,7 @@
 
 #define GDT_MAX_ENTRY_COUNT 32
 
-extern struct GDTDescriptor _gdt_gdtr;
+extern struct GDTR _gdt_gdtr;
 
 /**
  * Segment Descriptor access byte
@@ -67,15 +67,14 @@ struct GlobalDescriptorTable {
     struct SegmentDescriptor table[GDT_MAX_ENTRY_COUNT];
 } __attribute__((packed));
 
-// TODO : Rename to GDTR
 /**
- * GDT Descriptor, carrying information where's the GDT located and GDT size.
+ * GDTR, carrying information where's the GDT located and GDT size.
  * Global kernel variable defined at memory.c.
  * 
  * @param size    Global Descriptor Table size, use sizeof operator
  * @param address GDT address, GDT should already defined properly
  */
-struct GDTDescriptor {
+struct GDTR {
     uint16_t                     size;
     struct GlobalDescriptorTable *address;
 } __attribute__((packed));

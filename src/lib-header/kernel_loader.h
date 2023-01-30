@@ -2,11 +2,11 @@
 #define _KERNEL_LOADER
 
 /**
- * Load GDT from gdt_descriptor and launch protected mode. This function defined in asm source code.
+ * Load GDT from gdtr and launch protected mode. This function defined in asm source code.
  * 
- * @param gdt_descriptor Pointer to already defined & initialized GDTDescriptor
+ * @param gdtr Pointer to already defined & initialized GDTR
  * @warning Invalid address / definition of GDT will cause bootloop after calling this function.
  */
-extern void enter_protected_mode(struct GDTDescriptor *gdt_descriptor);
+extern void enter_protected_mode(struct GDTR *gdtr);
 
 #endif
