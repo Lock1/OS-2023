@@ -1,5 +1,6 @@
 # Object files
 OBJECTS = kernel.o kernel_loader.o portio.o stdmem.o framebuffer.o gdt.o
+# TODO : Make sure, basic template is runnable according to spec
 
 # Compiler & linker
 ASM = nasm
@@ -25,11 +26,12 @@ run: all
 all: build
 build: iso
 clean:
-	rm -rf *.o *.iso bin/kernel
+	rm -rf *.o *.iso $(OUTPUT_FOLDER)/kernel
 
 
 
 kernel: $(OBJECTS)
+# TODO: Compile all object files
 	@$(LIN) $(LFLAGS) $(OBJECTS) -o $(OUTPUT_FOLDER)/kernel
 	@echo Linking object files and generate elf32...
 	@rm -f *.o
@@ -37,24 +39,7 @@ kernel: $(OBJECTS)
 iso: kernel
 	@mkdir -p $(OUTPUT_FOLDER)/iso/boot/grub
 	@cp $(OUTPUT_FOLDER)/kernel     $(OUTPUT_FOLDER)/iso/boot/
-	@cp other/grub1_stage2_eltorito $(OUTPUT_FOLDER)/iso/boot/grub/
+	@cp other/grub1                 $(OUTPUT_FOLDER)/iso/boot/grub/
 	@cp $(SOURCE_FOLDER)/menu.lst   $(OUTPUT_FOLDER)/iso/boot/grub/
-	@genisoimage -R                          \
-		-b boot/grub/grub1_stage2_eltorito  \
-		-no-emul-boot                       \
-		-boot-load-size 4                   \
-		-A os                               \
-		-input-charset utf8                 \
-		-quiet                              \
-		-boot-info-table                    \
-		-o $(OUTPUT_FOLDER)/$(ISO_NAME).iso \
-		$(OUTPUT_FOLDER)/iso
+# TODO: Create ISO image
 	@rm -r $(OUTPUT_FOLDER)/iso/
-
-%.o: $(SOURCE_FOLDER)/%.c
-	@$(CC)  $(CFLAGS) $< -o $@
-	@echo Compiling $@...
-
-%.o: $(SOURCE_FOLDER)/%.s
-	@$(ASM) $(AFLAGS) $< -o $@
-	@echo Compiling $@...

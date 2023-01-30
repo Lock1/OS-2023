@@ -11,14 +11,22 @@ enum cursor_command {
 void framebuffer_set_cursor(uint8_t r, uint8_t c) {
     uint16_t location = r * 0x50 + c;
     out(CURSOR_PORT_CMD, UpperByte);
-    out(CURSOR_PORT_DATA, location & 0xFF00u);
+    out(CURSOR_PORT_DATA, (location & 0xFF00u) >> 8);
     out(CURSOR_PORT_CMD, LowerByte);
     out(CURSOR_PORT_DATA, location & 0x00FFu);
 }
 
-void framebuffer_write(uint16_t i, char c, uint8_t fg, uint8_t bg) {
-    uint8_t high = (fg & 0xF) << 4;
-    uint8_t low  = (bg & 0xF);
-    memset(MEMORY_FRAMEBUFFER + i, c, 1);
-    memset(MEMORY_FRAMEBUFFER + i + 1, high | low, 1);
+void framebuffer_write(uint8_t row, uint8_t col, char c, uint8_t fg, uint8_t bg) {
+    uint8_t  back_color = (bg & 0xF) << 4;
+    uint8_t  char_color = (fg & 0xF);
+    uint16_t offset     = 2*(80*row + col);
+    memset(MEMORY_FRAMEBUFFER + offset, c, 1);
+    memset(MEMORY_FRAMEBUFFER + offset + 1, back_color | char_color, 1);
+}
+
+void framebuffer_clear(void) {
+    memset(MEMORY_FRAMEBUFFER, 0, 80*25*2);
+    for (size_t i = 0; i < 80; i++)
+        for (size_t j = 0; j < 25; j++)
+            memset(MEMORY_FRAMEBUFFER + 2*(i+80*j), 0x07, 1);
 }

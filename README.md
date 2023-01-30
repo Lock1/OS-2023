@@ -13,6 +13,7 @@ Notes - [Milestone 1 Notes](/other/notes/Milestone%201%20Notes.md)
 - [x] Global Descriptor Table (GDT) + Protected Mode
 - [ ] Initial kit / template milestone 1
 
+
 ## Milestone 2
 6-11
 **WIP**

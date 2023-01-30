@@ -1,11 +1,11 @@
-#ifndef _MEMORY_H
-#define _MEMORY_H
+#ifndef _GDT_H
+#define _GDT_H
 
 #include "lib-header/stdtype.h"
 
 #define GDT_MAX_ENTRY_COUNT 32
 
-extern struct GDTDescriptor _memory_gdt_descriptor;
+extern struct GDTR _gdt_gdtr;
 
 /**
  * Segment Descriptor access byte
@@ -68,13 +68,13 @@ struct GlobalDescriptorTable {
 } __attribute__((packed));
 
 /**
- * GDT Descriptor, carrying information where's the GDT located and GDT size.
+ * GDTR, carrying information where's the GDT located and GDT size.
  * Global kernel variable defined at memory.c.
  * 
  * @param size    Global Descriptor Table size, use sizeof operator
  * @param address GDT address, GDT should already defined properly
  */
-struct GDTDescriptor {
+struct GDTR {
     uint16_t                     size;
     struct GlobalDescriptorTable *address;
 } __attribute__((packed));
