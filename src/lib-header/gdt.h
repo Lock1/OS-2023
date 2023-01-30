@@ -1,12 +1,11 @@
-#ifndef _MEMORY_H
-#define _MEMORY_H
+#ifndef _GDT_H
+#define _GDT_H
 
 #include "lib-header/stdtype.h"
 
 #define GDT_MAX_ENTRY_COUNT 32
 
-extern struct GDTDescriptor _memory_gdt_descriptor;
-// TODO : Rename to _gdt_gdtr
+extern struct GDTDescriptor _gdt_gdtr;
 
 /**
  * Segment Descriptor access byte
