@@ -1,6 +1,7 @@
 global loader                        ; the entry symbol for ELF
-global enter_protected_mode         ; go to protected mode
+global enter_protected_mode          ; go to protected mode
 extern kernel_setup                  ; kernel
+
 
 
 KERNEL_STACK_SIZE equ 4096           ; size of stack in bytes
@@ -21,34 +22,33 @@ align 4                              ; the code must be 4 byte aligned
     dd CHECKSUM                      ; and the checksum
 
 
-loader:                                       ; the loader label (defined as entry point in linker script)
-    mov esp, kernel_stack + KERNEL_STACK_SIZE ; setup stack register to proper location
+
+loader:                                        ; the loader label (defined as entry point in linker script)
+    mov  esp, kernel_stack + KERNEL_STACK_SIZE ; setup stack register to proper location
     call kernel_setup
 .loop:
-    jmp .loop                                 ; loop forever
+    jmp .loop                                  ; loop forever
+
 
 ; More details: https://en.wikibooks.org/wiki/X86_Assembly/Protected_Mode
 enter_protected_mode:
-    ; Load GDT from GDTDescriptor
     cli
     mov  eax, [esp+4]
-    lgdt [eax]
+    ; TODO: Load GDT from GDTDescriptor
+    ;       eax at this line will carry GDTR location, dont forget to use square bracket [eax]
 
-    ; Set Protection Enable bit-flag in Control Register 0 (CR0)
-    ; Or in other words: Switch to protected mode
     mov  eax, cr0
-    or   eax, 1
+    ; TODO: Set bit-0 (Protection Enable bit-flag) in Control Register 0 (CR0)
+    ;       Set eax with above condition, eax will be copied to CR0 with next instruction
     mov  cr0, eax
 
     ; Far jump to update cs register
     ; Warning: Invalid GDT will raise exception in any instruction below
     jmp 0x8:flush_cs
 flush_cs:
-    ; Update all segment register
     mov ax, 10h
+    ; TODO: Set all data segment register with 0x10
+    ;       Segments register need to set with 0x10: ss, ds, es
     mov ss, ax
-    mov ds, ax
-    mov es, ax
 
-    ; TODO : Enable interrupt, sti, need to continue & complete kernel_setup first
     ret

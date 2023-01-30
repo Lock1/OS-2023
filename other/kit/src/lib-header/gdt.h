@@ -8,21 +8,6 @@
 extern struct GDTR _gdt_gdtr;
 
 /**
- * Segment Descriptor access byte
- * 
- * @param type_bit   4-bit carrying R/W/X, direction, and accessed flag
- * @param non_system 1-bit descriptor type bit, 0 for system segment and 1 for code/data segment (inc. kernel)
- * @param privilege  2-bit privilege level field, PL0 = Maximum, PL3 = User / minimum privilege
- * @param valid_bit  1-bit indicating whether segment is valid
- */
-struct SDAccessByte {
-    uint8_t type_bit   : 4;
-    uint8_t non_system : 1;
-    uint8_t privilege  : 2;
-    uint8_t valid_bit  : 1;
-} __attribute__((packed));
-
-/**
  * Segment Descriptor storing system segment information.
  * Struct defined exactly as Intel Manual Segment Descriptor definition (Figure 3-8 Segment Descriptor).
  * Manual can be downloaded at www.intel.com/content/www/us/en/architecture-and-technology/64-ia-32-architectures-software-developer-vol-3a-part-1-manual.html/ 
@@ -30,13 +15,8 @@ struct SDAccessByte {
  * @param segment_low  16-bit lower-bit segment limit
  * @param base_low     16-bit lower-bit base address
  * @param base_mid     8-bit middle-bit base address
- * @param access       8-bit GDAccessByte structure, contain access flags
- * @param segment_high 4-bit upper-bit segment limit
- * @param _reserved    1-bit unused / reserved for future
- * @param long_mode    1-bit flag indicate 64-bit code segment
- * @param opr_32_bit   1-bit indicating using 32-bit or 16-bit operand mode
- * @param granularity  1-bit whether using block granularity (if 1) or byte-level
- * @param base_high    8-bit upper-bit base address
+ * @param type_bit     4-bit contain type flags
+ * @param non_system   1-bit contain system
  */
 struct SegmentDescriptor {
     // First 32-bit
@@ -45,17 +25,10 @@ struct SegmentDescriptor {
 
     // Next 16-bit (Bit 32 to 47)
     uint8_t             base_mid;
-    struct SDAccessByte access;
+    uint8_t type_bit   : 4;
+    uint8_t non_system : 1;
+    // TODO : Continue GDT definition
 
-    // Next 8-bit (Bit 48 to 55)
-    uint8_t segment_high : 4;
-    uint8_t _reserved    : 1;
-    uint8_t long_mode    : 1;
-    uint8_t opr_32_bit   : 1;
-    uint8_t granularity  : 1;
-
-    // Last 8-bit (Bit 56 to 63)
-    uint8_t base_high;
 } __attribute__((packed));
 
 /**
