@@ -68,6 +68,7 @@ struct GlobalDescriptorTable {
     struct SegmentDescriptor table[GDT_MAX_ENTRY_COUNT];
 } __attribute__((packed));
 
+// TODO : Rename to GDTR
 /**
  * GDT Descriptor, carrying information where's the GDT located and GDT size.
  * Global kernel variable defined at memory.c.

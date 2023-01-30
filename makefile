@@ -1,5 +1,5 @@
 # Object files
-OBJECTS = kernel.o kernel_loader.o portio.o stdmem.o framebuffer.o memory.o
+OBJECTS = kernel.o kernel_loader.o portio.o stdmem.o framebuffer.o gdt.o
 
 # Compiler & linker
 ASM = nasm

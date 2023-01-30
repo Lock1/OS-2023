@@ -13,8 +13,6 @@ Notes - [Milestone 1 Notes](/other/notes/Milestone%201%20Notes.md)
 - [x] Global Descriptor Table (GDT) + Protected Mode
 - [ ] Initial kit / template milestone 1
 
-TODO : Type bit split
-TODO : GDT filename
 
 ## Milestone 2
 6-11
