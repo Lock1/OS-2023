@@ -116,7 +116,6 @@ For main document : Show memory layout, from empty, loading kernel into memory, 
 
 ## 4. Global Descriptor Table (GDT) + Protected Mode
 Main document : Describe & illustrate GDT, littleosbook does pretty good job describing them already
-- https://forum.osdev.org/viewtopic.php?f=1&t=11117
 - https://wiki.osdev.org/Global_Descriptor_Table
 - https://wiki.osdev.org/GDT_Tutorial
 - https://wiki.osdev.org/Segment_Selector

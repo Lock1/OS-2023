@@ -6,6 +6,7 @@
 #define GDT_MAX_ENTRY_COUNT 32
 
 extern struct GDTDescriptor _memory_gdt_descriptor;
+// TODO : Rename to _gdt_gdtr
 
 /**
  * Segment Descriptor access byte

@@ -28,6 +28,7 @@ loader:                                       ; the loader label (defined as ent
     jmp .loop                                 ; loop forever
 
 ; More details: https://en.wikibooks.org/wiki/X86_Assembly/Protected_Mode
+; TODO : Rename to enter_protected_mode
 launch_protected_mode:
     ; Load GDT from GDTDescriptor
     cli
