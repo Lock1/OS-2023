@@ -7,6 +7,6 @@
  * @param gdt_descriptor Pointer to already defined & initialized GDTDescriptor
  * @warning Invalid address / definition of GDT will cause bootloop after calling this function.
  */
-extern void launch_protected_mode(struct GDTDescriptor *gdt_descriptor);
+extern void enter_protected_mode(struct GDTDescriptor *gdt_descriptor);
 
 #endif

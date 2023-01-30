@@ -1,5 +1,5 @@
 global loader                        ; the entry symbol for ELF
-global launch_protected_mode         ; go to protected mode
+global enter_protected_mode         ; go to protected mode
 extern kernel_setup                  ; kernel
 
 
@@ -28,8 +28,7 @@ loader:                                       ; the loader label (defined as ent
     jmp .loop                                 ; loop forever
 
 ; More details: https://en.wikibooks.org/wiki/X86_Assembly/Protected_Mode
-; TODO : Rename to enter_protected_mode
-launch_protected_mode:
+enter_protected_mode:
     ; Load GDT from GDTDescriptor
     cli
     mov  eax, [esp+4]
