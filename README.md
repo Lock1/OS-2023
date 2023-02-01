@@ -2,6 +2,7 @@
 Testing spesifikasi IF2130 Sistem Operasi 2023
 
 [Link to main google drive folder](https://drive.google.com/drive/u/1/folders/1LdYtswwx7qoXmI2DoEF8Yux-QSzXqU8v)
+
 [Dev Repository untuk kit](https://github.com/Lock1/kit-OS-2023)
 
 # Planned Roadmap
