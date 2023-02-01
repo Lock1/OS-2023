@@ -2,6 +2,7 @@
 Testing spesifikasi IF2130 Sistem Operasi 2023
 
 [Link to main google drive folder](https://drive.google.com/drive/u/1/folders/1LdYtswwx7qoXmI2DoEF8Yux-QSzXqU8v)
+[Dev Repository untuk kit](https://github.com/Lock1/kit-OS-2023)
 
 # Planned Roadmap
 ## Milestone 1
@@ -11,7 +12,7 @@ Notes - [Milestone 1 Notes](/other/notes/Milestone%201%20Notes.md)
 - [x] Bootloader
 - [x] I/O Memory Map (VGA)
 - [x] Global Descriptor Table (GDT) + Protected Mode
-- [ ] Initial kit / template milestone 1
+- [x] Initial kit / template milestone 1
 
 
 ## Milestone 2
