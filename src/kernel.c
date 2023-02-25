@@ -4,8 +4,14 @@
 #include "lib-header/gdt.h"
 #include "lib-header/framebuffer.h"
 #include "lib-header/kernel_loader.h"
+#include "lib-header/idt.h"
+
+
 
 void kernel_setup(void) {
+    struct InterruptGate k;
+    initInterruptGate(&k, 0xDEADBEEF, 0x0008, 0x00);
+
     uint32_t a;
     uint32_t volatile b = 0x0000BABE;
     __asm__("mov $0xCAFE0000, %0" : "=r"(a));
