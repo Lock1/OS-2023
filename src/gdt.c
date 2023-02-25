@@ -36,7 +36,8 @@ struct GlobalDescriptorTable global_descriptor_table = {
             .opr_32_bit        = 1,
             .long_mode         = 0,
             .granularity       = 1,
-        }
+        },
+        {0}
     }
 };
 

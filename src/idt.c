@@ -1,13 +1,11 @@
 #include "lib-header/idt.h"
 
-#define INTERRUPT_GATE_R_BIT_1 0b000
-#define INTERRUPT_GATE_R_BIT_2 0b110
-#define INTERRUPT_GATE_R_BIT_3 0b0
 
-void initInterruptGate(struct InterruptGate *ig, uint32_t offset, uint8_t segment, uint8_t privilege) {
-    ig->offset_low  = 0x0000FFFF & offset;
+
+void initInterruptGate(struct InterruptGate *ig, uint32_t offset, uint16_t segment, uint8_t privilege) {
+    ig->offset_low  = 0x0000FFFF  & offset;
     ig->offset_high = (0xFFFF0000 & offset) >> 16;
-    ig->privilege   = 0b11       & privilege;
+    ig->privilege   = 0b11        & privilege;
     ig->segment     = segment;
 
     // Target system 32-bit and flag this as valid interrupt gate

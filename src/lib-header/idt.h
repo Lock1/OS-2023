@@ -5,20 +5,23 @@
 #include "stdtype.h"
 
 // IDT hard limit, see Intel x86 manual 3a - 6.10 Interrupt Descriptor Table
-#define IDT_MAX_ENTRY_COUNT 256
+#define IDT_MAX_ENTRY_COUNT    256
+#define INTERRUPT_GATE_R_BIT_1 0b000
+#define INTERRUPT_GATE_R_BIT_2 0b110
+#define INTERRUPT_GATE_R_BIT_3 0b0
 
 extern struct IDTR _idt_idtr;
 
-
 /**
  * InterruptGate
- * 
+ *
  * @param offset_low  Lower 16-bit offset
  * @param segment     Memory segment
  * @param _reserved   Reserved bit
- * @param r_bit_1     Indicating valid interrupt gate, Valid value r_bit_1 = 0b110000
+ * @param _r_bit_1    Reserved & predetermined value for valid interrupt gate
+ * @param _r_bit_2    Reserved & predetermined value for valid interrupt gate
  * @param gate_32     Is this gate size 32-bit? If not then its 16-bit gate
- * @param r_bit_2     Indicating valid interrupt gate, Valid value r_bit_2 = 0b0
+ * @param _r_bit_3    Reserved & predetermined value for valid interrupt gate
  * @param privilege   Descriptor Privilege Level, behave exactly like GDT DPL
  * @param valid_bit   Indicating whether this gate is valid or not (?)
  * @param offset_high Higher 16-bit offset
@@ -58,6 +61,6 @@ struct IDTR {
     struct InterruptDescriptorTable *address;
 } __attribute__((packed));
 
-void initInterruptGate(struct InterruptGate *ig, uint32_t offset, uint8_t segment, uint8_t privilege);
+void initInterruptGate(struct InterruptGate *ig, uint32_t offset, uint16_t segment, uint8_t privilege);
 
 #endif

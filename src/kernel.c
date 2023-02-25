@@ -5,8 +5,9 @@
 #include "lib-header/framebuffer.h"
 #include "lib-header/kernel_loader.h"
 #include "lib-header/idt.h"
+#include "lib-header/interrupt.h"
 
-
+// extern int interrupt_handler_8(void);
 
 void kernel_setup(void) {
     struct InterruptGate k;
