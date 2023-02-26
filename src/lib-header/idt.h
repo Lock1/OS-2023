@@ -58,9 +58,12 @@ struct InterruptDescriptorTable {
  * @param address IDT address, IDT should already defined properly
  */
 struct IDTR {
+    uint16_t                         size;
     struct InterruptDescriptorTable *address;
 } __attribute__((packed));
 
-void initInterruptGate(struct InterruptGate *ig, uint32_t offset, uint16_t segment, uint8_t privilege);
+void set_idt_gate(uint8_t int_vector, void *handler_address, uint16_t segment, uint8_t privilege);
+
+void initialize_idt(void);
 
 #endif

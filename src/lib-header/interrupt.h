@@ -13,6 +13,8 @@ struct CPURegister {
 } __attribute__((packed));
 
 // Predefined struct by CPU
+// TODO : Wait, from manual figure 6.4, privilege can differ
+// Kernel-stack interrupt data
 struct InterruptInfo {
     uint32_t error_code;
     uint32_t eip;
@@ -20,6 +22,6 @@ struct InterruptInfo {
     uint32_t eflags;
 } __attribute__((packed));
 
-void interrupt_handler(struct CPURegister cpu, uint32_t int_number, struct InterruptInfo info);
+void main_interrupt_handler(struct CPURegister cpu, uint32_t int_number, struct InterruptInfo info);
 
 #endif

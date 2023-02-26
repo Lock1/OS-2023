@@ -10,8 +10,7 @@
 // extern int interrupt_handler_8(void);
 
 void kernel_setup(void) {
-    struct InterruptGate k;
-    initInterruptGate(&k, 0xDEADBEEF, 0x0008, 0x00);
+    initialize_idt();
 
     uint32_t a;
     uint32_t volatile b = 0x0000BABE;
