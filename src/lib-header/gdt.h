@@ -3,7 +3,10 @@
 
 #include "lib-header/stdtype.h"
 
-#define GDT_MAX_ENTRY_COUNT 32
+#define GDT_MAX_ENTRY_COUNT  32
+#define GDT_KERNEL_CS_OFFSET 0x8
+#define GDT_KERNEL_DS_OFFSET 0x10
+
 
 extern struct GDTR _gdt_gdtr;
 

@@ -62,7 +62,7 @@ struct IDTR {
     struct InterruptDescriptorTable *address;
 } __attribute__((packed));
 
-void set_idt_gate(uint8_t int_vector, void *handler_address, uint16_t segment, uint8_t privilege);
+void set_idt_gate(uint8_t int_vector, void *handler_address, uint16_t gdt_seg_selector, uint8_t privilege);
 
 void initialize_idt(void);
 

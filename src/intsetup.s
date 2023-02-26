@@ -1,7 +1,7 @@
 extern main_interrupt_handler
+global isr_stub_table
 
 %macro no_error_code_interrupt_handler 1
-global interrupt_handler_%1
 interrupt_handler_%1:
     push    dword 0                 ; push 0 as error code
     push    dword %1                ; push the interrupt number
@@ -9,7 +9,6 @@ interrupt_handler_%1:
 %endmacro
 
 %macro error_code_interrupt_handler 1
-global interrupt_handler_%1
 interrupt_handler_%1:
     push    dword %1
     jmp     call_generic_handler
@@ -83,3 +82,11 @@ no_error_code_interrupt_handler 28
 no_error_code_interrupt_handler 29
 error_code_interrupt_handler    30
 no_error_code_interrupt_handler 31
+
+
+isr_stub_table:
+    %assign i 0 
+    %rep    32 
+    dd interrupt_handler_%+i
+    %assign i i+1 
+    %endrep
