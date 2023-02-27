@@ -1,7 +1,7 @@
 #include "lib-header/idt.h"
 #include "lib-header/gdt.h"
 
-#define ISR_STUB_TABLE_LIMIT 32
+#define ISR_STUB_TABLE_LIMIT 64
 extern void *isr_stub_table[ISR_STUB_TABLE_LIMIT];
 
 struct InterruptDescriptorTable interrupt_descriptor_table = {

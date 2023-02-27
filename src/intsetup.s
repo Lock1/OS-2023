@@ -3,6 +3,7 @@ global isr_stub_table
 
 %macro no_error_code_interrupt_handler 1
 interrupt_handler_%1:
+    cli
     push    dword 0                 ; push 0 as error code
     push    dword %1                ; push the interrupt number
     jmp     call_generic_handler    ; jump to the common handler
@@ -10,6 +11,7 @@ interrupt_handler_%1:
 
 %macro error_code_interrupt_handler 1
 interrupt_handler_%1:
+    cli
     push    dword %1
     jmp     call_generic_handler
 %endmacro
@@ -49,48 +51,58 @@ call_generic_handler:
     ; [esp], [esp+4], [esp+8]
     ;   eip,   cs,    eflags
     ; improper value will cause invalid return address & register
+    sti
     iret
 
 
 
-; Interrupt handlers
-no_error_code_interrupt_handler 0
-no_error_code_interrupt_handler 1
-no_error_code_interrupt_handler 2
-no_error_code_interrupt_handler 3
-no_error_code_interrupt_handler 4
-no_error_code_interrupt_handler 5
-no_error_code_interrupt_handler 6
-no_error_code_interrupt_handler 7
-error_code_interrupt_handler    8
-no_error_code_interrupt_handler 9
-error_code_interrupt_handler    10
-error_code_interrupt_handler    11
-error_code_interrupt_handler    12
-error_code_interrupt_handler    13
-error_code_interrupt_handler    14
-no_error_code_interrupt_handler 15
-no_error_code_interrupt_handler 16
-error_code_interrupt_handler    17
-no_error_code_interrupt_handler 18
-no_error_code_interrupt_handler 19
-no_error_code_interrupt_handler 20
-no_error_code_interrupt_handler 21
-no_error_code_interrupt_handler 22
-no_error_code_interrupt_handler 23
-no_error_code_interrupt_handler 24
-no_error_code_interrupt_handler 25
-no_error_code_interrupt_handler 26
-no_error_code_interrupt_handler 27
-no_error_code_interrupt_handler 28
-no_error_code_interrupt_handler 29
-error_code_interrupt_handler    30
-no_error_code_interrupt_handler 31
+; CPU exception handlers
+no_error_code_interrupt_handler 0  ; 0x0  - Division by zero
+no_error_code_interrupt_handler 1  ; 0x1  - Debug Exception
+no_error_code_interrupt_handler 2  ; 0x2  - NMI, Non-Maskable Interrupt
+no_error_code_interrupt_handler 3  ; 0x3  - Breakpoint Exception
+no_error_code_interrupt_handler 4  ; 0x4  - INTO Overflow
+no_error_code_interrupt_handler 5  ; 0x5  - Out of Bounds
+no_error_code_interrupt_handler 6  ; 0x6  - Invalid Opcode
+no_error_code_interrupt_handler 7  ; 0x7  - Device Not Available
+error_code_interrupt_handler    8  ; 0x8  - Double Fault
+no_error_code_interrupt_handler 9  ; 0x9  - Deprecated
+error_code_interrupt_handler    10 ; 0xA  - Invalid TSS
+error_code_interrupt_handler    11 ; 0xB  - Segment Not Present
+error_code_interrupt_handler    12 ; 0xC  - Stack-Segment Fault
+error_code_interrupt_handler    13 ; 0xD  - General Protection Fault
+error_code_interrupt_handler    14 ; 0xE  - Page Fault
+no_error_code_interrupt_handler 15 ; 0xF  - Reserved
+no_error_code_interrupt_handler 16 ; 0x10 - x87 Floating-Point Exception
+error_code_interrupt_handler    17 ; 0x11 - Alignment Check Exception
+no_error_code_interrupt_handler 18 ; 0x12 - Machine Check Exception
+no_error_code_interrupt_handler 19 ; 0x13 - SIMD Floating-Point Exception
+no_error_code_interrupt_handler 20 ; 0x14 - Virtualization Exception
+no_error_code_interrupt_handler 21 ; 0x15 - Control Protection Exception
+no_error_code_interrupt_handler 22 ; 0x16 - Reserved
+no_error_code_interrupt_handler 23 ; 0x17 - Reserved
+no_error_code_interrupt_handler 24 ; 0x18 - Reserved
+no_error_code_interrupt_handler 25 ; 0x19 - Reserved
+no_error_code_interrupt_handler 26 ; 0x1A - Reserved
+no_error_code_interrupt_handler 27 ; 0x1B - Reserved
+no_error_code_interrupt_handler 28 ; 0x1C - Hypervisor Injection Exception
+no_error_code_interrupt_handler 29 ; 0x1D - VMM Communication Exception
+error_code_interrupt_handler    30 ; 0x1E - Security Exception
+no_error_code_interrupt_handler 31 ; 0x1F - Reserved
+
+; User defined interrupt handler
+%assign i 32 
+%rep    32
+no_error_code_interrupt_handler i
+%assign i i+1 
+%endrep
+
+
 
 
 isr_stub_table:
     %assign i 0 
-    %rep    32 
+    %rep    64 
     dd interrupt_handler_%+i
     %assign i i+1 
     %endrep
