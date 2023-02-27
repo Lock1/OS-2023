@@ -45,6 +45,10 @@ call_generic_handler:
     add     esp, 8
 
     ; return to the code that got interrupted
+    ; at this point, stack should be structured like this
+    ; [esp], [esp+4], [esp+8]
+    ;   eip,   cs,    eflags
+    ; improper value will cause invalid return address & register
     iret
 
 
