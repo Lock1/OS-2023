@@ -10,17 +10,17 @@
 // extern int interrupt_handler_8(void);
 
 void kernel_setup(void) {
-    uint32_t a;
-    uint32_t volatile b = 0x0000BABE;
-    __asm__("mov $0xCAFE0000, %0" : "=r"(a));
     enter_protected_mode(&_gdt_gdtr);
     initialize_idt();
+    pic_remap();
     framebuffer_clear();
-    __asm__("int $0x8");
+    __asm__("int $0x2");
     framebuffer_write(3, 8, 'H', 0, 0xF);
     framebuffer_write(3, 9, 'a', 0, 0xF);
     framebuffer_write(3, 10, 'i', 0, 0xF);
     framebuffer_write(3, 11, '!', 0, 0xF);
     framebuffer_set_cursor(3, 10);
-    while (1) b += 1;
+
+    // FIXME : GP fault with error code 0x102?
+    while (1);
 }
