@@ -23,10 +23,13 @@ const char keyboard_scancode_1_to_ascii_map[128] = {
 };
 
 bool printable_scancode(uint8_t scancode){
-    return scancode != EXT_SCANCODE_UP    
+    return scancode != EXTENDED_SCANCODE_BYTE 
+      && scancode != EXT_SCANCODE_UP    
       && scancode != EXT_SCANCODE_DOWN  
       && scancode != EXT_SCANCODE_LEFT  
-      && scancode != EXT_SCANCODE_RIGHT;
+      && scancode != EXT_SCANCODE_RIGHT
+      && keyboard_scancode_1_to_ascii_map[scancode] <= 127
+      && 32 <= keyboard_scancode_1_to_ascii_map[scancode];
 }
 
 uint8_t get_keyboard_scancode(void)
@@ -51,10 +54,10 @@ void keyboard_isr(void) {
         if (read_extended_mode) {
             switch (scancode) {
                 case EXT_SCANCODE_UP:
-                    framebuffer_set_cursor(row + 1, column);
+                    framebuffer_set_cursor(row - 1, column);
                     break;
                 case EXT_SCANCODE_DOWN:
-                    framebuffer_set_cursor(row - 1, column);
+                    framebuffer_set_cursor(row + 1, column);
                     break;
                 case EXT_SCANCODE_LEFT:
                     framebuffer_set_cursor(row, column - 1);
@@ -64,14 +67,11 @@ void keyboard_isr(void) {
                     break;
             }
             read_extended_mode = FALSE;
-        }
-
-        if (scancode == EXTENDED_SCANCODE_BYTE) {
+        } else if (scancode == EXTENDED_SCANCODE_BYTE) {
             read_extended_mode = TRUE;
         }
         else if (printable_scancode(scancode)) {
-            framebuffer_write(row, column, keyboard_scancode_1_to_ascii_map[scancode], 0, 0xF);
-            framebuffer_set_cursor(row, column + 1);
+            framebuffer_write(row, column, keyboard_scancode_1_to_ascii_map[scancode], 0xF, 0);
         }
     }
     pic_ack(IRQ_KEYBOARD);
