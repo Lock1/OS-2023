@@ -16,6 +16,15 @@ void framebuffer_set_cursor(uint8_t r, uint8_t c) {
     out(CURSOR_PORT_DATA, location & 0x00FFu);
 }
 
+uint16_t framebuffer_get_cursor(void) {
+    uint16_t position = 0;
+    out(CURSOR_PORT_CMD, LowerByte);
+    position |= in(CURSOR_PORT_DATA);
+    out(CURSOR_PORT_CMD, UpperByte);
+    position |= ((uint16_t) in(CURSOR_PORT_DATA)) << 8;
+    return position;
+}
+
 void framebuffer_write(uint8_t row, uint8_t col, char c, uint8_t fg, uint8_t bg) {
     uint8_t  back_color = (bg & 0xF) << 4;
     uint8_t  char_color = (fg & 0xF);

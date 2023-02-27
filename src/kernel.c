@@ -20,6 +20,7 @@ void kernel_setup(void) {
     framebuffer_write(3, 10, 'i', 0, 0xF);
     framebuffer_write(3, 11, '!', 0, 0xF);
     framebuffer_set_cursor(3, 10);
+    state_keyboard_activate();
 
     // TODO : Lets fix IRQ0 timer and set handler
     // TODO : After that we can try to setup keyboard
