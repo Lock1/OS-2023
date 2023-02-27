@@ -53,6 +53,8 @@ struct InterruptInfo {
 
 void main_interrupt_handler(struct CPURegister cpu, uint32_t int_number, struct InterruptInfo info);
 
+void activate_keyboard_interrupt(void);
+
 // 1-4 microsecond wait
 void io_wait(void);
 

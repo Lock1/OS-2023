@@ -8,7 +8,7 @@
 #define EXTENDED_SCANCODE_BYTE 0xE0
 // QEMU use set 1
 
-extern const char keyboard_scancode_1_to_ascii_map[128];
+extern const char keyboard_scancode_1_to_ascii_map[256];
 
 void keyboard_isr(void);
 void state_keyboard_activate(void);

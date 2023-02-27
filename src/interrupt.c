@@ -1,6 +1,6 @@
 #include "lib-header/interrupt.h"
 #include "lib-header/portio.h"
-#include "lib-header/user_isr.h"
+#include "lib-header/keyboard.h"
 
 
 // interrupt_handler_n in intsetup is placed on IDT
@@ -22,6 +22,11 @@ void pic_ack(uint8_t irq) {
     if (irq >= 8)
         out(PIC2_COMMAND, PIC_ACK);
     out(PIC1_COMMAND, PIC_ACK);
+}
+
+void activate_keyboard_interrupt(void) {
+    out(PIC1_COMMAND + IRQ_KEYBOARD, 0xFD);
+    out(0xA1, 0xFF);
 }
 
 void pic_remap(void) {

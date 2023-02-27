@@ -6,24 +6,19 @@
 #include "lib-header/kernel_loader.h"
 #include "lib-header/idt.h"
 #include "lib-header/interrupt.h"
-
+#include "lib-header/keyboard.h"
 
 void kernel_setup(void) {
     enter_protected_mode(&_gdt_gdtr);
     pic_remap();
     initialize_idt();
+    activate_keyboard_interrupt();
     framebuffer_clear();
-    out(0x21, 0xfd);
-    out(0xa1, 0xff);
     framebuffer_write(3, 8, 'H', 0, 0xF);
     framebuffer_write(3, 9, 'a', 0, 0xF);
     framebuffer_write(3, 10, 'i', 0, 0xF);
     framebuffer_write(3, 11, '!', 0, 0xF);
-    framebuffer_set_cursor(3, 10);
+    framebuffer_set_cursor(0, 0);
     state_keyboard_activate();
-
-    // TODO : Lets fix IRQ0 timer and set handler
-    // TODO : After that we can try to setup keyboard
-    // TODO : And FS
-    while (1);
+    while (TRUE);
 }

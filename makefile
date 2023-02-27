@@ -1,5 +1,5 @@
 # Object files
-OBJECTS = kernel.o kernel_loader.o portio.o stdmem.o framebuffer.o gdt.o idt.o interrupt.o intsetup.o user_isr.o
+OBJECTS = kernel.o kernel_loader.o portio.o stdmem.o framebuffer.o gdt.o idt.o interrupt.o intsetup.o keyboard.o
 
 # Compiler & linker
 ASM = nasm
@@ -12,7 +12,7 @@ OUTPUT_FOLDER = bin
 ISO_NAME      = os2023
 
 # Flags
-WARNING_CFLAG = -Wall -Wextra
+WARNING_CFLAG = -Wall -Wextra -Werror
 DEBUG_CFLAG   = -ffreestanding -fshort-wchar -g
 STRIP_CFLAG   = -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs
 CFLAGS        = $(DEBUG_CFLAG) $(WARNING_CFLAG) $(STRIP_CFLAG) -m32 -c -I$(SOURCE_FOLDER)
