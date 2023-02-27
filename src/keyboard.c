@@ -2,14 +2,8 @@
 #include "lib-header/portio.h"
 #include "lib-header/framebuffer.h"
 
-#define EXT_SCANCODE_UP    0x48
-#define EXT_SCANCODE_DOWN  0x50
-#define EXT_SCANCODE_LEFT  0x4B
-#define EXT_SCANCODE_RIGHT 0x4D
-
-static uint8_t scancode_buffer[8] = {0};
-static bool    read_extended_mode = FALSE;
-static bool    keyboard_input_on  = FALSE;
+static bool read_extended_mode = FALSE;
+static bool keyboard_input_on  = FALSE;
 
 const char keyboard_scancode_1_to_ascii_map[256] = {
       0, 0x1B, '1', '2', '3', '4', '5', '6',  '7', '8', '9',  '0',  '-', '=', '\b', '\t',
@@ -44,11 +38,11 @@ uint8_t get_keyboard_scancode(void) {
     return in(KEYBOARD_DATA_PORT);
 }
 
-void state_keyboard_activate(void) {
+void keyboard_state_activate(void) {
     keyboard_input_on = TRUE;
 }
 
-void state_keyboard_deactivate(void) {
+void keyboard_state_deactivate(void) {
     keyboard_input_on = FALSE;
 }
 

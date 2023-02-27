@@ -6,7 +6,11 @@
 // interrupt_handler_n in intsetup is placed on IDT
 // and all of them will call this interrupt_handler
 // this interrupt_handler will call proper handler for all interrupts
-void main_interrupt_handler(struct CPURegister cpu, uint32_t int_number, struct InterruptInfo info) {
+void main_interrupt_handler(
+    __attribute__((unused)) struct CPURegister cpu,
+    uint32_t int_number,
+    __attribute__((unused)) struct InterruptInfo info
+) {
     switch (int_number) {
         case PIC1_OFFSET + IRQ_KEYBOARD:
             keyboard_isr();

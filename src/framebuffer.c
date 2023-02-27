@@ -9,7 +9,7 @@ enum cursor_command {
 };
 
 void framebuffer_set_cursor(uint8_t r, uint8_t c) {
-    uint16_t location = r * 0x50 + c;
+    uint16_t location = (r * 0x50 + c) % FRAMEBUFFER_RESOLUTION;
     out(CURSOR_PORT_CMD, UpperByte);
     out(CURSOR_PORT_DATA, (location & 0xFF00u) >> 8);
     out(CURSOR_PORT_CMD, LowerByte);

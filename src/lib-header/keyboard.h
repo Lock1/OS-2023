@@ -4,14 +4,27 @@
 #include "interrupt.h"
 #include "stdtype.h"
 
+#define EXT_SCANCODE_UP    0x48
+#define EXT_SCANCODE_DOWN  0x50
+#define EXT_SCANCODE_LEFT  0x4B
+#define EXT_SCANCODE_RIGHT 0x4D
+
 #define KEYBOARD_DATA_PORT     0x60
 #define EXTENDED_SCANCODE_BYTE 0xE0
-// QEMU use set 1
 
+/**
+ * keyboard_scancode_1_to_ascii_map[256]
+ *
+ * Convert scancode values that correspond to ASCII printables
+ * 
+ * How to use this array: ascii_char = k[scancode]
+ * 
+ * By default, QEMU using scancode set 1
+ */
 extern const char keyboard_scancode_1_to_ascii_map[256];
 
 void keyboard_isr(void);
-void state_keyboard_activate(void);
-void state_keyboard_deactivate(void);
+void keyboard_state_activate(void);
+void keyboard_state_deactivate(void);
 
 #endif
