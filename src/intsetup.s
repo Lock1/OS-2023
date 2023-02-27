@@ -91,6 +91,25 @@ error_code_interrupt_handler    30 ; 0x1E - Security Exception
 no_error_code_interrupt_handler 31 ; 0x1F - Reserved
 
 ; User defined interrupt handler
+; If PIC1 & PIC2 offset is 0x20 and 0x28
+; 32 - 0x20 - IRQ0:  Programmable Interval Timer
+; 33 - 0x21 - IRQ1:  Keyboard
+; 34 - 0x22 - IRQ2:  PIC Cascade, used internally
+; 35 - 0x23 - IRQ3:  COM2, if enabled
+; 36 - 0x24 - IRQ4:  COM1, if enabled
+; 37 - 0x25 - IRQ5:  LPT2, if enabled
+; 38 - 0x26 - IRQ6:  Floppy Disk
+; 39 - 0x27 - IRQ7:  LPT1
+
+; 40 - 0x28 - IRQ8:  CMOS real-time clock
+; 41 - 0x29 - IRQ9:  Free
+; 42 - 0x2A - IRQ10: Free
+; 43 - 0x2B - IRQ11: Free
+; 44 - 0x2C - IRQ12: PS2 Mouse
+; 45 - 0x2D - IRQ13: Coprocessor
+; 46 - 0x2E - IRQ14: Primary ATA Hard Disk
+; 47 - 0x2F - IRQ15: Secondary ATA Hard Disk
+
 %assign i 32 
 %rep    32
 no_error_code_interrupt_handler i

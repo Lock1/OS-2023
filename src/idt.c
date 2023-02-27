@@ -10,7 +10,7 @@ struct InterruptDescriptorTable interrupt_descriptor_table = {
 
 struct IDTR _idt_idtr = {
     .address = &interrupt_descriptor_table,
-    .size    = IDT_MAX_ENTRY_COUNT,
+    .size    = sizeof(interrupt_descriptor_table) - 1,
 };
 
 void initialize_idt(void) {
