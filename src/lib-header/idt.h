@@ -1,6 +1,5 @@
 #ifndef _IDT_H
 #define _IDT_H
-// TODO : More comment in doxygen IDT
 
 #include "stdtype.h"
 

@@ -15,17 +15,23 @@
 
 #define PIC_ACK         0x20
 
-#define ICW1_ICW4       0x01 /* ICW4 (not) needed */
-#define ICW1_SINGLE     0x02 /* Single (cascade) mode */
-#define ICW1_INTERVAL4  0x04 /* Call address interval 4 (8) */
-#define ICW1_LEVEL      0x08 /* Level triggered (edge) mode */
-#define ICW1_INIT       0x10 /* Initialization - required! */
+#define ICW1_ICW4       0x01   /* ICW4 (not) needed */
+#define ICW1_SINGLE     0x02   /* Single (cascade) mode */
+#define ICW1_INTERVAL4  0x04   /* Call address interval 4 (8) */
+#define ICW1_LEVEL      0x08   /* Level triggered (edge) mode */
+#define ICW1_INIT       0x10   /* Initialization - required! */
 
-#define ICW4_8086       0x01 /* 8086/88 (MCS-80/85) mode */
-#define ICW4_AUTO       0x02 /* Auto (normal) EOI */
-#define ICW4_BUF_SLAVE  0x08 /* Buffered mode/slave */
-#define ICW4_BUF_MASTER 0x0C /* Buffered mode/master */
-#define ICW4_SFNM       0x10 /* Special fully nested (not) */
+#define ICW4_8086       0x01   /* 8086/88 (MCS-80/85) mode */
+#define ICW4_AUTO       0x02   /* Auto (normal) EOI */
+#define ICW4_BUF_SLAVE  0x08   /* Buffered mode/slave */
+#define ICW4_BUF_MASTER 0x0C   /* Buffered mode/master */
+#define ICW4_SFNM       0x10   /* Special fully nested (not) */
+
+// PICs IRQ list
+#define IRQ_TIMER       0
+#define IRQ_KEYBOARD    1
+
+
 
 struct CPURegister {
     uint32_t eax;
@@ -37,7 +43,6 @@ struct CPURegister {
 } __attribute__((packed));
 
 // Predefined struct by CPU
-// TODO : Wait, from manual figure 6.4, privilege can differ
 // Kernel-stack interrupt data
 struct InterruptInfo {
     uint32_t error_code;
@@ -47,8 +52,14 @@ struct InterruptInfo {
 } __attribute__((packed));
 
 void main_interrupt_handler(struct CPURegister cpu, uint32_t int_number, struct InterruptInfo info);
+
+// 1-4 microsecond wait
 void io_wait(void);
+
+// Send ACK to PIC
 void pic_ack(uint8_t irq);
+
+// Shift PIC interrupt number to 0x20 and 0x28 (master and slave)
 void pic_remap(void);
 
 #endif

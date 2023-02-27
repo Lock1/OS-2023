@@ -3,7 +3,6 @@ global isr_stub_table
 
 %macro no_error_code_interrupt_handler 1
 interrupt_handler_%1:
-    cli
     push    dword 0                 ; push 0 as error code
     push    dword %1                ; push the interrupt number
     jmp     call_generic_handler    ; jump to the common handler
@@ -11,7 +10,6 @@ interrupt_handler_%1:
 
 %macro error_code_interrupt_handler 1
 interrupt_handler_%1:
-    cli
     push    dword %1
     jmp     call_generic_handler
 %endmacro

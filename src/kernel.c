@@ -13,16 +13,13 @@ void kernel_setup(void) {
     pic_remap();
     initialize_idt();
     framebuffer_clear();
-    // __asm__("int $0x20");
-    // out(0x21, 0xfd);
-    // out(0xa1, 0xff);
+    out(0x21, 0xfd);
+    out(0xa1, 0xff);
     framebuffer_write(3, 8, 'H', 0, 0xF);
     framebuffer_write(3, 9, 'a', 0, 0xF);
     framebuffer_write(3, 10, 'i', 0, 0xF);
     framebuffer_write(3, 11, '!', 0, 0xF);
     framebuffer_set_cursor(3, 10);
-
-    // GPF trick : rightmost hex = table & external, and left over, multiply by 2 for index
 
     // TODO : Lets fix IRQ0 timer and set handler
     // TODO : After that we can try to setup keyboard
