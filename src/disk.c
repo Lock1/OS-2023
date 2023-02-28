@@ -1,13 +1,15 @@
 #include "lib-header/disk.h"
 #include "lib-header/portio.h"
 
-#define STATUS_BSY  0x80
-#define STATUS_RDY  0x40
-#define STATUS_DRQ  0x08
-#define STATUS_DF   0x20
-#define STATUS_ERR  0x01
+// ATA PIO status codes
+#define STATUS_BSY       0x80
+#define STATUS_RDY       0x40
+#define STATUS_DRQ       0x08
+#define STATUS_DF        0x20
+#define STATUS_ERR       0x01
 
-#define SECTOR_SIZE 512
+#define SECTOR_SIZE      512
+#define HALF_SECTOR_SIZE (SECTOR_SIZE/2)
 
 static void ATA_busy_wait() {
     while (in(0x1F7) & STATUS_BSY);
@@ -31,9 +33,9 @@ void read_sectors(void *ptr, uint32_t logical_block_address, uint8_t sector_coun
     for (uint32_t j = 0; j < sector_count; j++) {
         ATA_busy_wait();
         ATA_DRQ_wait();
-        for (uint32_t i = 0; i < 256; i++)
+        for (uint32_t i = 0; i < HALF_SECTOR_SIZE; i++)
             target[i] = in16(0x1F0);
-        target += SECTOR_SIZE;
+        target += HALF_SECTOR_SIZE;
     }
 }
 
@@ -49,7 +51,7 @@ void write_sectors(void *ptr, uint32_t logical_block_address, uint8_t sector_cou
     for (uint32_t j = 0; j < sector_count; j++) {
         ATA_busy_wait();
         ATA_DRQ_wait();
-        for (uint32_t i = 0; i < SECTOR_SIZE; i++)
-            out(0x1F0, ((uint8_t*) ptr)[i]);
+        for (uint32_t i = 0; i < HALF_SECTOR_SIZE; i++)
+            out16(0x1F0, ((uint16_t*) ptr)[i]);
     }
 }

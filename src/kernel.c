@@ -21,15 +21,10 @@ void kernel_setup(void) {
     // for (int i = 0; i < 512; i++)
     //     test[i] = i;
 
-    // TODO : Lets try identify qemu img first
-    // and after that we will try to fix outw
-    // or try -hda
-    // write_sectors(test, 1, 1);
+    // write_sectors(test, 11, 1);
 
     // ITS WORKKKK
-    read_sectors(test, 1, 1);
-    // TODO : out16
-    // makefile run update
+    read_sectors(test, 12, 1);
 
     keyboard_state_activate();
     while (is_keyboard_blocking());
