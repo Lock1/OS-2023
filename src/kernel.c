@@ -18,7 +18,7 @@ void kernel_setup(void) {
     framebuffer_clear();
     framebuffer_set_cursor(0, 0);
 
-    initialize_fat32();
+    initialize_filesystem_fat32();
 
     keyboard_state_activate();
     while (is_keyboard_blocking());
