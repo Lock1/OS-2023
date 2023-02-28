@@ -1,7 +1,7 @@
 #include "lib-header/stdtype.h"
 #include "lib-header/portio.h"
 
-/** x86 inb/outb:
+/** x86 inb/outb - inw/outw - inl/outl (8 / 16 / 32-bit data):
  * @param dx target port 
  * @param al input/output byte
  */
@@ -19,6 +19,24 @@ uint8_t in(uint16_t port) {
     __asm__ volatile(
         "inb %1, %0" 
         : "=a"(result) 
+        : "Nd"(port)
+    );
+    return result;
+}
+
+void out16(uint16_t port, uint16_t data) {
+    __asm__(
+        "outw %0, %1"
+        : // <Empty output operand>
+        : "a"(data), "Nd"(port)
+    );
+}
+
+uint16_t in16(uint16_t port) {
+    uint16_t result;
+    __asm__ volatile(
+        "inw %1, %0"
+        : "=a"(result)
         : "Nd"(port)
     );
     return result;

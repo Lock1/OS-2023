@@ -1,5 +1,5 @@
 # Object files
-OBJECTS = kernel.o kernel_loader.o portio.o stdmem.o framebuffer.o gdt.o idt.o interrupt.o intsetup.o keyboard.o
+OBJECTS = kernel.o kernel_loader.o portio.o stdmem.o framebuffer.o gdt.o idt.o interrupt.o intsetup.o keyboard.o disk.o fat32.o
 
 # Compiler & linker
 ASM = nasm
@@ -10,6 +10,7 @@ CC  = gcc
 SOURCE_FOLDER = src
 OUTPUT_FOLDER = bin
 ISO_NAME      = os2023
+DISK_NAME     = storage
 
 # Flags
 WARNING_CFLAG = -Wall -Wextra -Werror
@@ -21,13 +22,14 @@ LFLAGS        = -T $(SOURCE_FOLDER)/linker.ld -melf_i386
 
 
 run: all
-	@qemu-system-i386 -s -S -cdrom bin/$(ISO_NAME).iso
+	@qemu-system-i386 -s -S -drive file=$(OUTPUT_FOLDER)/$(DISK_NAME).bin,format=raw,if=ide,index=0,media=disk -cdrom $(ISO_NAME).iso 
 all: build
 build: iso
 clean:
 	rm -rf *.o *.iso bin/kernel
 
-
+disk:
+	@qemu-img create -f raw $(OUTPUT_FOLDER)/$(DISK_NAME).bin 4M
 
 kernel: $(OBJECTS)
 	@$(LIN) $(LFLAGS) $(OBJECTS) -o $(OUTPUT_FOLDER)/kernel

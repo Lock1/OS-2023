@@ -40,6 +40,10 @@ uint8_t get_keyboard_scancode(void) {
     return in(KEYBOARD_DATA_PORT);
 }
 
+bool is_keyboard_blocking(void) {
+    return keyboard_input_on;
+}
+
 void keyboard_state_activate(void) {
     keyboard_input_on = TRUE;
 }
