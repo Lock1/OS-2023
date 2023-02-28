@@ -3,9 +3,9 @@
 
 #include "disk.h"
 
-#define CLUSTER_SIZE (SECTOR_SIZE*4)
+#define CLUSTER_SIZE (BLOCK_SIZE*4)
 
-extern const uint8_t fs_boot_sector_signature[SECTOR_SIZE];
+extern const uint8_t fs_boot_sector_signature[BLOCK_SIZE];
 
 
 
