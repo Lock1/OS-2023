@@ -5,9 +5,10 @@
 #define BOOT_SECTOR 0
 
 const uint8_t fs_boot_sector_signature[SECTOR_SIZE] = {
-    'B', 'y', ' ', 'L', 'a', 'b', ' ', 'S', 'i', 's', 't', 'e', 'r', ' ', 'I', 'T', 'B', '\n',
-    'M', 'a', 'd', 'e', ' ', 'w', 'i', 't', 'h', ' ', '<', '3', '\n',
-    '-', 'L', 'o', 'c', 'k', '1', ' ', '2', '0', '2', '3', '\n',
+    'B', 'y', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+    'L', 'a', 'b', ' ', 'S', 'i', 's', 't', 'e', 'r', ' ', 'I', 'T', 'B', ' ', ' ',
+    'M', 'a', 'd', 'e', ' ', 'w', 'i', 't', 'h', ' ', '<', '3', ' ', ' ', ' ', ' ',
+    ' ', ' ', ' ', ' ', '-', 'L', 'o', 'c', 'k', '1', ' ', '2', '0', '2', '3', '\n',
     [SECTOR_SIZE-2] = 'O',
     [SECTOR_SIZE-1] = 'k',
 };
@@ -21,5 +22,6 @@ bool is_empty_storage(void) {
 void initialize_fat32(void) {
     if (is_empty_storage()) {
         write_sectors(fs_boot_sector_signature, BOOT_SECTOR, 1);
+        // TODO : Real FAT32 init
     }
 }
