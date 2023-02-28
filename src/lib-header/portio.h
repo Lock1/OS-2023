@@ -19,4 +19,12 @@ void out(uint16_t port, uint8_t data);
  */
 uint8_t in(uint16_t port);
 
+/** in16:
+ *  Read 16-bit data from the given I/O port
+ *
+ *  @param port The I/O port to request the data
+ *  @return Recieved data from the corresponding I/O port
+ */
+uint16_t in16(uint16_t port);
+
 #endif
