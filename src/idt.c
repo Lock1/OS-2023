@@ -4,7 +4,7 @@
 #define ISR_STUB_TABLE_LIMIT 64
 extern void *isr_stub_table[ISR_STUB_TABLE_LIMIT];
 
-struct InterruptDescriptorTable interrupt_descriptor_table = {
+static struct InterruptDescriptorTable interrupt_descriptor_table = {
     .table = {{0}},
 };
 

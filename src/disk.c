@@ -30,7 +30,7 @@ void read_sectors(void *ptr, uint32_t logical_block_address, uint8_t sector_coun
     }
 }
 
-void write_sectors(void *ptr, uint32_t logical_block_address, uint8_t sector_count) {
+void write_sectors(const void *ptr, uint32_t logical_block_address, uint8_t sector_count) {
     ATA_busy_wait();
     out(0x1F6, 0xE0 | ((logical_block_address >> 24) & 0xF));
     out(0x1F2, sector_count);

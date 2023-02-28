@@ -6,7 +6,7 @@
  * Initial SegmentDescriptor already set properly according to GDT definition in Intel Manual & OSDev.
  * Table entry : [{Null Descriptor}, {Kernel Code},  {Kernel Data (variable, etc)}, ...].
  */
-struct GlobalDescriptorTable global_descriptor_table = {
+static struct GlobalDescriptorTable global_descriptor_table = {
     .table = {
         {0},
         {

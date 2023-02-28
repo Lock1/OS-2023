@@ -8,6 +8,7 @@
 #include "lib-header/interrupt.h"
 #include "lib-header/keyboard.h"
 #include "lib-header/disk.h"
+#include "lib-header/fat32.h"
 
 void kernel_setup(void) {
     enter_protected_mode(&_gdt_gdtr);
@@ -16,6 +17,8 @@ void kernel_setup(void) {
     activate_keyboard_interrupt();
     framebuffer_clear();
     framebuffer_set_cursor(0, 0);
+
+    initialize_fat32();
 
     keyboard_state_activate();
     while (is_keyboard_blocking());
