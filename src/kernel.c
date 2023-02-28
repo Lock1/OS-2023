@@ -25,7 +25,11 @@ void kernel_setup(void) {
     // and after that we will try to fix outw
     // or try -hda
     // write_sectors(test, 1, 1);
+
+    // ITS WORKKKK
     read_sectors(test, 1, 1);
+    // TODO : out16
+    // makefile run update
 
     keyboard_state_activate();
     while (is_keyboard_blocking());
