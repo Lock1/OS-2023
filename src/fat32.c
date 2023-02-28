@@ -14,7 +14,7 @@ const uint8_t fs_boot_sector_signature[SECTOR_SIZE] = {
 };
 
 bool is_empty_storage(void) {
-    struct SectorBuffer boot_sector;
+    struct BlockBuffer boot_sector;
     read_sectors(&boot_sector, 0, 1);
     return memcmp(&boot_sector, fs_boot_sector_signature, SECTOR_SIZE);
 }
