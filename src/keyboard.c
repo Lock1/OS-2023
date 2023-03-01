@@ -3,7 +3,6 @@
 #include "lib-header/framebuffer.h"
 #include "lib-header/stdmem.h"
 
-
 static struct KeyboardDriverState keyboard_state = {
     .read_extended_mode   = FALSE,
     .keyboard_input_on    = FALSE,
@@ -40,10 +39,6 @@ bool printable_scancode(uint8_t scancode) {
       && 32 <= keyboard_scancode_1_to_ascii_map[scancode];
 }
 
-uint8_t get_keyboard_scancode(void) {
-    return in(KEYBOARD_DATA_PORT);
-}
-
 void get_keyboard_buffer(char *buf) {
     memcpy(buf, keyboard_state.keyboard_buffer, KEYBOARD_BUFFER_SIZE);
 }
@@ -64,7 +59,7 @@ void keyboard_isr(void) {
     if (!keyboard_state.keyboard_input_on)
         keyboard_state.buffer_index = 0;
     else {
-        uint8_t  scancode    = get_keyboard_scancode();
+        uint8_t  scancode    = in(KEYBOARD_DATA_PORT);
         char     mapped_char = keyboard_scancode_1_to_ascii_map[scancode];
         uint16_t position    = framebuffer_get_cursor();
         uint16_t row         = position / 80;

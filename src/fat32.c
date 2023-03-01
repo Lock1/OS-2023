@@ -5,9 +5,9 @@
 static struct FAT32DriverState fat32driver_state = {0};
 
 const uint8_t fs_signature[BLOCK_SIZE] = {
-    'B', 'y', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-    'L', 'a', 'b', ' ', 'S', 'i', 's', 't', 'e', 'r', ' ', 'I', 'T', 'B', ' ', ' ',
-    'M', 'a', 'd', 'e', ' ', 'w', 'i', 't', 'h', ' ', '<', '3', ' ', ' ', ' ', ' ',
+    'B', 'y', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  ' ',
+    'L', 'a', 'b', ' ', 'S', 'i', 's', 't', 'e', 'r', ' ', 'I', 'T', 'B', ' ',  ' ',
+    'M', 'a', 'd', 'e', ' ', 'w', 'i', 't', 'h', ' ', '<', '3', ' ', ' ', ' ',  ' ',
     ' ', ' ', ' ', ' ', '-', 'L', 'o', 'c', 'k', '1', ' ', '2', '0', '2', '3', '\n',
     [BLOCK_SIZE-2] = 'O',
     [BLOCK_SIZE-1] = 'k',
@@ -63,3 +63,8 @@ void initialize_filesystem_fat32(void) {
         read_clusters(&fat32driver_state.fat_table, FAT_CLUSTER_NUMBER, 1);
     }
 }
+
+// TODO : CRUD implementation
+// int8_t read(struct FAT32DriverRequest request) {}
+// int8_t write(struct FAT32DriverRequest request) {}
+// int8_t delete(struct FAT32DriverRequest request) {}

@@ -143,6 +143,14 @@ struct FAT32DriverRequest {
 uint32_t cluster_to_logical_block_address(uint32_t cluster);
 
 /**
+ * Initialize DirectoryTable value with parent DirectoryEntry
+ * 
+ * @param dir_table          Pointer to directory table
+ * @param parent_dir_cluster Parent directory cluster number
+ */
+void init_directory_table(struct FAT32DirectoryTable *dir_table, uint32_t parent_dir_cluster);
+
+/**
  * Checking whether filesystem signature is missing or not in boot sector
  * 
  * @return True if memcmp(boot_sector, fs_signature) returning inequality

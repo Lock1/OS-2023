@@ -3,7 +3,7 @@
 
 #include "stdtype.h"
 
-// ATA PIO status codes
+/* -- ATA PIO status codes -- */
 #define ATA_STATUS_BSY   0x80
 #define ATA_STATUS_RDY   0x40
 #define ATA_STATUS_DRQ   0x08
@@ -13,9 +13,18 @@
 #define BLOCK_SIZE      512
 #define HALF_BLOCK_SIZE (BLOCK_SIZE/2)
 
+
+
+
+
+// Block buffer data type - @param buf Byte buffer with size of BLOCK_SIZE
 struct BlockBuffer {
     uint8_t buf[BLOCK_SIZE];
 } __attribute__((packed));
+
+
+
+
 
 /**
  * ATA PIO logical block address read blocks. Will blocking until read is completed.
