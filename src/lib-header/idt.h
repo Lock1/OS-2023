@@ -25,7 +25,6 @@ extern struct IDTR _idt_idtr;
  * @param valid_bit   Indicating whether this gate is valid or not (?)
  * @param offset_high Higher 16-bit offset
  */
-
 struct InterruptGate {
     // First 32-bit (Bit 0 to 31)
     uint16_t offset_low;
