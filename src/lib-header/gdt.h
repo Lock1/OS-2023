@@ -3,12 +3,17 @@
 
 #include "lib-header/stdtype.h"
 
-#define GDT_MAX_ENTRY_COUNT  32
-#define GDT_KERNEL_CS_OFFSET 0x8
-#define GDT_KERNEL_DS_OFFSET 0x10
+#define GDT_MAX_ENTRY_COUNT              32
+// As kernel SegmentDescriptor for code located at index 1 in GDT, then segment selector is sizeof(SegmentDescriptor) * 1 = 0x8
+#define GDT_KERNEL_CODE_SEGMENT_SELECTOR 0x8
+#define GDT_KERNEL_DATA_SEGMENT_SELECTOR 0x10
 
 
 extern struct GDTR _gdt_gdtr;
+
+
+
+
 
 /**
  * Segment Descriptor access byte
@@ -62,8 +67,9 @@ struct SegmentDescriptor {
 } __attribute__((packed));
 
 /**
- * Global Descriptor Table containing list of segment descriptor. One GDT already defined in memory.c.
+ * Global Descriptor Table containing list of segment descriptor. One GDT already defined in gdt.c.
  * More details at https://wiki.osdev.org/GDT_Tutorial
+ * 
  * @param table Fixed-width array of SegmentDescriptor with size GDT_MAX_ENTRY_COUNT
  */
 struct GlobalDescriptorTable {
@@ -72,7 +78,7 @@ struct GlobalDescriptorTable {
 
 /**
  * GDTR, carrying information where's the GDT located and GDT size.
- * Global kernel variable defined at memory.c.
+ * Global kernel variable defined at gdt.c.
  * 
  * @param size    Global Descriptor Table size, use sizeof operator
  * @param address GDT address, GDT should already defined properly
