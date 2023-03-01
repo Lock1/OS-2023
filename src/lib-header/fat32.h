@@ -143,12 +143,13 @@ struct FAT32DriverRequest {
 uint32_t cluster_to_logical_block_address(uint32_t cluster);
 
 /**
- * Initialize DirectoryTable value with parent DirectoryEntry
+ * Initialize DirectoryTable value with parent DirectoryEntry and directory name
  * 
  * @param dir_table          Pointer to directory table
+ * @param name               8-byte char for directory name
  * @param parent_dir_cluster Parent directory cluster number
  */
-void init_directory_table(struct FAT32DirectoryTable *dir_table, uint32_t parent_dir_cluster);
+void init_directory_table(struct FAT32DirectoryTable *dir_table, char *name, uint32_t parent_dir_cluster);
 
 /**
  * Checking whether filesystem signature is missing or not in boot sector
@@ -195,6 +196,19 @@ void read_clusters(void *ptr, uint32_t cluster_number, uint8_t cluster_count);
 
 
 /* -- CRUD Operation -- */
+
+/**
+ *  FAT32 Folder / Directory read
+ *
+ * @param request buf point to struct FAT32DirectoryTable,
+ *                name is directory name,
+ *                ext is unused,
+ *                parent_cluster_number is target directory table to read,
+ *                buffer_size must be exactly sizeof(struct FAT32DirectoryTable)
+ * @return Error code: 0 success - 1 not a folder - 2 not found - -1 unknown
+ */
+int8_t read_directory(struct FAT32DriverRequest request);
+
 
 /**
  * FAT32 read, read a file from file system.
