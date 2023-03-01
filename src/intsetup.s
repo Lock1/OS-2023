@@ -1,21 +1,10 @@
 extern main_interrupt_handler
 global isr_stub_table
 
-%macro no_error_code_interrupt_handler 1
-interrupt_handler_%1:
-    push    dword 0                 ; push 0 as error code
-    push    dword %1                ; push the interrupt number
-    jmp     call_generic_handler    ; jump to the common handler
-%endmacro
-
-%macro error_code_interrupt_handler 1
-interrupt_handler_%1:
-    push    dword %1
-    jmp     call_generic_handler
-%endmacro
-
+; Generic handler section for interrupt
 call_generic_handler:
-    ; Before interrupt_handler_n above, stack will have these value that pushed by CPU
+    ; Before interrupt_handler_n is called (caller of this generic handler section), 
+    ; stack will have these value that pushed automatically by CPU
     ; [esp + 12] eflags
     ; [esp + 8 ] cs
     ; [esp + 4 ] eip
@@ -54,6 +43,20 @@ call_generic_handler:
 
 
 
+; Macro for creating interrupt handler that only push interrupt number
+%macro no_error_code_interrupt_handler 1
+interrupt_handler_%1:
+    push    dword 0                 ; push 0 as error code
+    push    dword %1                ; push the interrupt number
+    jmp     call_generic_handler    ; jump to the common handler
+%endmacro
+
+%macro error_code_interrupt_handler 1
+interrupt_handler_%1:
+    push    dword %1
+    jmp     call_generic_handler
+%endmacro
+
 ; CPU exception handlers
 no_error_code_interrupt_handler 0  ; 0x0  - Division by zero
 no_error_code_interrupt_handler 1  ; 0x1  - Debug Exception
@@ -89,7 +92,7 @@ error_code_interrupt_handler    30 ; 0x1E - Security Exception
 no_error_code_interrupt_handler 31 ; 0x1F - Reserved
 
 ; User defined interrupt handler
-; If PIC1 & PIC2 offset is 0x20 and 0x28
+; Assuming PIC1 & PIC2 offset is 0x20 and 0x28
 ; 32 - 0x20 - IRQ0:  Programmable Interval Timer
 ; 33 - 0x21 - IRQ1:  Keyboard
 ; 34 - 0x22 - IRQ2:  PIC Cascade, used internally
@@ -107,7 +110,6 @@ no_error_code_interrupt_handler 31 ; 0x1F - Reserved
 ; 45 - 0x2D - IRQ13: Coprocessor
 ; 46 - 0x2E - IRQ14: Primary ATA Hard Disk
 ; 47 - 0x2F - IRQ15: Secondary ATA Hard Disk
-
 %assign i 32 
 %rep    32
 no_error_code_interrupt_handler i
@@ -116,7 +118,7 @@ no_error_code_interrupt_handler i
 
 
 
-
+; ISR stub table, useful for reducing code repetition
 isr_stub_table:
     %assign i 0 
     %rep    64 

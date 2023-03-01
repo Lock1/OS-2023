@@ -2,10 +2,6 @@
 #include "lib-header/portio.h"
 #include "lib-header/keyboard.h"
 
-
-// interrupt_handler_n in intsetup is placed on IDT
-// and all of them will call this interrupt_handler
-// this interrupt_handler will call proper handler for all interrupts
 void main_interrupt_handler(
     __attribute__((unused)) struct CPURegister cpu,
     uint32_t int_number,

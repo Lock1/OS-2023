@@ -63,7 +63,11 @@ bool is_keyboard_blocking(void);
  * Will start listen and process keyboard scancode if keyboard_input_on.
  * 
  * Will only print printable character into framebuffer.
- * Stop processing when enter key (line feed) is pressed
+ * Stop processing when enter key (line feed) is pressed.
+ * 
+ * Note that, with keyboard interrupt & ISR, keyboard reading is non-blocking.
+ * This can be made into blocking input with `while (is_keyboard_blocking());` 
+ * after activating keyboard input
  */
 void keyboard_isr(void);
 
