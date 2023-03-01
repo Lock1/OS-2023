@@ -18,16 +18,19 @@ Notes - [Milestone 1 Notes](/other/notes/Milestone%201%20Notes.md)
 
 ## Milestone 2
 6-11
-**WIP**
-- [ ] Interrupt (IRQ kaya keyboard)
-- [ ] Filesystem
-- [ ] Basic process + monotasking
+- [x] Interrupt (IRQ kaya keyboard)
+- [x] Filesystem
+- [ ] ~~Basic process + monotasking~~ Cancelled, possibly next milestone
 
 ## Milestone 3
 12-End
-- [ ] Paging
-- [ ] Memory management (memcpy, malloc, etc)
-- [ ] Multitasking
+- [ ] Basic shell
+- [ ] Paging, need massive testing
+
+This two might be way out of scope
+- [ ] ~~Memory management (memcpy, malloc, etc)~~
+- [ ] ~~Multitasking~~
+
 
 # Resources
 32 bit Resources
