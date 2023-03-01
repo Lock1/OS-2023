@@ -65,6 +65,14 @@ void initialize_filesystem_fat32(void) {
 }
 
 // TODO : CRUD implementation
-// int8_t read(struct FAT32DriverRequest request) {}
-// int8_t write(struct FAT32DriverRequest request) {}
-// int8_t delete(struct FAT32DriverRequest request) {}
+int8_t read(struct FAT32DriverRequest request) {
+    return (int8_t) request.buffer_size;
+}
+
+int8_t write(struct FAT32DriverRequest request) {
+    return (int8_t) request.buffer_size;
+}
+
+int8_t delete(struct FAT32DriverRequest request) {
+    return (int8_t) request.buffer_size;
+}
