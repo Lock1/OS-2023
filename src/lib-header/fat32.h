@@ -134,13 +134,14 @@ struct FAT32DriverRequest {
 
 
 /* -- Driver Interfaces -- */
+
 /**
  * Convert cluster number to logical block address
  * 
  * @param cluster Cluster number to convert
  * @return uint32_t Logical Block Address
  */
-uint32_t cluster_to_logical_block_address(uint32_t cluster);
+uint32_t cluster_to_lba(uint32_t cluster);
 
 /**
  * Initialize DirectoryTable value with parent DirectoryEntry and directory name
