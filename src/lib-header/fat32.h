@@ -168,7 +168,7 @@ void create_fat32(void);
 
 /**
  * Initialize file system driver state, if is_empty_storage() then create_fat32()
- * Else, read FileAllocationTable into driver state
+ * Else, read and cache entire FileAllocationTable into driver state
  */
 void initialize_filesystem_fat32(void);
 
