@@ -18,7 +18,7 @@ void initialize_idt(void) {
 }
 
 void set_interrupt_gate(uint8_t int_vector, void *handler_address, uint16_t gdt_seg_selector, uint8_t privilege) {
-    struct InterruptGate *idt_int_gate = &interrupt_descriptor_table.table[int_vector];
+    struct IDTGate *idt_int_gate = &interrupt_descriptor_table.table[int_vector];
 
     idt_int_gate->offset_low  = 0x0000FFFF  & (uint32_t) handler_address;
     idt_int_gate->offset_high = (0xFFFF0000 & (uint32_t) handler_address) >> 16;

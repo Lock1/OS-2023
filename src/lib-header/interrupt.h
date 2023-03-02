@@ -62,7 +62,7 @@ struct CPURegister {
  * @param cs         Code segment selector where interrupt is raised
  * @param eflags     CPU eflags register when interrupt is raised
  */
-struct InterruptInfo {
+struct InterruptStack {
     uint32_t error_code;
     uint32_t eip;
     uint32_t cs;
@@ -97,6 +97,6 @@ void pic_remap(void);
  * @param int_number Interrupt number that trigger interrupt exception
  * @param info       Information about interrupt that pushed automatically by CPU
  */
-void main_interrupt_handler(struct CPURegister cpu, uint32_t int_number, struct InterruptInfo info);
+void main_interrupt_handler(struct CPURegister cpu, uint32_t int_number, struct InterruptStack info);
 
 #endif

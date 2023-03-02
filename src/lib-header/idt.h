@@ -18,7 +18,7 @@ extern struct IDTR _idt_idtr;
 
 
 /**
- * InterruptGate, IDT entry that point into interrupt handler
+ * IDTGate, IDT entry that point into interrupt handler
  * Struct defined exactly in Intel x86 Vol 3a - Figure 6-2. IDT Gate Descriptors
  *
  * @param offset_low  Lower 16-bit offset
@@ -32,7 +32,7 @@ extern struct IDTR _idt_idtr;
  * @param valid_bit   Indicating whether this gate is valid or not (?)
  * @param offset_high Higher 16-bit offset
  */
-struct InterruptGate {
+struct IDTGate {
     // First 32-bit (Bit 0 to 31)
     uint16_t offset_low;
     uint16_t segment;
@@ -49,13 +49,13 @@ struct InterruptGate {
 } __attribute__((packed));
 
 /**
- * Interrupt Descriptor Table, containing lists of InterruptGate. 
+ * Interrupt Descriptor Table, containing lists of IDTGate. 
  * One IDT already defined in idt.c
  *
- * @param table 256-entry array of InterruptGate
+ * @param table 256-entry array of IDTGate
  */
 struct InterruptDescriptorTable {
-    struct InterruptGate table[IDT_MAX_ENTRY_COUNT];
+    struct IDTGate table[IDT_MAX_ENTRY_COUNT];
 } __attribute__((packed));
 
 /**
@@ -74,7 +74,7 @@ struct IDTR {
 
 
 /**
- * Set InterruptGate with proper interrupt handler values.
+ * Set IDTGate with proper interrupt handler values.
  * Will directly edit global IDT variable and set values properly
  * 
  * @param int_vector       Interrupt vector to handle
