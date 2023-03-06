@@ -136,12 +136,13 @@ struct FAT32DriverRequest {
 /* -- Driver Interfaces -- */
 
 /**
- * Convert cluster number to logical block address
+ * Convert cluster number to logical block address. 
+ * Note : On this course, LBA = CLUSTER_BLOCK_COUNT * cluster directly, without any FAT32 offsets
  * 
- * @param cluster Cluster number to convert
+ * @param cluster_number Cluster number to convert
  * @return uint32_t Logical Block Address
  */
-uint32_t cluster_to_lba(uint32_t cluster);
+uint32_t cluster_to_lba(uint32_t cluster_number);
 
 /**
  * Initialize DirectoryTable value with parent DirectoryEntry and directory name

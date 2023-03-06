@@ -14,8 +14,8 @@ const uint8_t fs_signature[BLOCK_SIZE] = {
     [BLOCK_SIZE-1] = 'k',
 };
 
-uint32_t cluster_to_lba(uint32_t cluster) {
-    return cluster * CLUSTER_BLOCK_COUNT;
+uint32_t cluster_to_lba(uint32_t cluster_number) {
+    return cluster_number * CLUSTER_BLOCK_COUNT;
 }
 
 void write_clusters(const void *ptr, uint32_t cluster_number, uint8_t cluster_count) {
