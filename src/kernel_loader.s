@@ -93,3 +93,5 @@ flush_cs:
     mov ss, ax
     mov ds, ax
     mov es, ax
+
+    ret
