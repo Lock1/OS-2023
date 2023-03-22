@@ -7,6 +7,9 @@
 
 // Decision : 4 MiB paging mode, less data structure, it seems less complex than 4KB
 
+extern struct PageDirectory _paging_kernel_page_directory;
+
+
 // 32-bit structure
 struct PageDirectoryEntryFlag {
     uint8_t present_bit        : 1;
@@ -23,13 +26,13 @@ struct PageDirectoryEntryFlag {
 // Check Intel Manual 3a - Ch 4 Paging - Figure 4-4 PDE: 4MB page
 struct PageDirectoryEntry {
     struct PageDirectoryEntryFlag flag;
-    uint8_t global_page    : 1;
-    uint8_t available      : 3;
-    uint8_t use_pat        : 1;
+    uint8_t  global_page    : 1;
+    uint8_t  reserved_1     : 3;
+    uint8_t  use_pat        : 1;
     
-    uint8_t higher_address;
-    uint8_t reserved       : 1;
-    uint16_t lower_address : 10;
+    uint8_t  higher_address;
+    uint8_t  reserved_2     : 1;
+    uint16_t lower_address  : 10;
 } __attribute__((packed));
 
 struct PageDirectory {
@@ -37,6 +40,8 @@ struct PageDirectory {
 } __attribute__((packed));
 
 
+void init_kernel_page_directory(void);
 
+extern void kernel_tlb_flush(void);
 
 #endif
