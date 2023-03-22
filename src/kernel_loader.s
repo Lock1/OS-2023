@@ -63,7 +63,7 @@ loader_entrypoint:                            ; the loader label (defined as ent
 
 loader_virtual:
     mov dword [_paging_kernel_page_directory], 0
-    invlpg[0]
+    invlpg [0]
     mov esp, kernel_stack + KERNEL_STACK_SIZE ; setup stack register to proper location
     call kernel_setup
 .loop:

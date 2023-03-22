@@ -2,7 +2,7 @@ ENTRY(loader)                /* the name of the entry label */
 
 /* relocation on address at 0xC001 0000, but load address (physical location) still at 0x100000 */
 SECTIONS {
-    . = 0xC0100000;          /* link at 1MB */
+    . = 0xC0100000;          /* use relocation address (memory references) at 0xC010 0000 */
 
     .multiboot ALIGN (0x1000) : AT (ADDR (.multiboot) - 0xC0000000)
     {

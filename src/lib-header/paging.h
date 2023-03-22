@@ -9,7 +9,6 @@
 extern struct PageDirectory _paging_kernel_page_directory;
 
 
-// 32-bit structure
 struct PageDirectoryEntryFlag {
     uint8_t present_bit        : 1;
     uint8_t read_write_bit     : 1;
@@ -37,10 +36,5 @@ struct PageDirectoryEntry {
 struct PageDirectory {
     struct PageDirectoryEntry table[PAGE_ENTRY_COUNT];
 } __attribute__((packed));
-
-
-void init_kernel_page_directory(void);
-
-extern void kernel_tlb_flush(void);
 
 #endif
