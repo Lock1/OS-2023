@@ -1,10 +1,9 @@
-ENTRY(low_loader)                /* the name of the entry label */
+ENTRY(loader)                /* the name of the entry label */
 
+/* relocation on address at 0xC001 0000, but load address (physical location) still at 0x100000 */
 SECTIONS {
-    /* relocation address at 0xC001 0000, but load address (physical location) still at 0x100000 */
     . = 0xC0100000;          /* link at 1MB */
 
-    _kernel_start = .;
     .multiboot ALIGN (0x1000) : AT (ADDR (.multiboot) - 0xC0000000)
     {
         *(.multiboot)        /* put GRUB multiboot header at front */
@@ -35,5 +34,4 @@ SECTIONS {
         *(COMMON)            /* all COMMON sections from all files */
         *(.bss)              /* all bss sections from all files */
     }
-    _kernel_end = .;
 }

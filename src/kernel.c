@@ -20,6 +20,5 @@ void kernel_setup(void) {
     framebuffer_set_cursor(0, 0);
     initialize_filesystem_fat32();
     keyboard_state_activate();
-    init_kernel_page_directory();
     while (TRUE);
 }

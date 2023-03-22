@@ -1,11 +1,11 @@
-global low_loader                             ; the entry symbol for ELF
+global loader                                 ; the entry symbol for ELF
 global enter_protected_mode                   ; go to protected mode
 extern kernel_setup                           ; kernel
 extern _paging_kernel_page_directory          ; kernel page directory
 
 
 KERNEL_VIRTUAL_BASE equ 0xC0000000
-KERNEL_STACK_SIZE   equ 4194304                 ; size of stack in bytes
+KERNEL_STACK_SIZE   equ 2097152                 ; size of stack in bytes
 MAGIC_NUMBER        equ 0x1BADB002              ; define the magic number constant
 FLAGS               equ 0x0                     ; multiboot flags
 CHECKSUM            equ -MAGIC_NUMBER           ; calculate the checksum
@@ -26,8 +26,8 @@ align 4                                       ; the code must be 4 byte aligned
 
 
 section .setup.text                           ; start of the text (code) section
-low_loader equ (loader - KERNEL_VIRTUAL_BASE)
-loader:                                   ; the loader label (defined as entry point in linker script)
+loader equ (loader_entrypoint - KERNEL_VIRTUAL_BASE)
+loader_entrypoint:                            ; the loader label (defined as entry point in linker script)
     ; Initial identity mapping, map first 4MB to itself
     mov edi, _paging_kernel_page_directory - KERNEL_VIRTUAL_BASE
     mov esi, 0
@@ -56,15 +56,21 @@ loader:                                   ; the loader label (defined as entry p
     mov eax, cr0
     or  eax, 0x80000000    ; PG flag
     mov cr0, eax
-    mov eax, 0xDEADBEEF
-    hlt
 
+    ; Jump into higher half first, cannot use C because call stack is still not working
+    lea eax, [loader_virtual]
+    jmp eax
+
+loader_virtual:
+    mov dword [_paging_kernel_page_directory], 0
+    invlpg[0]
     mov esp, kernel_stack + KERNEL_STACK_SIZE ; setup stack register to proper location
     call kernel_setup
 .loop:
     jmp .loop                                 ; loop forever
 
 
+section .text
 ; More details: https://en.wikibooks.org/wiki/X86_Assembly/Protected_Mode
 enter_protected_mode:
     ; Load GDT from GDTDescriptor
