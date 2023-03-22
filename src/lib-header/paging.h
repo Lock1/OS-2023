@@ -7,10 +7,11 @@
 
 // Operating system page directory, using page size 4 MiB
 extern struct PageDirectory _paging_kernel_page_directory;
-// Linker variable  _linker_kernel_start : Pointing to kernel starting address
-extern uint32_t *_linker_kernel_start;
-// Linker variable  _linker_kernel_end : Pointing to kernel end address
-extern uint32_t *_linker_kernel_end;
+// Linker variable : Pointing to kernel start & end address
+extern uint32_t _linker_kernel_virtual_addr_start;
+extern uint32_t _linker_kernel_virtual_addr_end;
+extern uint32_t _linker_kernel_physical_addr_start;
+extern uint32_t _linker_kernel_physical_addr_end;
 
 
 /**

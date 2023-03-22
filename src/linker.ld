@@ -4,7 +4,9 @@ ENTRY(loader)                /* the name of the entry label */
 SECTIONS {
     . = 0xC0100000;          /* use relocation address (memory references) at 0xC010 0000 */
 
-    _linker_kernel_start = .;   /* Optional variable that can be used in kernel, show starting address of kernel */
+    /* Optional variable that can be used in kernel, starting address of kernel */
+    _linker_kernel_virtual_addr_start  = .; 
+    _linker_kernel_physical_addr_start = . - 0xC0000000; 
     .multiboot ALIGN (0x1000) : AT (ADDR (.multiboot) - 0xC0000000)
     {
         *(.multiboot)        /* put GRUB multiboot header at front */
@@ -35,5 +37,7 @@ SECTIONS {
         *(COMMON)            /* all COMMON sections from all files */
         *(.bss)              /* all bss sections from all files */
     }
-    _linker_kernel_end = .;   /* Optional variable that can be used in kernel, show end address of kernel */
+    /* Optional variable that can be used in kernel, show end address of kernel */
+    _linker_kernel_virtual_addr_end  = .;
+    _linker_kernel_physical_addr_end = . - 0xC0000000;
 }
