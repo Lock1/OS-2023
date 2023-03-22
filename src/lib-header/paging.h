@@ -6,7 +6,6 @@
 #define PAGE_ENTRY_COUNT 1024
 
 // Decision : 4 MiB paging mode, less data structure, it seems less complex than 4KB
-
 extern struct PageDirectory _paging_kernel_page_directory;
 
 

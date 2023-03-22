@@ -1,7 +1,6 @@
 #include "lib-header/paging.h"
 
-struct PageDirectory _paging_kernel_page_directory = {0};
-
+__attribute__((aligned(0x1000))) struct PageDirectory _paging_kernel_page_directory = {0};
 
 void init_kernel_page_directory(void) {
     for (int i = 0; i < PAGE_ENTRY_COUNT; i++) {
