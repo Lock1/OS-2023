@@ -25,6 +25,7 @@ align 4                                       ; the code must be 4 byte aligned
     dd CHECKSUM                               ; and the checksum
 
 
+
 section .setup.text                           ; start of the text (code) section
 loader equ (loader_entrypoint - KERNEL_VIRTUAL_BASE)
 loader_entrypoint:                            ; the loader label (defined as entry point in linker script)
@@ -63,11 +64,12 @@ loader_entrypoint:                            ; the loader label (defined as ent
 
 loader_virtual:
     mov dword [_paging_kernel_page_directory], 0
-    invlpg [0]
-    mov esp, kernel_stack + KERNEL_STACK_SIZE ; setup stack register to proper location
+    invlpg [0] ; Delete identity mapping and invalidate TLB cache for first page
+    mov esp, kernel_stack + KERNEL_STACK_SIZE ; Setup stack register to proper location
     call kernel_setup
 .loop:
     jmp .loop                                 ; loop forever
+
 
 
 section .text
