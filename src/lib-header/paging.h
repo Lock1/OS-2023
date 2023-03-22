@@ -26,10 +26,10 @@ struct PageDirectoryEntry {
     struct PageDirectoryEntryFlag flag;
     uint8_t  global_page    : 1;
     uint8_t  reserved_1     : 3;
-    uint8_t  use_pat        : 1;
     
-    uint8_t  higher_address;
-    uint8_t  reserved_2     : 1;
+    uint8_t  use_pat        : 1;
+    uint8_t  higher_address : 3;   // Need to be 3 for pleasing gcc packed rule
+    uint8_t  reserved_2     : 4;
     uint16_t lower_address  : 10;
 } __attribute__((packed));
 
