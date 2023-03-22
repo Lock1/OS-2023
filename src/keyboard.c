@@ -83,6 +83,7 @@ void keyboard_isr(void) {
             framebuffer_set_cursor(row, column + 1);
             keyboard_state.keyboard_buffer[keyboard_state.buffer_index++] = mapped_char;
         } else if (mapped_char == '\n') {
+            keyboard_state.keyboard_buffer[keyboard_state.buffer_index++] = '\0';
             framebuffer_set_cursor(row + 1, 0);
             keyboard_state_deactivate();
         } else if (mapped_char == '\b') {
