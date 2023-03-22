@@ -1,6 +1,21 @@
 #include "lib-header/paging.h"
 
-__attribute__((aligned(0x1000))) struct PageDirectory _paging_kernel_page_directory = {0};
+__attribute__((aligned(0x1000))) struct PageDirectory _paging_kernel_page_directory = {
+    .table = {
+        [0] = {
+            .flag.present_bit       = 1,
+            .flag.write_bit         = 1,
+            .lower_address          = 0,
+            .flag.use_pagesize_4_mb = 1,
+        },
+        [0x300] = {
+            .flag.present_bit       = 1,
+            .flag.write_bit         = 1,
+            .lower_address          = 0,
+            .flag.use_pagesize_4_mb = 1,
+        },
+    }
+};
 
 void update_page_directory_entry(void *physical_addr, void *virtual_addr, struct PageDirectoryEntryFlag flag) {
     uint32_t page_index = ((uint32_t) virtual_addr >> 22) & 0x3FF;

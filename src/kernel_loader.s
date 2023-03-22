@@ -29,21 +29,6 @@ align 4                                       ; the code must be 4 byte aligned
 section .setup.text                           ; start of the text (code) section
 loader equ (loader_entrypoint - KERNEL_VIRTUAL_BASE)
 loader_entrypoint:                            ; the loader label (defined as entry point in linker script)
-    ; Initial identity mapping, map first 4MB to itself
-    mov edi, _paging_kernel_page_directory - KERNEL_VIRTUAL_BASE
-    mov esi, 0
-    mov edx, esi
-    or  edx, 0x83   ; Present writable flag
-    mov [edi], edx
-
-    ; Higher half mapping
-    ; Sends page directory corresponding virtual address 0xC000 0000 to physical address 0x0000 0000
-    mov edi, _paging_kernel_page_directory - KERNEL_VIRTUAL_BASE + 4 * 0x300 
-    mov esi, 0
-    mov edx, esi
-    or  edx, 0x83
-    mov [edi], edx
-
     ; Set CR3 (CPU page register)
     mov eax, _paging_kernel_page_directory - KERNEL_VIRTUAL_BASE
     mov cr3, eax
