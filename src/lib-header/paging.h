@@ -41,7 +41,7 @@ struct PageDirectoryEntryFlag {
  * Check Intel Manual 3a - Ch 4 Paging - Figure 4-4 PDE: 4MB page
  * 
  * @param flag            Contain 8-bit page directory entry flag
- * @param global_page     Is this page translation global
+ * @param global_page     Is this page translation global (also cannot be flushed)
  * @param reserved_1      Reserved bit
  * @param use_pat         Whether use PAT or not, unused for this project
  * @param higher_address  Higher address for page, unused for this project 
@@ -65,12 +65,31 @@ struct PageDirectoryEntry {
  * Page Directory, contain array of PageDirectoryEntry.
  * Note: This data structure not only can be manipulated by kernel, 
  *   MMU operation, TLB hit & miss also affecting this data structure (dirty, accessed bit, etc).
- * Warning: Address must be aligned in 4 KB or 4 MB, use __attribute__((aligned(0x1000)))
+ * Warning: Address must be aligned in 4 KB (listed on Intel Manual), use __attribute__((aligned(0x1000))), 
+ *   unaligned definition of PageDirectory will cause triple fault
  * 
  * @param table Fixed-width array of PageDirectoryEntry with size PAGE_ENTRY_COUNT
  */
 struct PageDirectory {
     struct PageDirectoryEntry table[PAGE_ENTRY_COUNT];
 } __attribute__((packed));
+
+/**
+ * update_page_directory,
+ * Edit _paging_kernel_page_directory with respective parameter
+ * 
+ * @param physical_addr Physical address to map
+ * @param virtual_addr  Virtual address to map
+ * @param flag          Page entry flags
+ */
+void update_page_directory(void *physical_addr, void *virtual_addr, struct PageDirectoryEntryFlag flag);
+
+/**
+ * flush_single_tlb, 
+ * invalidate page that contain virtual address in parameter
+ * 
+ * @param virtual_addr Virtual address to flush
+ */
+void flush_single_tlb(void *virtual_addr);
 
 #endif
