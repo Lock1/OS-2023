@@ -19,4 +19,6 @@ SECTIONS {
     {
         *(.rodata*)
     }
+    _linker_user_program_end = .;
+    ASSERT ((_linker_user_program_end <= 4 * 1024 * 1024), "Error: User program linking result is more than 4 MiB")
 }

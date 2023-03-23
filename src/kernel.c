@@ -26,6 +26,20 @@ void kernel_setup(void) {
     framebuffer_clear();
     framebuffer_set_cursor(0, 0);
     initialize_filesystem_fat32();
-    while (TRUE)
-        keyboard_state_activate();
+
+    // Allocate first 4 MiB virtual memory
+    allocate_single_user_page_frame(0);
+
+    // Write shell into memory
+    struct FAT32DriverRequest request = {
+        .buf                   = (uint8_t*) 0,
+        .name                  = "shell",
+        .ext                   = "\0\0\0",
+        .parent_cluster_number = ROOT_CLUSTER_NUMBER,
+        .buffer_size           = PAGE_FRAME_SIZE,
+    }
+    read(request);
+
+    while (TRUE);
+    // keyboard_state_activate();
 }
