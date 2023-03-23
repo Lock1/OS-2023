@@ -25,7 +25,8 @@ void update_page_directory_entry(void *physical_addr, void *virtual_addr, struct
     uint32_t page_index = ((uint32_t) virtual_addr >> 22) & 0x3FF;
 
     _paging_kernel_page_directory.table[page_index].flag          = flag;
-    _paging_kernel_page_directory.table[page_index].lower_address = ((uint32_t) physical_addr >> 22) & 0x3FF;
+    _paging_kernel_page_directory.table[page_index].lower_address = (((uint32_t)physical_addr >> 22) * 4) & 0x3FF;
+    flush_single_tlb(virtual_addr);
 }
 
 int8_t allocate_single_user_page_frame(void *virtual_addr) {

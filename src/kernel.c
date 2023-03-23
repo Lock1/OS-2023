@@ -28,7 +28,7 @@ void kernel_setup(void) {
     initialize_filesystem_fat32();
 
     // Allocate first 4 MiB virtual memory
-    allocate_single_user_page_frame(0);
+    allocate_single_user_page_frame((uint8_t*) 0);
 
     // Write shell into memory
     struct FAT32DriverRequest request = {
@@ -37,7 +37,7 @@ void kernel_setup(void) {
         .ext                   = "\0\0\0",
         .parent_cluster_number = ROOT_CLUSTER_NUMBER,
         .buffer_size           = PAGE_FRAME_SIZE,
-    }
+    };
     read(request);
 
     while (TRUE);

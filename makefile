@@ -45,6 +45,10 @@ user-shell:
 	@size --target=binary bin/shell
 	@rm -f *.o
 
+insert-shell: inserter user-shell
+	@echo Inserting shell into root directory...
+	@cd bin; ./inserter shell 2 $(DISK_NAME).bin
+
 kernel: $(OBJECTS)
 	@$(LIN) $(LFLAGS) $(OBJECTS) -o $(OUTPUT_FOLDER)/kernel
 	@echo Linking object files and generate elf32...
