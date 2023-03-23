@@ -43,19 +43,27 @@ void write_blocks(const void *ptr, uint32_t logical_block_address, uint8_t block
 
 
 int main(int argc, char *argv[]) {
-    if (argc < 4)
-        fprintf(stderr, "inserter: ./inserter <file to insert> <parent cluster index> <storage>");
+    if (argc < 4) {
+        fprintf(stderr, "inserter: ./inserter <file to insert> <parent cluster index> <storage>\n");
+        exit(1);
+    }
 
     // Read storage into memory, requiring 4 MB memory
     image_storage     = malloc(4*1024*1024);
+    file_buffer       = malloc(4*1024*1024);
     FILE *fptr        = fopen(argv[3], "r");
     fread(image_storage, 4*1024*1024, 1, fptr);
     fclose(fptr);
 
     // Read target file, assuming file is less than 4 MiB
     FILE *fptr_target = fopen(argv[1], "r");
-    size_t filesize   = fread(file_buffer, 4*1024*1024, 1, fptr);
+    fread(file_buffer, 4*1024*1024, 1, fptr_target);
+    fseek(fptr_target, 0, SEEK_END);
+    size_t filesize   = ftell(fptr_target);
     fclose(fptr_target);
+
+    printf("Filename : %s\n",  argv[1]);
+    printf("Filesize : %ld\n", filesize);
 
     // FAT32 operations
     initialize_filesystem_fat32();
@@ -64,9 +72,16 @@ int main(int argc, char *argv[]) {
         .ext         = "\0\0\0",
         .buffer_size = filesize,
     };
-    sscanf(argv[2], "%d",  &request.parent_cluster_number);
+    sscanf(argv[2], "%u",  &request.parent_cluster_number);
     sscanf(argv[1], "%8s", request.name);
-    write(request);
+    int retcode = write(request);
+    if (retcode == 0)
+        puts("Write success");
+    else if (retcode == 1)
+        puts("Error: File/folder name already exist");
+    else if (retcode == 2)
+        puts("Error: Invalid parent cluster");
+
 
     // Write image in memory into original, overwrite them
     fptr              = fopen(argv[3], "w");
