@@ -11,7 +11,7 @@
 #include "lib-header/fat32.h"
 #include "lib-header/paging.h"
 
-// TODO: FS Read -> To memory + simple allocator -> iret -> shell & syscall
+// TODO: To memory + simple allocator -> iret -> shell & syscall
 void kernel_setup(void) {
     enter_protected_mode(&_gdt_gdtr);
     pic_remap();
