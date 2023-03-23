@@ -14,6 +14,9 @@ const uint8_t fs_signature[BLOCK_SIZE] = {
     [BLOCK_SIZE-1] = 'k',
 };
 
+
+
+// -- Misc Helper --
 uint32_t cluster_to_lba(uint32_t cluster_number) {
     return cluster_number * CLUSTER_BLOCK_COUNT;
 }
@@ -34,6 +37,9 @@ void init_directory_table(struct FAT32DirectoryTable *dir_table, char *name, uin
     memcpy(dir_table->table[0].name, name, 8);
 }
 
+
+
+// -- File system initializer --
 bool is_empty_storage(void) {
     struct BlockBuffer boot_sector;
     read_blocks(&boot_sector, 0, 1);
@@ -66,6 +72,9 @@ void initialize_filesystem_fat32(void) {
         read_clusters(&fat32driver_state.fat_table, FAT_CLUSTER_NUMBER, 1);
 }
 
+
+
+// -- CRUD Helper --
 bool is_loaded_dir_table_valid(void) {
     return fat32driver_state.dir_table_buf.table[0].user_attribute == UATTR_NOT_EMPTY;
 }
@@ -74,7 +83,6 @@ uint32_t get_cluster_from_entry(struct FAT32DirectoryEntry entry) {
     return entry.cluster_high << 16 | entry.cluster_low;
 }
 
-// Require driver.dirtable already loaded properly
 int32_t driver_dir_table_linear_scan(char name[8], char ext[3], bool find_empty) {
     for (uint32_t i = 0; i < DIRECTORY_TABLE_ENTRY_COUNT; i++) {
         struct FAT32DirectoryEntry entry = fat32driver_state.dir_table_buf.table[i];
@@ -87,8 +95,6 @@ int32_t driver_dir_table_linear_scan(char name[8], char ext[3], bool find_empty)
     return -1;
 }
 
-// Require driver.fat already loaded properly, returning -1 if available cluster is less than cluster_count
-// Also requiring empty_buf with size at least uint32_t[16]
 int8_t driver_fat_mark_empty_cluster(uint32_t empty_buf[16], uint32_t cluster_count) {
     uint32_t marked_cluster_count = 0;
     for (int i = 0; i < CLUSTER_MAP_SIZE; i++) {
@@ -110,6 +116,9 @@ bool is_dirtable_empty(struct FAT32DirectoryTable *dirtable) {
     return TRUE;
 }
 
+
+
+// -- File system CRUD --
 int8_t read(struct FAT32DriverRequest request) {
     // Read directory at parent_cluster_number
     read_clusters(&fat32driver_state.dir_table_buf, request.parent_cluster_number, 1);

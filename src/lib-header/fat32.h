@@ -198,8 +198,58 @@ void read_clusters(void *ptr, uint32_t cluster_number, uint8_t cluster_count);
 
 
 
-/* -- CRUD Operation -- */
+/* -- CRUD Helper -- */
+/**
+ * Check whether this is valid DirectoryTable.
+ * Note : Stateful - fat32driver_state
+ * 
+ * @return True if loaded DirectoryTable have entry 0
+ */
+bool is_loaded_dir_table_valid(void);
 
+/**
+ * Get the cluster number from DirectoryEntry
+ * 
+ * @param entry Target entry to convert into cluster_number
+ * @return uint32_t cluster_number
+ */
+uint32_t get_cluster_from_entry(struct FAT32DirectoryEntry entry);
+
+/**
+ * Search single entry index with same name or just single empty entry
+ * Note : Stateful - Require fat32driver_state.dirtable already loaded properly
+ *
+ * @param name       Name to match
+ * @param ext        Extension to match
+ * @param find_empty Whether searching empty entry or not
+ * @return int32_t entry_index in dirtable, -1 if not found
+ */
+int32_t driver_dir_table_linear_scan(char name[8], char ext[3], bool find_empty);
+
+/**
+ * Mark empty cluster_map (up to 16 clusters) and put cluster_number in empty_buf.
+ * Will try to search cluster_count-many empty FAT entry.
+ * Note : Stateful - Require fat32driver_state.dirtable already loaded properly
+ *
+ * @param empty_buf     Pointer into array with size at least uint32_t[16]
+ * @param cluster_count How many empty cluster to search
+ * @return int8_t Error code, returning -1 if empty cluster found is < than cluster_count
+ */
+int8_t driver_fat_mark_empty_cluster(uint32_t empty_buf[16], uint32_t cluster_count);
+
+/**
+ * Check whether pointed dirtable is empty or not
+ * 
+ * @param dirtable Pointer into directory table
+ * @return True if only 1 entry with UATTR_NOT_EMPTY
+ */
+bool is_dirtable_empty(struct FAT32DirectoryTable *dirtable);
+
+
+
+
+
+/* -- CRUD Operation -- */
 /**
  *  FAT32 Folder / Directory read
  *
