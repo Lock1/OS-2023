@@ -40,6 +40,8 @@ void kernel_setup(void) {
     };
     read(request);
 
+    kernel_execute_user_program((uint8_t *) 0);
+
     while (TRUE);
     // keyboard_state_activate();
 }
