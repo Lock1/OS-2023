@@ -11,7 +11,13 @@
 #include "lib-header/fat32.h"
 #include "lib-header/paging.h"
 
-// TODO: To memory + simple allocator -> iret -> shell & syscall
+// TODO: Decide how we following target
+//       Inserter -> Read to memory + simple allocator -> iret -> shell & syscall
+// Inserter - Done
+// Paging   - Done
+// All we need is just smack iret
+
+
 void kernel_setup(void) {
     enter_protected_mode(&_gdt_gdtr);
     pic_remap();

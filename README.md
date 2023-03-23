@@ -28,8 +28,8 @@ Notes - [Milestone 1 Notes](/other/notes/Milestone%201%20Notes.md)
 
 ## Milestone 3
 12-End
+- [x] Paging, it seems doable?
 - [ ] Basic shell
-- [ ] Paging, need massive testing
 
 This two might be way out of scope
 - [ ] ~~Memory management (memcpy, malloc, etc)~~

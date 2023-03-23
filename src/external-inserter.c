@@ -16,9 +16,9 @@ struct FAT32DriverRequest {
     uint32_t  buffer_size;
 } __attribute__((packed));
 
-void* memcpy(void* restrict dest, const void* restrict src, size_t n);
+void*  memcpy(void* restrict dest, const void* restrict src, size_t n);
 
-void initialize_filesystem_fat32(void);
+void   initialize_filesystem_fat32(void);
 int8_t read(struct FAT32DriverRequest request);
 int8_t read_directory(struct FAT32DriverRequest request);
 int8_t write(struct FAT32DriverRequest request);
@@ -81,7 +81,6 @@ int main(int argc, char *argv[]) {
         puts("Error: File/folder name already exist");
     else if (retcode == 2)
         puts("Error: Invalid parent cluster");
-
 
     // Write image in memory into original, overwrite them
     fptr              = fopen(argv[3], "w");
