@@ -17,11 +17,33 @@ __attribute__((aligned(0x1000))) struct PageDirectory _paging_kernel_page_direct
     }
 };
 
+static struct PageDriverState page_driver_state = {
+    .last_available_physical_addr = (uint32_t*) 0 + PAGE_FRAME_SIZE,
+};
+
 void update_page_directory_entry(void *physical_addr, void *virtual_addr, struct PageDirectoryEntryFlag flag) {
     uint32_t page_index = ((uint32_t) virtual_addr >> 22) & 0x3FF;
 
     _paging_kernel_page_directory.table[page_index].flag          = flag;
     _paging_kernel_page_directory.table[page_index].lower_address = ((uint32_t) physical_addr >> 22) & 0x3FF;
+}
+
+int8_t allocate_single_user_page_frame(void *virtual_addr) {
+    uint32_t physical_addr = (uint32_t) page_driver_state.last_available_physical_addr;
+
+    // Using default QEMU config (128 MiB max memory)
+    if (physical_addr < 128 * 1024 * 1024) {
+        struct PageDirectoryEntryFlag flag = {
+            .present_bit       = 1,
+            .write_bit         = 1,
+            .user_bit          = 1,
+            .use_pagesize_4_mb = 1,
+        };
+        update_page_directory_entry((uint32_t *) physical_addr, virtual_addr, flag);
+        page_driver_state.last_available_physical_addr += PAGE_FRAME_SIZE;
+        return 0;
+    }
+    return -1;
 }
 
 void flush_single_tlb(void *virtual_addr) {

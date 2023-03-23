@@ -4,8 +4,9 @@
 #include "stdtype.h"
 
 #define PAGE_ENTRY_COUNT 1024
+#define PAGE_FRAME_SIZE  (4*1024*1024)
 
-// Operating system page directory, using page size 4 MiB
+// Operating system page directory, using page size PAGE_FRAME_SIZE (4 MiB)
 extern struct PageDirectory _paging_kernel_page_directory;
 // Linker variable : Pointing to kernel start & end address
 extern uint32_t _linker_kernel_virtual_addr_start;
@@ -76,6 +77,19 @@ struct PageDirectory {
 } __attribute__((packed));
 
 /**
+ * Containing page driver states
+ * 
+ * @param last_available_physical_addr Pointer to last empty physical addr (multiple of 4 MiB)
+ */
+struct PageDriverState {
+    uint32_t *last_available_physical_addr;
+} __attribute__((packed));
+
+
+
+
+
+/**
  * update_page_directory,
  * Edit _paging_kernel_page_directory with respective parameter
  * 
@@ -92,5 +106,13 @@ void update_page_directory(void *physical_addr, void *virtual_addr, struct PageD
  * @param virtual_addr Virtual address to flush
  */
 void flush_single_tlb(void *virtual_addr);
+
+/**
+ * Allocate user memory into specified virtual memory address
+ * 
+ * @param  virtual_addr Virtual address to be mapped (multiple of 4 MiB or page frame size)
+ * @return int8_t       0 success, -1 for failed allocation
+ */
+int8_t allocate_single_user_page_frame(void *virtual_addr);
 
 #endif
