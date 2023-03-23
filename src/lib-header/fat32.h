@@ -4,10 +4,11 @@
 #include "disk.h"
 
 /* -- IF2230 File System constants -- */
-#define BOOT_SECTOR           0
-#define CLUSTER_BLOCK_COUNT   4
-#define CLUSTER_SIZE          (BLOCK_SIZE*CLUSTER_BLOCK_COUNT)
-#define CLUSTER_MAP_SIZE      512
+#define BOOT_SECTOR                 0
+#define CLUSTER_BLOCK_COUNT         4
+#define CLUSTER_SIZE                (BLOCK_SIZE*CLUSTER_BLOCK_COUNT)
+#define CLUSTER_MAP_SIZE            512
+#define DIRECTORY_TABLE_ENTRY_COUNT (CLUSTER_SIZE / sizeof(struct FAT32DirectoryEntry))
 
 /* -- FAT32 FileAllocationTable constants -- */
 // FAT reserved value for cluster 0 and 1 in FileAllocationTable
@@ -90,7 +91,7 @@ struct FAT32DirectoryEntry {
 
 // FAT32 DirectoryTable, containing directory entry table - @param table Table of DirectoryEntry that span within 1 cluster
 struct FAT32DirectoryTable {
-    struct FAT32DirectoryEntry table[CLUSTER_SIZE / sizeof(struct FAT32DirectoryEntry)];
+    struct FAT32DirectoryEntry table[DIRECTORY_TABLE_ENTRY_COUNT];
 } __attribute__((packed));
 
 
