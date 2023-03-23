@@ -261,6 +261,8 @@ int8_t delete(struct FAT32DriverRequest request) {
 
     // Remove entry from parent directory
     fat32driver_state.dir_table_buf.table[entry_index].user_attribute = 0;
+    memset(fat32driver_state.dir_table_buf.table[entry_index].name, 0, 8);
+    memset(fat32driver_state.dir_table_buf.table[entry_index].ext, 0, 3);
 
     // Remove FAT cluster number
     uint32_t cluster_iterator = get_cluster_from_entry(entry);
