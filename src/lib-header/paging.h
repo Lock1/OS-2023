@@ -82,7 +82,7 @@ struct PageDirectory {
  * @param last_available_physical_addr Pointer to last empty physical addr (multiple of 4 MiB)
  */
 struct PageDriverState {
-    uint32_t *last_available_physical_addr;
+    uint8_t *last_available_physical_addr;
 } __attribute__((packed));
 
 
@@ -108,7 +108,8 @@ void update_page_directory(void *physical_addr, void *virtual_addr, struct PageD
 void flush_single_tlb(void *virtual_addr);
 
 /**
- * Allocate user memory into specified virtual memory address
+ * Allocate user memory into specified virtual memory address.
+ * Multiple call on same virtual address will unmap previous physical address and change it into new one.
  * 
  * @param  virtual_addr Virtual address to be mapped (multiple of 4 MiB or page frame size)
  * @return int8_t       0 success, -1 for failed allocation

@@ -18,7 +18,7 @@ __attribute__((aligned(0x1000))) struct PageDirectory _paging_kernel_page_direct
 };
 
 static struct PageDriverState page_driver_state = {
-    .last_available_physical_addr = (uint32_t*) 0 + PAGE_FRAME_SIZE,
+    .last_available_physical_addr = (uint8_t*) 0 + PAGE_FRAME_SIZE,
 };
 
 void update_page_directory_entry(void *physical_addr, void *virtual_addr, struct PageDirectoryEntryFlag flag) {
