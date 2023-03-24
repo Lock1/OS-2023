@@ -11,7 +11,7 @@ void interrupt(uint32_t eax, uint32_t ebx, uint32_t ecx, uint32_t edx) {
 
 int main(void) {
     int a = 0xDEADBEEF;
-    interrupt(0xCAFE, 0xDEADC0DE, a, 0xBABE);
+    interrupt(0xCAFE, 0xDEADC0DE, (uint32_t) &a, 0xBABE);
     while (1);
 
     return 0;

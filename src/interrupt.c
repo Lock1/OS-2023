@@ -25,7 +25,14 @@ void main_interrupt_handler(
         case PIC1_OFFSET + IRQ_KEYBOARD:
             keyboard_isr();
             break;
+        case 0x30:
+            syscall(cpu, info);
+            break;
     }
+}
+
+void syscall(struct CPURegister cpu, __attribute__((unused)) struct InterruptStack info) {
+    *((uint32_t*) cpu.ecx) = 0x80801010;
 }
 
 void io_wait(void) {

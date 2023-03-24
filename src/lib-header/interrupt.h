@@ -142,4 +142,13 @@ void main_interrupt_handler(struct CPURegister cpu, uint32_t int_number, struct 
 // Set kernel stack in TSS
 void set_tss_kernel_current_stack(void);
 
+/**
+ * Kernel syscall for user mode. This project will use INT $0x30 as syscall
+ * Both parameter passed directly from main_interrupt_handler().
+ *
+ * @param cpu  CPU register when interrupt is raised
+ * @param info Information about interrupt that pushed automatically by CPU
+ */
+void syscall(struct CPURegister cpu, struct InterruptStack info);
+
 #endif
