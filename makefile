@@ -33,7 +33,8 @@ disk:
 
 inserter:
 	@$(CC) -Wno-builtin-declaration-mismatch \
-		$(SOURCE_FOLDER)/stdmem.c $(SOURCE_FOLDER)/fat32.c $(SOURCE_FOLDER)/external-inserter.c \
+		$(SOURCE_FOLDER)/stdmem.c $(SOURCE_FOLDER)/fat32.c \
+		$(SOURCE_FOLDER)/external-inserter.c \
 		-o $(OUTPUT_FOLDER)/inserter
 
 user-shell:
