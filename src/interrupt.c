@@ -1,6 +1,18 @@
 #include "lib-header/interrupt.h"
 #include "lib-header/portio.h"
 #include "lib-header/keyboard.h"
+#include "lib-header/gdt.h"
+#include "lib-header/kernel_loader.h"
+
+struct TSSEntry _interrupt_tss_entry = {
+    .ss0  = GDT_KERNEL_DATA_SEGMENT_SELECTOR,
+};
+
+void set_tss_kernel_current_stack(void) {
+    uint32_t stack_ptr;
+    __asm__ volatile ("mov %%esp, %0": "=r"(stack_ptr) : /* <Empty> */);
+    _interrupt_tss_entry.esp0 = stack_ptr;
+}
 
 void main_interrupt_handler(
     __attribute__((unused)) struct CPURegister cpu,
