@@ -11,8 +11,12 @@ struct IDTR _idt_idtr = {
 };
 
 void initialize_idt(void) {
-    for (uint8_t int_vector = 0; int_vector < ISR_STUB_TABLE_LIMIT; int_vector++)
-        set_interrupt_gate(int_vector, isr_stub_table[int_vector], GDT_KERNEL_CODE_SEGMENT_SELECTOR, 0x00);
+    for (uint8_t int_vector = 0; int_vector < ISR_STUB_TABLE_LIMIT; int_vector++) {
+        if (int_vector < 0x30)
+            set_interrupt_gate(int_vector, isr_stub_table[int_vector], GDT_KERNEL_CODE_SEGMENT_SELECTOR, 0x0);
+        else
+            set_interrupt_gate(int_vector, isr_stub_table[int_vector], GDT_KERNEL_CODE_SEGMENT_SELECTOR, 0x3);
+    }
     __asm__ volatile("lidt %0" : : "m"(_idt_idtr));
     __asm__ volatile("sti");
 }

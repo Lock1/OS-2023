@@ -11,11 +11,9 @@
 #include "lib-header/fat32.h"
 #include "lib-header/paging.h"
 
-// TODO: Decide how we following target
-//       Inserter -> Read to memory + simple allocator -> iret -> shell & syscall
-// Inserter - Done
-// Paging   - Done
-// All we need is just smack iret
+// TODO: Shell & syscall
+// - TSS
+// - Syscall
 
 
 void kernel_setup(void) {
@@ -26,6 +24,8 @@ void kernel_setup(void) {
     framebuffer_clear();
     framebuffer_set_cursor(0, 0);
     initialize_filesystem_fat32();
+    gdt_install_tss();
+    set_tss_register();
 
     // Allocate first 4 MiB virtual memory
     allocate_single_user_page_frame((uint8_t*) 0);
@@ -40,6 +40,7 @@ void kernel_setup(void) {
     };
     read(request);
 
+    set_tss_kernel_current_stack();
     kernel_execute_user_program((uint8_t *) 0);
 
     while (TRUE);
