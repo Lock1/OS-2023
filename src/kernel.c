@@ -43,5 +43,4 @@ void kernel_setup(void) {
     kernel_execute_user_program((uint8_t *) 0);
 
     while (TRUE);
-    // keyboard_state_activate();
 }

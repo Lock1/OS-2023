@@ -3,6 +3,7 @@
 #include "lib-header/keyboard.h"
 #include "lib-header/gdt.h"
 #include "lib-header/kernel_loader.h"
+#include "lib-header/fat32.h"
 
 struct TSSEntry _interrupt_tss_entry = {
     .ss0  = GDT_KERNEL_DATA_SEGMENT_SELECTOR,
@@ -17,9 +18,9 @@ void set_tss_kernel_current_stack(void) {
 }
 
 void main_interrupt_handler(
-    __attribute__((unused)) struct CPURegister cpu,
-    uint32_t int_number,
-    __attribute__((unused)) struct InterruptStack info
+    struct CPURegister cpu, 
+    uint32_t int_number, 
+    struct InterruptStack info
 ) {
     switch (int_number) {
         case PIC1_OFFSET + IRQ_KEYBOARD:
@@ -32,7 +33,10 @@ void main_interrupt_handler(
 }
 
 void syscall(struct CPURegister cpu, __attribute__((unused)) struct InterruptStack info) {
-    *((uint32_t*) cpu.ecx) = 0x80801010;
+    if (cpu.eax == 0) {
+        struct FAT32DriverRequest request = *(struct FAT32DriverRequest*) cpu.ebx;
+        read(request);
+    }
 }
 
 void io_wait(void) {

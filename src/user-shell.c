@@ -1,4 +1,5 @@
 #include "lib-header/stdtype.h"
+#include "lib-header/fat32.h"
 
 void interrupt(uint32_t eax, uint32_t ebx, uint32_t ecx, uint32_t edx) {
     __asm__ volatile("mov %0, %%ebx" : /* <Empty> */ : "r"(ebx));
@@ -10,9 +11,16 @@ void interrupt(uint32_t eax, uint32_t ebx, uint32_t ecx, uint32_t edx) {
 }
 
 int main(void) {
-    int a = 0xDEADBEEF;
-    interrupt(0xCAFE, 0xDEADC0DE, (uint32_t) &a, 0xBABE);
-    while (1);
+    struct ClusterBuffer cl = {0};
+    struct FAT32DriverRequest request = {
+        .buf                   = &cl,
+        .name                  = "ikanaide",
+        .ext                   = "\0\0\0",
+        .parent_cluster_number = ROOT_CLUSTER_NUMBER,
+        .buffer_size           = CLUSTER_SIZE,
+    };
+    interrupt(0, (uint32_t) &request, 0, 0);
 
+    while (TRUE);
     return 0;
 }
