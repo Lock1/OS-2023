@@ -10,10 +10,7 @@
 #include "lib-header/disk.h"
 #include "lib-header/fat32.h"
 #include "lib-header/paging.h"
-
-// TODO: Shell & syscall
-// - Syscall & Kernel global / .data stability test
-
+#include "lib-header/textio.h"
 
 void kernel_setup(void) {
     enter_protected_mode(&_gdt_gdtr);
@@ -39,6 +36,7 @@ void kernel_setup(void) {
     };
     read(request);
 
+    // Set TSS $esp pointer and jump into shell 
     set_tss_kernel_current_stack();
     kernel_execute_user_program((uint8_t *) 0);
 

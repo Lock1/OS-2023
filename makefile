@@ -1,5 +1,5 @@
 # Object files
-OBJECTS = kernel_loader.o kernel.o portio.o stdmem.o framebuffer.o gdt.o idt.o interrupt.o intsetup.o keyboard.o disk.o fat32.o paging.o
+OBJECTS = kernel_loader.o kernel.o portio.o stdmem.o framebuffer.o gdt.o idt.o interrupt.o intsetup.o keyboard.o disk.o fat32.o paging.o textio.o
 
 # Compiler & linker
 ASM = nasm

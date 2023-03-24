@@ -4,6 +4,8 @@
 #include "lib-header/gdt.h"
 #include "lib-header/kernel_loader.h"
 #include "lib-header/fat32.h"
+#include "lib-header/textio.h"
+#include "lib-header/stdmem.h"
 
 struct TSSEntry _interrupt_tss_entry = {
     .ss0  = GDT_KERNEL_DATA_SEGMENT_SELECTOR,
@@ -17,11 +19,7 @@ void set_tss_kernel_current_stack(void) {
     _interrupt_tss_entry.esp0 = stack_ptr + 8; 
 }
 
-void main_interrupt_handler(
-    struct CPURegister cpu, 
-    uint32_t int_number, 
-    struct InterruptStack info
-) {
+void main_interrupt_handler(struct CPURegister cpu, uint32_t int_number, struct InterruptStack info) {
     switch (int_number) {
         case PIC1_OFFSET + IRQ_KEYBOARD:
             keyboard_isr();
@@ -36,6 +34,15 @@ void syscall(struct CPURegister cpu, __attribute__((unused)) struct InterruptSta
     if (cpu.eax == 0) {
         struct FAT32DriverRequest request = *(struct FAT32DriverRequest*) cpu.ebx;
         read(request);
+    } else if (cpu.eax == 4) {
+        keyboard_state_activate();
+        __asm__("sti"); // Due IRQ is disabled when main_interrupt_handler() called
+        while (is_keyboard_blocking());
+        char buf[KEYBOARD_BUFFER_SIZE];
+        get_keyboard_buffer(buf);
+        memcpy((char *) cpu.ebx, buf, cpu.ecx);
+    } else if (cpu.eax == 5) {
+        puts((char *) cpu.ebx, cpu.ecx, cpu.edx);
     }
 }
 
