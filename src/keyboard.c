@@ -86,6 +86,7 @@ void keyboard_isr(void) {
             keyboard_state.keyboard_buffer[keyboard_state.buffer_index++] = '\0';
             framebuffer_set_cursor(row + 1, 0);
             keyboard_state_deactivate();
+            keyboard_state.buffer_index = 0;
         } else if (mapped_char == '\b') {
             framebuffer_set_cursor(row, column - 1);
             framebuffer_write(row, column - 1, ' ', 0xF, 0);

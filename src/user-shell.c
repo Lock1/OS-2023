@@ -20,7 +20,13 @@ int main(void) {
         .buffer_size           = CLUSTER_SIZE,
     };
     interrupt(0, (uint32_t) &request, 0, 0);
+    interrupt(5, (uint32_t) "owo\n", 4, 0xF);
 
-    while (TRUE);
+    char buf[16];
+    while (TRUE) {
+        interrupt(4, (uint32_t) buf, 16, 0);
+        interrupt(5, (uint32_t) buf, 16, 0xF);
+    }
+
     return 0;
 }
