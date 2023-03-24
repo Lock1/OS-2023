@@ -33,7 +33,7 @@ void main_interrupt_handler(struct CPURegister cpu, uint32_t int_number, struct 
 void syscall(struct CPURegister cpu, __attribute__((unused)) struct InterruptStack info) {
     if (cpu.eax == 0) {
         struct FAT32DriverRequest request = *(struct FAT32DriverRequest*) cpu.ebx;
-        read(request);
+        *((int8_t*) cpu.ecx) = read(request);
     } else if (cpu.eax == 4) {
         keyboard_state_activate();
         __asm__("sti"); // Due IRQ is disabled when main_interrupt_handler() called
