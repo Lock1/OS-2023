@@ -129,6 +129,9 @@ void pic_remap(void);
  * This function will be called first if any INT 0x00 - 0x40 is raised, 
  * and will call proper ISR for respective interrupt / exception.
  * 
+ * If inter-privilege interrupt raised, SS and ESP is automatically out of main_interrupt_handler()
+ * parameter. Can be checked with ((int*) info) + 4 for user $esp, 5 for user $ss
+ * 
  * Again, this function is not for normal function call, all parameter will be automatically set when interrupt is called.
  * @param cpu        CPU register when interrupt is raised
  * @param int_number Interrupt number that trigger interrupt exception

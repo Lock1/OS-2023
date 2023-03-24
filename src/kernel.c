@@ -12,8 +12,7 @@
 #include "lib-header/paging.h"
 
 // TODO: Shell & syscall
-// - TSS
-// - Syscall
+// - Syscall & Kernel global / .data stability test
 
 
 void kernel_setup(void) {
