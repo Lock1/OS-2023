@@ -24,14 +24,17 @@ Notes - [Milestone 1 Notes](/other/notes/Milestone%201%20Notes.md)
 6-11
 - [x] Interrupt (IRQ kaya keyboard)
 - [x] Filesystem
-- [ ] ~~Basic process + monotasking~~ Cancelled, possibly next milestone
+- [ ] ~~Basic process + monotasking~~ Dropped for milestone 2
 
 ## Milestone 3
 12-End
-- [x] Paging, it seems doable?
-- [ ] Basic shell
+- [x] Paging
+- [x] User mode
+- [x] Basic shell
 
-This two might be way out of scope
+
+## Dropped
+Seems too hard?
 - [ ] ~~Memory management (memcpy, malloc, etc)~~
 - [ ] ~~Multitasking~~
 
