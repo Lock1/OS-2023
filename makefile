@@ -1,5 +1,5 @@
 # Object files
-OBJECTS = kernel_loader.o kernel.o portio.o stdmem.o framebuffer.o gdt.o idt.o interrupt.o intsetup.o keyboard.o disk.o fat32.o paging.o
+OBJECTS = kernel_loader.o kernel.o portio.o stdmem.o framebuffer.o gdt.o idt.o interrupt.o intsetup.o keyboard.o disk.o fat32.o paging.o textio.o
 
 # Compiler & linker
 ASM = nasm
@@ -33,7 +33,8 @@ disk:
 
 inserter:
 	@$(CC) -Wno-builtin-declaration-mismatch \
-		$(SOURCE_FOLDER)/stdmem.c $(SOURCE_FOLDER)/fat32.c $(SOURCE_FOLDER)/external-inserter.c \
+		$(SOURCE_FOLDER)/stdmem.c $(SOURCE_FOLDER)/fat32.c \
+		$(SOURCE_FOLDER)/external-inserter.c \
 		-o $(OUTPUT_FOLDER)/inserter
 
 user-shell:

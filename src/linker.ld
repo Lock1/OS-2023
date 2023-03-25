@@ -36,6 +36,8 @@ SECTIONS {
     {
         *(COMMON)            /* all COMMON sections from all files */
         *(.bss)              /* all bss sections from all files */
+        kernel_loader.o(.bss)
+        _linker_kernel_stack_top = .;
     }
     /* Optional variable that can be used in kernel, show end address of kernel */
     _linker_kernel_virtual_addr_end  = .;

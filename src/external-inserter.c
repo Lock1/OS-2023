@@ -63,7 +63,7 @@ int main(int argc, char *argv[]) {
     fclose(fptr_target);
 
     printf("Filename : %s\n",  argv[1]);
-    printf("Filesize : %ld\n", filesize);
+    printf("Filesize : %ld bytes\n", filesize);
 
     // FAT32 operations
     initialize_filesystem_fat32();

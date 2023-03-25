@@ -8,11 +8,8 @@
 
 // Operating system page directory, using page size PAGE_FRAME_SIZE (4 MiB)
 extern struct PageDirectory _paging_kernel_page_directory;
-// Linker variable : Pointing to kernel start & end address
-extern uint32_t _linker_kernel_virtual_addr_start;
-extern uint32_t _linker_kernel_virtual_addr_end;
-extern uint32_t _linker_kernel_physical_addr_start;
-extern uint32_t _linker_kernel_physical_addr_end;
+
+
 
 
 /**
@@ -47,19 +44,18 @@ struct PageDirectoryEntryFlag {
  * @param reserved_1      Reserved bit
  * @param use_pat         Whether use PAT or not, unused for this project
  * @param higher_address  Higher address for page, unused for this project 
- *    (note: Intel manual show minimum at least 4 bit, but due gcc angry with bitfield packing rule and its unused, we will use 3)
  * @param reserved_2      Reserved bit
  * @param lower_address   10-bit lower address, note directly correspond with 4 MiB memory (= 0x40 0000 = 1 with 22 zeros, 
  *    which is exactly PageDirectoryEntry bit-22 to 31 = lower_address)
  */
 struct PageDirectoryEntry {
     struct PageDirectoryEntryFlag flag;
-    uint8_t  global_page    : 1;
-    uint8_t  reserved_1     : 3;
+    uint16_t  global_page    : 1;
+    uint16_t  reserved_1     : 3;
     
-    uint8_t  use_pat        : 1;
-    uint8_t  higher_address : 3;   // Need to be exactly 3 for pleasing gcc packed rule
-    uint8_t  reserved_2     : 4;
+    uint16_t  use_pat        : 1;
+    uint16_t  higher_address : 8;
+    uint16_t  reserved_2     : 1;
     uint16_t lower_address  : 10;
 } __attribute__((packed));
 
