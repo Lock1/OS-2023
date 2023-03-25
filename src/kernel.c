@@ -32,7 +32,7 @@ void kernel_setup(void) {
         .name                  = "shell",
         .ext                   = "\0\0\0",
         .parent_cluster_number = ROOT_CLUSTER_NUMBER,
-        .buffer_size           = PAGE_FRAME_SIZE,
+        .buffer_size           = 0x100000,
     };
     read(request);
 
