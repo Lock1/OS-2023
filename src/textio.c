@@ -10,8 +10,8 @@ void puts(char *buf, int32_t count, uint8_t color) {
         if (buf[i] == '\n') {
             row++;
             col = 0;
-        } else {
-            framebuffer_write(row, col++, buf[i], color, 0);
+        } else if (0x1F < buf[i] && buf[i] < 0x7F) {
+            framebuffer_write(row, col++, buf[i], color, 0); // Only printables
         }
         i++;
     }

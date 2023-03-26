@@ -29,25 +29,66 @@ void interrupt(uint32_t eax, uint32_t ebx, uint32_t ecx, uint32_t edx) {
     __asm__ volatile("int $0x30");
 }
 
-size_t strlen(char *ptr) {
+size_t strlen(const char *ptr) {
     uint32_t i = 0;
     while (ptr[i] != '\0')
         i++;
     return i;
 }
 
+void readfs(struct FAT32DriverRequest request) {
+    int retcode;
+    interrupt(0, (uint32_t) &request, (uint32_t) &retcode, 0);
+}
+
+void fgets(char *buf, uint32_t count) {
+    interrupt(4, (uint32_t) buf, count, 0);
+}
+
 void puts(char *buf, uint8_t color) {
     interrupt(5, (uint32_t) buf, strlen(buf), color);
 }
 
+uint8_t strcmp(const char *a, const char *b) {
+    if (strlen(a) != strlen(b))
+        return 1;
+    else {
+        uint32_t i = 0;
+        while (a[i] != '\0') {
+            if (a[i] != b[i])
+                return 1;
+            i++;
+        }
+        return 0;
+    }
+}
+
+
+
 int main(void) {
+    struct ClusterBuffer cl           = {0};
+    struct FAT32DriverRequest request = {
+        .buf = &cl,
+        .name = "ikanaide",
+        .ext = "\0\0\0",
+        .parent_cluster_number = 2,
+        .buffer_size = CLUSTER_SIZE,
+    };
+    readfs(request);
+
     char buf[16];
     while (TRUE) {
         puts("Brush@OS-IF2230", BIOS_LIGHT_GREEN);
         puts(":", BIOS_GRAY);
         puts("/", BIOS_LIGHT_BLUE);
         puts("$ ", BIOS_GRAY);
-        interrupt(4, (uint32_t) buf, 16, 0);
+        fgets(buf, 16);
+
+        if (!strcmp(buf, "cat ikanaide")) {
+            // *Kind* of mockup, but still working properly
+            puts((char*) &cl, BIOS_YELLOW);
+            puts("\n", BIOS_YELLOW);
+        }
     }
 
     return 0;
