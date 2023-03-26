@@ -50,12 +50,12 @@ struct PageDirectoryEntryFlag {
  */
 struct PageDirectoryEntry {
     struct PageDirectoryEntryFlag flag;
-    uint16_t  global_page    : 1;
-    uint16_t  reserved_1     : 3;
+    uint16_t global_page    : 1;
+    uint16_t reserved_1     : 3;
     
-    uint16_t  use_pat        : 1;
-    uint16_t  higher_address : 8;
-    uint16_t  reserved_2     : 1;
+    uint16_t use_pat        : 1;
+    uint16_t higher_address : 8;
+    uint16_t reserved_2     : 1;
     uint16_t lower_address  : 10;
 } __attribute__((packed));
 
