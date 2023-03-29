@@ -90,9 +90,9 @@ uint32_t get_cluster_from_entry(struct FAT32DirectoryEntry entry) {
 int32_t driver_dir_table_linear_scan(char name[8], char ext[3], bool find_empty) {
     for (uint32_t i = 0; i < DIRECTORY_TABLE_ENTRY_COUNT; i++) {
         struct FAT32DirectoryEntry entry = fat32driver_state.dir_table_buf.table[i];
-        bool is_entry_not_empty     = (entry.user_attribute & UATTR_NOT_EMPTY);
-        bool search_and_found_empty = find_empty && !is_entry_not_empty;
-        bool name_match             = is_entry_not_empty && !memcmp(entry.name, name, 8) && !memcmp(entry.ext, ext, 3);
+        bool is_entry_not_empty          = (entry.user_attribute & UATTR_NOT_EMPTY);
+        bool search_and_found_empty      = find_empty && !is_entry_not_empty;
+        bool name_match                  = is_entry_not_empty && !memcmp(entry.name, name, 8) && !memcmp(entry.ext, ext, 3);
         if (search_and_found_empty || name_match)
             return i;
     }
