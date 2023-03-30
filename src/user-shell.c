@@ -20,7 +20,7 @@
 #define BIOS_WHITE         0xF
 
 
-void interrupt(uint32_t eax, uint32_t ebx, uint32_t ecx, uint32_t edx) {
+void syscall(uint32_t eax, uint32_t ebx, uint32_t ecx, uint32_t edx) {
     __asm__ volatile("mov %0, %%ebx" : /* <Empty> */ : "r"(ebx));
     __asm__ volatile("mov %0, %%ecx" : /* <Empty> */ : "r"(ecx));
     __asm__ volatile("mov %0, %%edx" : /* <Empty> */ : "r"(edx));
@@ -38,15 +38,20 @@ size_t strlen(const char *ptr) {
 
 void readfs(struct FAT32DriverRequest request) {
     int retcode;
-    interrupt(0, (uint32_t) &request, (uint32_t) &retcode, 0);
+    syscall(0, (uint32_t) &request, (uint32_t) &retcode, 0);
+}
+
+void readdir(struct FAT32DriverRequest request) {
+    int retcode;
+    syscall(1, (uint32_t) &request, (uint32_t) &retcode, 0);
 }
 
 void fgets(char *buf, uint32_t count) {
-    interrupt(4, (uint32_t) buf, count, 0);
+    syscall(4, (uint32_t) buf, count, 0);
 }
 
 void puts(char *buf, uint8_t color) {
-    interrupt(5, (uint32_t) buf, strlen(buf), color);
+    syscall(5, (uint32_t) buf, strlen(buf), color);
 }
 
 uint8_t strcmp(const char *a, const char *b) {
@@ -68,11 +73,11 @@ uint8_t strcmp(const char *a, const char *b) {
 int main(void) {
     struct ClusterBuffer cl           = {0};
     struct FAT32DriverRequest request = {
-        .buf = &cl,
-        .name = "ikanaide",
-        .ext = "\0\0\0",
+        .buf                   = &cl,
+        .name                  = "ikanaide",
+        .ext                   = "\0\0\0",
         .parent_cluster_number = 2,
-        .buffer_size = CLUSTER_SIZE,
+        .buffer_size           = CLUSTER_SIZE,
     };
     readfs(request);
 

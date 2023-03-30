@@ -5,8 +5,6 @@ Karena ada sedikit masalah dengan directory name length dengan manim (temporary 
 
 https://github.com/Lock1/OS-2023-Manim
 
-[Link to main google drive folder](https://drive.google.com/drive/u/1/folders/1LdYtswwx7qoXmI2DoEF8Yux-QSzXqU8v)
-
 [Dev Repository untuk kit](https://github.com/Lock1/kit-OS-2023)
 
 # Planned Roadmap
