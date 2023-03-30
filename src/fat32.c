@@ -123,6 +123,7 @@ bool is_dirtable_empty(struct FAT32DirectoryTable *dirtable) {
 
 
 // -- File system CRUD --
+// Note : Not comprehensive edge case checking, just simple and quick implementation
 int8_t read(struct FAT32DriverRequest request) {
     // Read directory at parent_cluster_number
     read_clusters(&fat32driver_state.dir_table_buf, request.parent_cluster_number, 1);
@@ -215,7 +216,7 @@ int8_t write(struct FAT32DriverRequest request) {
     if (request.buffer_size == 0) {
         struct FAT32DirectoryTable new_table = {0};
         init_directory_table(&new_table, request.name, request.parent_cluster_number);
-        new_entry.attribute    = 0 | ATTR_SUBDIRECTORY;
+        new_entry.attribute = 0 | ATTR_SUBDIRECTORY;
 
         fat32driver_state.fat_table.cluster_map[empty_clusters[0]] = FAT32_FAT_END_OF_FILE;
         write_clusters(new_table.table, empty_clusters[0], 1);
@@ -231,7 +232,7 @@ int8_t write(struct FAT32DriverRequest request) {
     }
 
     // Update file system metadata in storage
-    fat32driver_state.dir_table_buf.table[empty_entry_index] = new_entry; // Insert new entry into dirtable
+    fat32driver_state.dir_table_buf.table[empty_entry_index] = new_entry;                      // Insert new entry into dirtable
     write_clusters(fat32driver_state.dir_table_buf.table,   request.parent_cluster_number, 1); // Dirtable
     write_clusters(fat32driver_state.fat_table.cluster_map, FAT_CLUSTER_NUMBER, 1);            // FAT
 
@@ -274,7 +275,7 @@ int8_t delete(struct FAT32DriverRequest request) {
 
     // Update file system metadata in storage
     write_clusters(fat32driver_state.dir_table_buf.table,   request.parent_cluster_number, 1); // Dirtable
-    write_clusters(fat32driver_state.fat_table.cluster_map, FAT_CLUSTER_NUMBER, 1);          // FAT
+    write_clusters(fat32driver_state.fat_table.cluster_map, FAT_CLUSTER_NUMBER, 1);            // FAT
 
     return 0;
 }
