@@ -21,6 +21,9 @@ void set_tss_kernel_current_stack(void) {
 
 void main_interrupt_handler(struct CPURegister cpu, uint32_t int_number, struct InterruptStack info) {
     switch (int_number) {
+        case PAGE_FAULT:
+            __asm__("hlt");
+            break;
         case PIC1_OFFSET + IRQ_TIMER:
             pic_ack(0);
             break;

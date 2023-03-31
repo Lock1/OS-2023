@@ -57,6 +57,40 @@
 #define IRQ_PRIMARY_ATA  14
 #define IRQ_SECOND_ATA   15
 
+// CPU Exceptions
+#define DIVISION_BY_ZERO         0x0
+#define DEBUG_EXCEPTION          0x1
+#define NON_MASK_INTERRUPT       0x2
+#define BREAKPOINT_EXCEPTION     0x3
+#define OVERFLOW_EXCEPTION       0x4
+#define BOUND_RANGE_EXCEED       0x5
+#define INVALID_OPCODE           0x6
+#define DEVICE_UNAVAILABLE       0x7
+#define DOUBLE_FAULT             0x8
+#define COPROCESSOR_EXCEPTION    0x9
+#define INVALID_TSS              0xA
+#define SEGMENT_NOT_PRESENT      0xB
+#define STACK_SEGMENT_FAULT      0xC
+#define GENERAL_PROTECTION_FAULT 0xD
+#define PAGE_FAULT               0xE
+#define RESERVED_EX_0XF          0xF
+#define X87_FLOATING_EXCEPTION   0x10
+#define ALIGNMENT_CHECK          0x11
+#define MACHINE_CHECK            0x12
+#define SIMD_FLOATING_EXCEPTION  0x13
+#define VIRTUALIZATION_EXCEPTION 0x14
+#define CONTROL_PROT_EXCEPTION   0x15
+#define RESERVED_EX_0X16         0x16
+#define RESERVED_EX_0X17         0x17
+#define RESERVED_EX_0X18         0x18
+#define RESERVED_EX_0X19         0x19
+#define RESERVED_EX_0X1A         0x1A
+#define RESERVED_EX_0X1B         0x1B
+#define HYPERVISOR_INJ_EXCEPTION 0x1C
+#define VMM_COMM_EXCEPTION       0x1D
+#define SECURITY_EXCEPTION       0x1E
+#define RESERVED_EX_0X1F         0x1F
+
 extern struct TSSEntry _interrupt_tss_entry;
 
 
