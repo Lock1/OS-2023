@@ -9,6 +9,7 @@
 #define CLUSTER_SIZE                (BLOCK_SIZE*CLUSTER_BLOCK_COUNT)
 #define CLUSTER_MAP_SIZE            512
 #define DIRECTORY_TABLE_ENTRY_COUNT (CLUSTER_SIZE / sizeof(struct FAT32DirectoryEntry))
+#define CLUSTER_MARK_MAX            512
 
 /* -- FAT32 FileAllocationTable constants -- */
 // FAT reserved value for cluster 0 and 1 in FileAllocationTable

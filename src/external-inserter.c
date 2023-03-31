@@ -81,6 +81,8 @@ int main(int argc, char *argv[]) {
         puts("Error: File/folder name already exist");
     else if (retcode == 2)
         puts("Error: Invalid parent cluster");
+    else
+        puts("Error: Unknown error");
 
     // Write image in memory into original, overwrite them
     fptr              = fopen(argv[3], "w");

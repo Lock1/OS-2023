@@ -99,9 +99,9 @@ int32_t driver_dir_table_linear_scan(char name[8], char ext[3], bool find_empty)
     return -1;
 }
 
-int8_t driver_fat_mark_empty_cluster(uint32_t empty_buf[16], uint32_t cluster_count) {
+int8_t driver_fat_mark_empty_cluster(uint32_t empty_buf[CLUSTER_MARK_MAX], uint32_t cluster_count) {
     uint32_t marked_cluster_count = 0;
-    for (int i = 0; i < CLUSTER_MAP_SIZE && marked_cluster_count < 16; i++) {
+    for (int i = 0; i < CLUSTER_MAP_SIZE && marked_cluster_count < CLUSTER_MARK_MAX; i++) {
         uint32_t cluster = fat32driver_state.fat_table.cluster_map[i];
         if (cluster == FAT32_FAT_EMPTY_ENTRY)
             empty_buf[marked_cluster_count++] = i;
@@ -193,8 +193,8 @@ int8_t write(struct FAT32DriverRequest request) {
         return -1; // No empty entry available
     
     // Scan and mark empty cluster
-    uint32_t empty_clusters[16]       = {0};
-    uint32_t cluster_count_to_reserve = ceil_div(request.buffer_size, CLUSTER_SIZE);
+    uint32_t empty_clusters[CLUSTER_MARK_MAX] = {0};
+    uint32_t cluster_count_to_reserve         = ceil_div(request.buffer_size, CLUSTER_SIZE);
     if (request.buffer_size == 0)
         cluster_count_to_reserve = 1;
     int8_t err_code = driver_fat_mark_empty_cluster(empty_clusters, cluster_count_to_reserve);
@@ -211,7 +211,7 @@ int8_t write(struct FAT32DriverRequest request) {
     memcpy(new_entry.ext,  request.ext,  3);
 
     // Write actual data
-    new_entry.cluster_high = (uint16_t)(empty_clusters[0] >> 16);
+    new_entry.cluster_high = (uint16_t) (empty_clusters[0] >> 16);
     new_entry.cluster_low  = empty_clusters[0] & 0xFFFF;
     if (request.buffer_size == 0) {
         struct FAT32DirectoryTable new_table = {0};
