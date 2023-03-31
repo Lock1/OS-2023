@@ -48,5 +48,5 @@ int8_t allocate_single_user_page_frame(void *virtual_addr) {
 }
 
 void flush_single_tlb(void *virtual_addr) {
-    asm volatile("invlpg (%0)" : /* <Empty> */ : "b"(virtual_addr): "memory");
+    __asm__ volatile("invlpg (%0)" : /* <Empty> */ : "b"(virtual_addr): "memory");
 }
