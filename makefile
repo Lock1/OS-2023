@@ -1,12 +1,12 @@
 # Object files & root temporaty folder
-OBJECTS = kernel-entrypoint.o kernel.o  \
+OBJECTS = kernel-entrypoint.o kernel.o \
 	generic-lib/stdmem.o \
 	driver/framebuffer.o driver/keyboard.o driver/disk.o \
 	cpu/portio.o cpu/gdt.o cpu/idt.o cpu/interrupt.o cpu/intsetup.o \
-	fat32.o \
+	filesystem/fat32.o \
 	memory/paging.o \
 	driver/text-io-module/textio.o
-FOLDERS = cpu memory driver generic-lib
+FOLDERS = cpu memory driver filesystem generic-lib
 
 # Compiler & linker
 ASM = nasm
@@ -47,7 +47,7 @@ disk:
 
 inserter:
 	@$(CC) -Wno-builtin-declaration-mismatch -g -I$(SOURCE_FOLDER) \
-		$(SOURCE_FOLDER)/generic-lib/stdmem.c $(SOURCE_FOLDER)/fat32.c \
+		$(SOURCE_FOLDER)/generic-lib/stdmem.c $(SOURCE_FOLDER)/filesystem/fat32.c \
 		$(SOURCE_FOLDER)/external-program/external-inserter.c \
 		-o $(OUTPUT_FOLDER)/inserter
 
