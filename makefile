@@ -1,5 +1,5 @@
 # Object files & root temporaty folder
-OBJECTS = kernel_loader.o kernel.o  \
+OBJECTS = kernel-entrypoint.o kernel.o  \
 	generic-lib/stdmem.o \
 	driver/framebuffer.o driver/keyboard.o driver/disk.o \
 	cpu/portio.o cpu/gdt.o cpu/idt.o cpu/interrupt.o cpu/intsetup.o \
