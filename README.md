@@ -24,7 +24,7 @@ Notes - [Milestone 1 Notes](/other/notes/Milestone%201%20Notes.md)
 6-11
 - [x] Interrupt (IRQ kaya keyboard)
 - [x] Filesystem
-- [ ] ~~Basic process + monotasking~~ Dropped for milestone 2
+- [-] ~~Basic process + monotasking~~ Dropped for milestone 2
 
 ## Milestone 3
 12-End
@@ -35,8 +35,8 @@ Notes - [Milestone 1 Notes](/other/notes/Milestone%201%20Notes.md)
 
 ## Dropped
 Seems too hard?
-- [ ] ~~Memory management (memcpy, malloc, etc)~~
-- [ ] ~~Multitasking~~
+- [-] ~~Memory management (memcpy, malloc, etc)~~
+- [-] ~~Multitasking~~
 
 
 # Resources
