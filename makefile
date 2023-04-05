@@ -2,7 +2,7 @@
 OBJECTS = kernel-entrypoint.o kernel.o \
 	generic-lib/stdmem.o \
 	driver/framebuffer.o driver/keyboard.o driver/disk.o \
-	cpu/portio.o cpu/gdt.o cpu/idt.o cpu/interrupt.o cpu/intsetup.o \
+	cpu/portio.o cpu/gdt.o cpu/idt.o cpu/interrupt.o cpu/interrupt-setup.o \
 	filesystem/fat32.o \
 	memory/paging.o \
 	driver/text-io-module/textio.o
