@@ -1,5 +1,6 @@
 # Object files
-OBJECTS = kernel_loader.o kernel.o portio.o stdmem.o framebuffer.o gdt.o idt.o interrupt.o intsetup.o keyboard.o disk.o fat32.o paging.o textio.o
+OBJECTS = kernel_loader.o kernel.o portio.o stdmem.o framebuffer.o cpu/gdt.o cpu/idt.o interrupt.o intsetup.o keyboard.o disk.o fat32.o paging.o textio.o
+FOLDERS = cpu interrupt
 
 # Compiler & linker
 ASM = nasm
@@ -11,6 +12,7 @@ SOURCE_FOLDER = src
 OUTPUT_FOLDER = bin
 ISO_NAME      = os2023
 DISK_NAME     = storage
+VPATH         = $(SOURCE_FOLDER)
 
 # Flags
 WARNING_CFLAG = -Wall -Wextra -Werror
@@ -25,8 +27,14 @@ run: all
 	@qemu-system-i386 -s -S -drive file=$(OUTPUT_FOLDER)/$(DISK_NAME).bin,format=raw,if=ide,index=0,media=disk -cdrom $(ISO_NAME).iso 
 all: build
 build: iso
-clean:
+clean: delete-temp
 	rm -rf *.o *.iso bin/kernel
+
+delete-temp:
+	@rm -f *.o
+	for folder in $(FOLDERS) ; do rm -rf $$folder ; done
+
+
 
 disk:
 	@qemu-img create -f raw $(OUTPUT_FOLDER)/$(DISK_NAME).bin 4M
@@ -57,7 +65,7 @@ insert-shell: inserter user-shell
 kernel: $(OBJECTS)
 	@$(LIN) $(LFLAGS) $(OBJECTS) -o $(OUTPUT_FOLDER)/kernel
 	@echo Linking object files and generate elf32...
-	@rm -f *.o
+	@$(MAKE) delete-temp
 
 iso: kernel
 	@mkdir -p $(OUTPUT_FOLDER)/iso/boot/grub
@@ -76,10 +84,12 @@ iso: kernel
 		$(OUTPUT_FOLDER)/iso
 	@rm -r $(OUTPUT_FOLDER)/iso/
 
-%.o: $(SOURCE_FOLDER)/%.c
-	@$(CC)  $(CFLAGS) $< -o $@
+%.o: %.c
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) $< -o $@
 	@echo Compiling $@...
 
-%.o: $(SOURCE_FOLDER)/%.s
+%.o: %.s
+	@mkdir -p $(@D)
 	@$(ASM) $(AFLAGS) $< -o $@
 	@echo Compiling $@...
