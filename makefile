@@ -1,11 +1,12 @@
 # Object files & root temporaty folder
-OBJECTS = kernel_loader.o kernel.o stdmem.o \
+OBJECTS = kernel_loader.o kernel.o  \
+	generic-lib/stdmem.o \
 	driver/framebuffer.o driver/keyboard.o driver/disk.o \
 	cpu/portio.o cpu/gdt.o cpu/idt.o cpu/interrupt.o cpu/intsetup.o \
 	fat32.o \
 	memory/paging.o \
 	driver/text-io-module/textio.o
-FOLDERS = cpu memory driver
+FOLDERS = cpu memory driver generic-lib
 
 # Compiler & linker
 ASM = nasm
@@ -45,8 +46,8 @@ disk:
 	@qemu-img create -f raw $(OUTPUT_FOLDER)/$(DISK_NAME).bin 4M
 
 inserter:
-	@$(CC) -Wno-builtin-declaration-mismatch -g \
-		$(SOURCE_FOLDER)/stdmem.c $(SOURCE_FOLDER)/fat32.c \
+	@$(CC) -Wno-builtin-declaration-mismatch -g -I$(SOURCE_FOLDER) \
+		$(SOURCE_FOLDER)/generic-lib/stdmem.c $(SOURCE_FOLDER)/fat32.c \
 		$(SOURCE_FOLDER)/external-program/external-inserter.c \
 		-o $(OUTPUT_FOLDER)/inserter
 
