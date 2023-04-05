@@ -1,10 +1,10 @@
-# Object files
+# Object files & root temporaty folder
 OBJECTS = kernel_loader.o kernel.o stdmem.o \
 	driver/framebuffer.o driver/keyboard.o driver/disk.o \
 	cpu/portio.o cpu/gdt.o cpu/idt.o cpu/interrupt.o cpu/intsetup.o \
 	fat32.o \
 	memory/paging.o \
-	textio.o
+	driver/text-io-module/textio.o
 FOLDERS = cpu memory driver
 
 # Compiler & linker
