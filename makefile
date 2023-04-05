@@ -1,6 +1,11 @@
 # Object files
-OBJECTS = kernel_loader.o kernel.o portio.o stdmem.o framebuffer.o cpu/gdt.o cpu/idt.o cpu/interrupt.o cpu/intsetup.o keyboard.o disk.o fat32.o memory/paging.o textio.o
-FOLDERS = cpu memory
+OBJECTS = kernel_loader.o kernel.o stdmem.o \
+	driver/framebuffer.o driver/keyboard.o driver/disk.o \
+	cpu/portio.o cpu/gdt.o cpu/idt.o cpu/interrupt.o cpu/intsetup.o \
+	fat32.o \
+	memory/paging.o \
+	textio.o
+FOLDERS = cpu memory driver
 
 # Compiler & linker
 ASM = nasm
