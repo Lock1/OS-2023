@@ -47,16 +47,16 @@ disk:
 inserter:
 	@$(CC) -Wno-builtin-declaration-mismatch -g \
 		$(SOURCE_FOLDER)/stdmem.c $(SOURCE_FOLDER)/fat32.c \
-		$(SOURCE_FOLDER)/external-inserter.c \
+		$(SOURCE_FOLDER)/external-program/external-inserter.c \
 		-o $(OUTPUT_FOLDER)/inserter
 
 user-shell:
-	@$(ASM) $(AFLAGS) $(SOURCE_FOLDER)/user-entry.s -o user-entry.o
-	@$(CC)  $(CFLAGS) -fno-pie $(SOURCE_FOLDER)/user-shell.c -o user-shell.o
-	@$(LIN) -T $(SOURCE_FOLDER)/user-linker.ld -melf_i386 \
+	@$(ASM) $(AFLAGS) $(SOURCE_FOLDER)/external-program/user-entry.s -o user-entry.o
+	@$(CC)  $(CFLAGS) -fno-pie $(SOURCE_FOLDER)/external-program/user-shell.c -o user-shell.o
+	@$(LIN) -T $(SOURCE_FOLDER)/external-program/user-linker.ld -melf_i386 \
 		user-entry.o user-shell.o -o $(OUTPUT_FOLDER)/shell
 	@echo Linking object shell object files and generate flat binary...
-	@$(LIN) -T $(SOURCE_FOLDER)/user-linker.ld -melf_i386 --oformat=elf32-i386\
+	@$(LIN) -T $(SOURCE_FOLDER)/external-program/user-linker.ld -melf_i386 --oformat=elf32-i386\
 		user-entry.o user-shell.o -o $(OUTPUT_FOLDER)/shell_elf
 	@echo Linking object shell object files and generate ELF32 for debugging...
 	@size --target=binary bin/shell
