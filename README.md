@@ -1,6 +1,8 @@
 # OS-2023
 Testing spesifikasi IF2230 Sistem Operasi 2023
 
+![Shell sample](other/img/shell-sample.gif)
+
 Karena ada sedikit masalah dengan directory name length dengan manim (temporary file biasanya relatif panjang filenamenya), untuk source code animasi manim dipindah ke separate repository:
 
 https://github.com/Lock1/OS-2023-Manim
