@@ -26,7 +26,7 @@ DEBUG_CFLAG   = -ffreestanding -fshort-wchar -g
 STRIP_CFLAG   = -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs
 CFLAGS        = $(DEBUG_CFLAG) $(WARNING_CFLAG) $(STRIP_CFLAG) -m32 -c -I$(SOURCE_FOLDER)
 AFLAGS        = -f elf32 -g -F dwarf
-LFLAGS        = -T $(SOURCE_FOLDER)/linker.ld -melf_i386
+LFLAGS        = -T $(SOURCE_FOLDER)/external-linker-iso/linker.ld -melf_i386
 
 
 run: all
@@ -77,7 +77,7 @@ iso: kernel
 	@mkdir -p $(OUTPUT_FOLDER)/iso/boot/grub
 	@cp $(OUTPUT_FOLDER)/kernel     $(OUTPUT_FOLDER)/iso/boot/
 	@cp other/grub1_stage2_eltorito $(OUTPUT_FOLDER)/iso/boot/grub/
-	@cp $(SOURCE_FOLDER)/menu.lst   $(OUTPUT_FOLDER)/iso/boot/grub/
+	@cp $(SOURCE_FOLDER)/external-linker-iso/menu.lst $(OUTPUT_FOLDER)/iso/boot/grub/
 	@genisoimage -R                          \
 		-b boot/grub/grub1_stage2_eltorito  \
 		-no-emul-boot                       \
