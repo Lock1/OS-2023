@@ -3,7 +3,7 @@
 
 #include "lib-header/stdtype.h"
 
-struct VGARegister {
+struct VGARegisterPort {
     uint16_t address_register;
     uint16_t data_register;
 };
@@ -19,12 +19,20 @@ struct VGAMiscOutputRegisterData {
     uint8_t vertical_sync:   1;
 };
 
+struct VGAMiscFeatureControlData {
+    uint8_t feature_control0: 1;
+    uint8_t feature_control1: 1;
+    uint8_t _reserved: 6;
+};
+
 // Special register, using 0x3C2 for write-only data port
 // Use instead 0x3CC for read-only port
 // http://www.osdever.net/FreeVGA/vga/extreg.htm
-extern const struct VGARegister misc_output_register;
+extern const struct VGARegisterPort _vga_reg_misc_output_register;
 
 // Video Mode 13h values
-extern const struct VGAMiscOutputRegisterData misc_mode13h;
+extern const struct VGAMiscOutputRegisterData _vga_reg_mode13h_misc;
+extern const struct VGAMiscFeatureControlData _vga_reg_mode13h_fc;
+
 
 #endif

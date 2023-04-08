@@ -6,11 +6,11 @@
 
 // };
 
-static uint8_t struct_serialize(const void *struct_ptr) {
+static inline uint8_t struct_serialize(const void *struct_ptr) {
     return *((uint8_t *) struct_ptr);
 }
 
 void vga_use_graphic_mode(void) {
-    out(misc_output_register.data_register, struct_serialize(&misc_mode13h));
+    out(_vga_reg_misc_output_register.data_register, struct_serialize(&_vga_reg_mode13h_misc));
 
 }

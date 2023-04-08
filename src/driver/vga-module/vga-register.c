@@ -5,15 +5,24 @@
 //     .data_register    = 0x3CF,
 // };
 
-const struct VGARegister misc_output_register = {
+// VGA Register port
+const struct VGARegisterPort _vga_reg_misc_output_register = {
     .data_register    = 0x3C2,
 };
 
-const struct VGAMiscOutputRegisterData misc_mode13h = {
-    .ioas            = 1,
-    .ram_enable      = 1,
-    .clock_select    = 0,
-    .odd_even_page   = 1,
-    .horizontal_sync = 1,
-    .vertical_sync   = 0,
+
+
+// Video Mode 13h register values
+const struct VGAMiscOutputRegisterData _vga_reg_mode13h_misc = {
+    .ioas             = 1,
+    .ram_enable       = 1,
+    .clock_select     = 0,
+    .odd_even_page    = 1,
+    .horizontal_sync  = 1,
+    .vertical_sync    = 0,
+};
+
+const struct VGAMiscFeatureControlData _vga_reg_mode13h_fc = {
+    .feature_control0 = 0,
+    .feature_control1 = 0,
 };
