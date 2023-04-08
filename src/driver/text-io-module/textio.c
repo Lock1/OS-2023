@@ -1,5 +1,5 @@
-#include "lib-header/textio.h"
-#include "lib-header/framebuffer.h"
+#include "lib-header/driver/text-io-module/textio.h"
+#include "lib-header/driver/framebuffer.h"
 
 void puts(char *buf, int32_t count, uint8_t color) {
     uint16_t cursor_location = framebuffer_get_cursor();

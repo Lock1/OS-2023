@@ -1,6 +1,6 @@
 #include "lib-header/cpu/portio.h"
-#include "lib-header/vga.h"
-#include "lib-header/vga-register.h"
+#include "lib-header/driver/vga.h"
+#include "lib-header/driver/vga-module/vga-register.h"
 
 static inline uint8_t struct_serialize(const void *struct_ptr) {
     return *((uint8_t *) struct_ptr);

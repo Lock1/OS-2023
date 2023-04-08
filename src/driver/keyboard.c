@@ -1,7 +1,7 @@
 #include "lib-header/cpu/portio.h"
 #include "lib-header/cpu/interrupt.h"
-#include "lib-header/keyboard.h"
-#include "lib-header/framebuffer.h"
+#include "lib-header/driver/keyboard.h"
+#include "lib-header/driver/framebuffer.h"
 #include "lib-header/stdmem.h"
 
 static struct KeyboardDriverState keyboard_state = {

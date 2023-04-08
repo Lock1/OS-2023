@@ -1,4 +1,4 @@
-#include "lib-header/vga-register.h"
+#include "lib-header/driver/vga-module/vga-register.h"
 
 // VGA Register port - Indexed register
 const struct VGARegisterPort _vga_reg_sequencer = {

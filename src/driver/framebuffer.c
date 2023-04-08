@@ -1,5 +1,5 @@
 #include "lib-header/cpu/portio.h"
-#include "lib-header/framebuffer.h"
+#include "lib-header/driver/framebuffer.h"
 #include "lib-header/stdtype.h"
 #include "lib-header/stdmem.h"
 

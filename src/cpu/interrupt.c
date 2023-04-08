@@ -1,11 +1,13 @@
 #include "lib-header/cpu/interrupt.h"
 #include "lib-header/cpu/portio.h"
 #include "lib-header/cpu/gdt.h"
-#include "lib-header/keyboard.h"
+#include "lib-header/driver/keyboard.h"
+#include "lib-header/driver/text-io-module/textio.h"
 #include "lib-header/kernel_loader.h"
 #include "lib-header/fat32.h"
-#include "lib-header/textio.h"
 #include "lib-header/stdmem.h"
+
+// TODO : Use dispatch table style to decouple this with keyboard and other
 
 struct TSSEntry _interrupt_tss_entry = {
     .ss0  = GDT_KERNEL_DATA_SEGMENT_SELECTOR,
