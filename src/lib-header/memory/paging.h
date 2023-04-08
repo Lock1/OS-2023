@@ -1,7 +1,7 @@
 #ifndef _PAGING_H
 #define _PAGING_H
 
-#include "stdtype.h"
+#include "lib-header/stdtype.h"
 
 #define PAGE_ENTRY_COUNT 1024
 #define PAGE_FRAME_SIZE  (4*1024*1024)

@@ -7,11 +7,11 @@
 #include "lib-header/driver/keyboard.h"
 #include "lib-header/driver/disk.h"
 #include "lib-header/driver/text-io-module/textio.h"
+#include "lib-header/filesystem/fat32.h"
 #include "lib-header/stdtype.h"
 #include "lib-header/stdmem.h"
 #include "lib-header/kernel_loader.h"
-#include "lib-header/fat32.h"
-#include "lib-header/paging.h"
+#include "lib-header/memory/paging.h"
 
 void kernel_setup(void) {
     enter_protected_mode(&_gdt_gdtr);
