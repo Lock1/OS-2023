@@ -40,10 +40,10 @@ const struct VGASequencerClockingModeData _vga_reg_mode13h_clocking_mode = {
 };
 
 const struct VGASequencerMapMaskData _vga_reg_mode13h_map_mask = {
-    .enable_memory_plane_0 = 1,
-    .enable_memory_plane_1 = 1,
-    .enable_memory_plane_2 = 1,
-    .enable_memory_plane_3 = 1,
+    .enable_memory_plane_0 = 0,
+    .enable_memory_plane_1 = 0,
+    .enable_memory_plane_2 = 0,
+    .enable_memory_plane_3 = 0,
 };
 
 const struct VGASequencerCharacterMapData _vga_reg_mode13h_character_map = {
@@ -51,6 +51,12 @@ const struct VGASequencerCharacterMapData _vga_reg_mode13h_character_map = {
     .character_set_a      = 0,
     .second_bit_charset_b = 0,
     .second_bit_charset_a = 0,
+};
+
+const struct VGASequencerMemoryModeData _vga_reg_mode13h_sequencer_memory_mode = {
+    .extended_memory         = 1,
+    .disable_odd_even_memory = 1,
+    .enable_chain_four       = 1,
 };
 
 

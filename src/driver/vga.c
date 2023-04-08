@@ -2,10 +2,6 @@
 #include "lib-header/portio.h"
 #include "lib-header/vga-register.h"
 
-// static struct VGADriverState vga_state = {
-
-// };
-
 static inline uint8_t struct_serialize(const void *struct_ptr) {
     return *((uint8_t *) struct_ptr);
 }
@@ -26,19 +22,21 @@ static void set_indexed_register(struct VGARegisterPort vga_reg, uint8_t *indexe
 }
 
 static void set_sequencer_register(void) {
-    uint8_t sequencer_index[4] = {
+    uint8_t sequencer_index[5] = {
         SEQUENCER_INDEX_RESET,
         SEQUENCER_INDEX_CLOCKING_MODE,
         SEQUENCER_INDEX_MAP_MASK,
         SEQUENCER_INDEX_CHARACTER_MAP,
+        SEQUENCER_INDEX_MEMORY_MODE,
     };
-    uint8_t sequencer_data[4] = {
+    uint8_t sequencer_data[5] = {
         struct_serialize(&_vga_reg_mode13h_reset),
         struct_serialize(&_vga_reg_mode13h_clocking_mode),
         struct_serialize(&_vga_reg_mode13h_map_mask),
         struct_serialize(&_vga_reg_mode13h_character_map),
+        struct_serialize(&_vga_reg_mode13h_sequencer_memory_mode),
     };
-    set_indexed_register(_vga_reg_crt_controller, sequencer_index, sequencer_data, 4);
+    set_indexed_register(_vga_reg_crt_controller, sequencer_index, sequencer_data, 5);
 }
 
 // static void set_crt_controller_register(void) {

@@ -3,10 +3,4 @@
 
 void vga_use_graphic_mode(void);
 
-// struct VGADriverState {
-
-// };
-
-
-
 #endif
