@@ -1,5 +1,6 @@
+#include "lib-header/cpu/portio.h"
+#include "lib-header/cpu/interrupt.h"
 #include "lib-header/keyboard.h"
-#include "lib-header/portio.h"
 #include "lib-header/framebuffer.h"
 #include "lib-header/stdmem.h"
 

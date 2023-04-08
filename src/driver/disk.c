@@ -1,5 +1,5 @@
+#include "lib-header/cpu/portio.h"
 #include "lib-header/disk.h"
-#include "lib-header/portio.h"
 
 static void ATA_busy_wait() {
     while (in(0x1F7) & ATA_STATUS_BSY);
