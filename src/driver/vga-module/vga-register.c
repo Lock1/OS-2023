@@ -6,8 +6,13 @@
 // };
 
 // VGA Register port
-const struct VGARegisterPort _vga_reg_misc_output_register = {
+const struct VGARegisterPort _vga_reg_external_output = {
     .data_register    = 0x3C2,
+};
+
+// Assuming color mode is used, for mono use 0x3BA
+const struct VGARegisterPort _vga_reg_external_fc = {
+    .data_register    = 0x3DA,
 };
 
 
