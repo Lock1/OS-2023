@@ -57,9 +57,9 @@ struct VGACRTControllerStartHorizontalRetraceData {
 } __attribute__((packed));
 
 struct VGACRTControllerEndHorizontalRetraceData {
-    uint8_t end_horizontal_retrace:  5;
-    uint8_t horizontal_retrace_skew: 2;
-    uint8_t end_horizontal_blanking: 1;
+    uint8_t end_horizontal_retrace:    5;
+    uint8_t horizontal_retrace_skew:   2;
+    uint8_t end_horizontal_blanking_5: 1;
 } __attribute__((packed));
 
 struct VGACRTControllerVerticalTotalData {
@@ -148,9 +148,9 @@ struct VGACRTControllerStartVerticalBlankingData {
     uint8_t start_vertical_blanking;
 } __attribute__((packed));
 
+// Note: OSDever said this 7-bit, but asmhacker said 8-bit
 struct VGACRTControllerEndVerticalBlankingData {
-    uint8_t end_vertical_blanking: 7;
-    uint8_t _reserved:             1;
+    uint8_t end_vertical_blanking;
 } __attribute__((packed));
 
 struct VGACRTControllerCRTCModeControlData {
@@ -177,6 +177,31 @@ extern const struct VGACRTControllerHorizontalTotalData         _vga_reg_mode13h
 extern const struct VGACRTControllerEndHorizontalDisplayData    _vga_reg_mode13h_end_horizontal_display;
 extern const struct VGACRTControllerStartHorizontalBlankingData _vga_reg_mode13h_start_horizontal_blanking;
 extern const struct VGACRTControllerEndHorizontalBlankingData   _vga_reg_mode13h_end_horizontal_blanking;
+extern const struct VGACRTControllerStartHorizontalRetraceData  _vga_reg_mode13h_start_horizontal_retrace;
+
+extern const struct VGACRTControllerEndHorizontalRetraceData    _vga_reg_mode13h_end_horizontal_retrace;
+extern const struct VGACRTControllerVerticalTotalData           _vga_reg_mode13h_vertical_total;
+extern const struct VGACRTControllerOverflowData                _vga_reg_mode13h_overflow;
+extern const struct VGACRTControllerPresetRowScanData           _vga_reg_mode13h_preset_row_scan;
+extern const struct VGACRTControllerMaximumScanlineData         _vga_reg_mode13h_maximum_scanline;
+
+extern const struct VGACRTControllerCursorStartData             _vga_reg_mode13h_cursor_start;
+extern const struct VGACRTControllerCursorEndData               _vga_reg_mode13h_cursor_end;
+extern const struct VGACRTControllerStartAddressHighData        _vga_reg_mode13h_start_address_high;
+extern const struct VGACRTControllerStartAddressLowData         _vga_reg_mode13h_start_address_low;
+extern const struct VGACRTControllerCursorLocationHighData      _vga_reg_mode13h_cursor_location_high;
+
+extern const struct VGACRTControllerCursorLocationLowData       _vga_reg_mode13h_cursor_location_low;
+extern const struct VGACRTControllerVerticalRetraceStartData    _vga_reg_mode13h_vertical_retrace_start;
+extern const struct VGACRTControllerVerticalRetraceEndData      _vga_reg_mode13h_vertical_retrace_end;
+extern const struct VGACRTControllerVerticalDisplayEndData      _vga_reg_mode13h_vertical_display_end;
+extern const struct VGACRTControllerOffsetData                  _vga_reg_mode13h_offset;
+
+extern const struct VGACRTControllerUnderlineLocationData       _vga_reg_mode13h_underline_location;
+extern const struct VGACRTControllerStartVerticalBlankingData   _vga_reg_mode13h_start_vertical_blanking;
+extern const struct VGACRTControllerEndVerticalBlankingData     _vga_reg_mode13h_end_vertical_blanking;
+extern const struct VGACRTControllerCRTCModeControlData         _vga_reg_mode13h_ctrc_mode_control;
+extern const struct VGACRTControllerLineCompareData             _vga_reg_mode13h_line_compare;
 
 void vga_set_crt_controller_register(void);
 
