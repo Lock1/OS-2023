@@ -16,7 +16,7 @@ struct VGARegisterPort {
 } __attribute__((packed));
 
 
-// VGA Register values, avoiding raw bytes and use struct as much as possible
+// VGA Register values, avoiding raw bytes and use struct as much as possible, even if somewhat feel stupid
 struct VGACRTControllerHorizontalTotalData {
     uint8_t horizontal_total;
 } __attribute__((packed));

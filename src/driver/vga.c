@@ -15,6 +15,11 @@ static void vga_set_index_register(struct VGARegisterPort vga_reg, uint8_t index
     out(vga_reg.data_register, data);
 }
 
+static void set_external_misc_register(void) {
+    out(_vga_reg_external_output.data_register, struct_serialize(&_vga_reg_mode13h_output));
+    out(_vga_reg_external_fc.data_register, struct_serialize(&_vga_reg_mode13h_fc));
+}
+
 static void set_indexed_register(struct VGARegisterPort vga_reg, uint8_t *indexes, uint8_t *datas, uint32_t count) {
     for (uint32_t i = 0; i < count; i++)
         vga_set_index_register(vga_reg, indexes[i], datas[i]);
@@ -38,10 +43,6 @@ static void set_crt_controller_register(void) {
 
 
 void vga_use_graphic_mode(void) {
-    // VGA miscellaneous register
-    out(_vga_reg_external_output.data_register, struct_serialize(&_vga_reg_mode13h_output));
-    out(_vga_reg_external_fc.data_register, struct_serialize(&_vga_reg_mode13h_fc));
-
-    // VGA Indexed register
+    set_external_misc_register();
     set_crt_controller_register();
 }
