@@ -1,11 +1,12 @@
 # Object files & root temporaty folder
 OBJECTS = kernel-entrypoint.o kernel.o \
 	generic-lib/stdmem.o \
-	driver/framebuffer.o driver/keyboard.o driver/disk.o \
+	driver/framebuffer.o driver/keyboard.o driver/disk.o driver/vga.o \
 	cpu/portio.o cpu/gdt.o cpu/idt.o cpu/interrupt.o cpu/interrupt-setup.o \
 	filesystem/fat32.o \
 	memory/paging.o \
-	driver/text-io-module/textio.o
+	driver/text-io-module/textio.o \
+	driver/vga-module/vga-register.o
 FOLDERS = cpu memory driver filesystem generic-lib
 
 # Compiler & linker

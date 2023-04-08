@@ -11,6 +11,7 @@
 #include "lib-header/fat32.h"
 #include "lib-header/paging.h"
 #include "lib-header/textio.h"
+#include "lib-header/vga.h"
 
 void kernel_setup(void) {
     enter_protected_mode(&_gdt_gdtr);
@@ -35,6 +36,7 @@ void kernel_setup(void) {
         .buffer_size           = 0x100000,
     };
     read(request);
+    vga_use_graphic_mode();
 
     // Set TSS $esp pointer and jump into shell 
     set_tss_kernel_current_stack();
