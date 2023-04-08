@@ -4,7 +4,6 @@
 #include "lib-header/driver/keyboard.h"
 #include "lib-header/driver/text-io-module/textio.h"
 #include "lib-header/filesystem/fat32.h"
-#include "lib-header/kernel_loader.h"
 #include "lib-header/stdmem.h"
 
 // TODO : Use dispatch table style to decouple this with keyboard and other

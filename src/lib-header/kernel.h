@@ -1,5 +1,5 @@
-#ifndef _KERNEL_LOADER
-#define _KERNEL_LOADER
+#ifndef _KERNEL_H
+#define _KERNEL_H
 
 // Linker variable : Pointing to kernel start & end address
 // Note : Use & operator, example : a = (uint32_t) &_linker_kernel_stack_top
