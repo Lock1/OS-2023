@@ -62,10 +62,115 @@ struct VGACRTControllerEndHorizontalRetraceData {
     uint8_t end_horizontal_blanking: 1;
 } __attribute__((packed));
 
+struct VGACRTControllerVerticalTotalData {
+    uint8_t vertical_total;
+} __attribute__((packed));
+
+struct VGACRTControllerOverflowData {
+    uint8_t vertical_total_8:          1;
+    uint8_t vertical_display_end_8:    1;
+    uint8_t vertical_retrace_start_8:  1;
+    uint8_t start_vertical_blanking_8: 1;
+    uint8_t line_compare_8:            1;
+    uint8_t vertical_total_9:          1;
+    uint8_t vertical_display_end_9:    1;
+    uint8_t vertical_retrace_start_9:  1;
+} __attribute__((packed));
+
+struct VGACRTControllerPresetRowScanData {
+    uint8_t preset_row_scan: 5;
+    uint8_t byte_panning:    2;
+    uint8_t _reserved:       1;
+} __attribute__((packed));
+
+struct VGACRTControllerMaximumScanlineData {
+    uint8_t maximum_scanline:          5;
+    uint8_t start_vertical_blanking_9: 1;
+    uint8_t line_compare_9:            1;
+    uint8_t scan_doubling:             1;
+} __attribute__((packed));
+
+struct VGACRTControllerCursorStartData {
+    uint8_t cursor_scanline_start: 5;
+    uint8_t cursor_disable:        1;
+    uint8_t _reserved:             2;
+} __attribute__((packed));
+
+struct VGACRTControllerCursorEndData {
+    uint8_t cursor_scanline_end: 5;
+    uint8_t ega_cursor_skew:     2;
+    uint8_t _reserved:           1;
+} __attribute__((packed));
+
+struct VGACRTControllerStartAddressHighData {
+    uint8_t start_address_high;
+} __attribute__((packed));
+
+struct VGACRTControllerStartAddressLowData {
+    uint8_t start_address_low;
+} __attribute__((packed));
+
+struct VGACRTControllerCursorLocationHighData {
+    uint8_t cursor_location_high;
+} __attribute__((packed));
+
+struct VGACRTControllerCursorLocationLowData {
+    uint8_t cursor_location_low;
+} __attribute__((packed));
+
+struct VGACRTControllerVerticalRetraceStartData {
+    uint8_t vertical_retrace_start;
+} __attribute__((packed));
+
+struct VGACRTControllerVerticalRetraceEndData {
+    uint8_t vertical_retrace_end: 4;
+    uint8_t _reserved:            2;
+    uint8_t memory_bandwidth:     1;
+    uint8_t protect_crt_register: 1;
+} __attribute__((packed));
+
+struct VGACRTControllerVerticalDisplayEndData {
+    uint8_t vertical_display_end;
+} __attribute__((packed));
+
+struct VGACRTControllerOffsetData {
+    uint8_t offset;
+} __attribute__((packed));
+
+struct VGACRTControllerUnderlineLocationData {
+    uint8_t underline_location:     5;
+    uint8_t divide_4_address_clock: 1;
+    uint8_t double_word_addressing: 1;
+    uint8_t _reserved:              1;
+} __attribute__((packed));
+
+struct VGACRTControllerStartVerticalBlankingData {
+    uint8_t start_vertical_blanking;
+} __attribute__((packed));
+
+struct VGACRTControllerEndVerticalBlankingData {
+    uint8_t end_vertical_blanking: 7;
+    uint8_t _reserved:             1;
+} __attribute__((packed));
+
+struct VGACRTControllerCRTCModeControlData {
+    uint8_t map_display_address_13: 1;
+    uint8_t map_display_address_14: 1;
+    uint8_t divide_2_scanline:      1;
+    uint8_t divide_2_address_clock: 1;
+    uint8_t _reserved:              1;
+    uint8_t address_wrap:           1;
+    uint8_t use_byte_mode:          1;
+    uint8_t sync_enable:            1;
+} __attribute__((packed));
+
+struct VGACRTControllerLineCompareData {
+    uint8_t line_compare_register;
+} __attribute__((packed));
 
 
 // VGA register port
-extern const struct VGARegisterPort              _vga_reg_sequencer;
+extern const struct VGARegisterPort                             _vga_reg_sequencer;
 
 // Video Mode 13h values
 extern const struct VGACRTControllerHorizontalTotalData         _vga_reg_mode13h_horizontal_total;
