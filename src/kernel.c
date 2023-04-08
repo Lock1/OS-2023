@@ -36,7 +36,7 @@ void kernel_setup(void) {
         .buffer_size           = 0x100000,
     };
     read(request);
-    vga_use_graphic_mode();
+    vga_use_video_mode_13h();
 
     // Set TSS $esp pointer and jump into shell 
     set_tss_kernel_current_stack();

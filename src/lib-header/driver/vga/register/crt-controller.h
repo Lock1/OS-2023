@@ -52,6 +52,16 @@ struct VGACRTControllerEndHorizontalBlankingData {
     uint8_t vertical_rectrace:       1;
 } __attribute__((packed));
 
+struct VGACRTControllerStartHorizontalRetraceData {
+    uint8_t start_horizontal_retrace;
+} __attribute__((packed));
+
+struct VGACRTControllerEndHorizontalRetraceData {
+    uint8_t end_horizontal_retrace:  5;
+    uint8_t horizontal_retrace_skew: 2;
+    uint8_t end_horizontal_blanking: 1;
+} __attribute__((packed));
+
 
 
 // VGA register port

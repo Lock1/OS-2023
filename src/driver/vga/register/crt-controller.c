@@ -42,5 +42,8 @@ void vga_set_crt_controller_register(void) {
         register_const_serialize(&_vga_reg_mode13h_start_horizontal_blanking),
         register_const_serialize(&_vga_reg_mode13h_end_horizontal_blanking),
     };
+
+    vga_set_index_register(_vga_reg_crt_controller, CRT_INDEX_VERTICAL_RETRACE_END, 0x0E);
+
     set_indexed_register(_vga_reg_crt_controller, crt_controller_index, crt_controller_data, 4);
 }
