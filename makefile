@@ -6,7 +6,8 @@ OBJECTS = kernel-entrypoint.o kernel.o \
 	filesystem/fat32.o \
 	memory/paging.o \
 	driver/text-io-module/textio.o \
-	driver/vga/vga-register.o
+	driver/vga/vga-register.o \
+	driver/vga/register/sequencer.o driver/vga/register/crt-controller.o driver/vga/register/external.o
 FOLDERS = cpu memory driver filesystem generic-lib
 
 # Compiler & linker
