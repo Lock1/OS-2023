@@ -21,6 +21,20 @@ struct VGACRTControllerHorizontalTotalData {
     uint8_t horizontal_total;
 } __attribute__((packed));
 
+struct VGACRTControllerEndHorizontalDisplayData {
+    uint8_t end_horizontal_display;
+} __attribute__((packed));
+
+struct VGACRTControllerStartHorizontalBlankingData {
+    uint8_t start_horizontal_blanking;
+} __attribute__((packed));
+
+struct VGACRTControllerEndHorizontalBlankingData {
+    uint8_t end_horizontal_blanking: 5;
+    uint8_t display_enable_skew:     2;
+    uint8_t vertical_rectrace:       1;
+} __attribute__((packed));
+
 // http://www.osdever.net/FreeVGA/vga/extreg.htm
 struct VGAExternalOutputRegisterData {
     uint8_t ioas:            1;
@@ -51,7 +65,10 @@ extern const struct VGARegisterPort _vga_reg_external_output;
 extern const struct VGARegisterPort _vga_reg_external_fc;
 
 // Video Mode 13h values
-extern const struct VGACRTControllerHorizontalTotalData _vga_reg_mode13h_horizontal_total;
+extern const struct VGACRTControllerHorizontalTotalData         _vga_reg_mode13h_horizontal_total;
+extern const struct VGACRTControllerEndHorizontalDisplayData    _vga_reg_mode13h_end_horizontal_display;
+extern const struct VGACRTControllerStartHorizontalBlankingData _vga_reg_mode13h_start_horizontal_blanking;
+extern const struct VGACRTControllerEndHorizontalBlankingData   _vga_reg_mode13h_end_horizontal_blanking;
 extern const struct VGAExternalOutputRegisterData _vga_reg_mode13h_output;
 extern const struct VGAExternalFeatureControlData _vga_reg_mode13h_fc;
 

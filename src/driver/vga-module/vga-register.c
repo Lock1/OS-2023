@@ -28,6 +28,20 @@ const struct VGACRTControllerHorizontalTotalData _vga_reg_mode13h_horizontal_tot
     .horizontal_total = 3,
 };
 
+const struct VGACRTControllerEndHorizontalDisplayData _vga_reg_mode13h_end_horizontal_display = {
+    .end_horizontal_display = 0,
+};
+
+const struct VGACRTControllerStartHorizontalBlankingData _vga_reg_mode13h_start_horizontal_blanking = {
+    .start_horizontal_blanking = 3,
+};
+
+const struct VGACRTControllerEndHorizontalBlankingData _vga_reg_mode13h_end_horizontal_blanking = {
+    .end_horizontal_blanking = 0,
+    .display_enable_skew     = 0,
+    .vertical_rectrace       = 0,
+};
+
 const struct VGAExternalOutputRegisterData _vga_reg_mode13h_output = {
     .ioas             = 1,
     .ram_enable       = 1,
