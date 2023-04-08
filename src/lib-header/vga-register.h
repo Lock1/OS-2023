@@ -3,16 +3,26 @@
 
 #include "lib-header/stdtype.h"
 
+#define CRT_INDEX_HORIZONTAL_TOTAL          0
+#define CRT_INDEX_END_HORIZONTAL_DISPLAY    0
+#define CRT_INDEX_START_HORIZONTAL_BLANKING 0
+#define CRT_INDEX_END_HORIZONTAL_BLANKING   0
+
 // Note : Naming convention directly follow from http://www.osdever.net/FreeVGA/vga/vga.htm
 
-
 struct VGARegisterPort {
-    uint16_t address_register;
-    uint16_t data_register;
-};
+    uint16_t   address_register;
+    uint16_t   data_register;
+} __attribute__((packed));
+
+
+// VGA Register values, avoiding raw bytes and use struct as much as possible
+struct VGACRTControllerHorizontalTotalData {
+    uint8_t horizontal_total;
+} __attribute__((packed));
 
 // http://www.osdever.net/FreeVGA/vga/extreg.htm
-struct VGAMiscOutputRegisterData {
+struct VGAExternalOutputRegisterData {
     uint8_t ioas:            1;
     uint8_t ram_enable:      1;
     uint8_t clock_select:    2;
@@ -20,22 +30,30 @@ struct VGAMiscOutputRegisterData {
     uint8_t odd_even_page:   1;
     uint8_t horizontal_sync: 1;
     uint8_t vertical_sync:   1;
-};
+} __attribute__((packed));
 
-struct VGAMiscFeatureControlData {
+struct VGAExternalFeatureControlData {
     uint8_t feature_control0: 1;
     uint8_t feature_control1: 1;
-    uint8_t _reserved: 6;
-};
+    uint8_t _reserved:        6;
+} __attribute__((packed));
 
+
+
+
+
+
+// VGA register port
+extern const struct VGARegisterPort _vga_reg_crt_controller;
 
 // External / Misc registers, http://www.osdever.net/FreeVGA/vga/extreg.htm
 extern const struct VGARegisterPort _vga_reg_external_output;
 extern const struct VGARegisterPort _vga_reg_external_fc;
 
 // Video Mode 13h values
-extern const struct VGAMiscOutputRegisterData _vga_reg_mode13h_misc;
-extern const struct VGAMiscFeatureControlData _vga_reg_mode13h_fc;
+extern const struct VGACRTControllerHorizontalTotalData _vga_reg_mode13h_horizontal_total;
+extern const struct VGAExternalOutputRegisterData _vga_reg_mode13h_output;
+extern const struct VGAExternalFeatureControlData _vga_reg_mode13h_fc;
 
 
 #endif

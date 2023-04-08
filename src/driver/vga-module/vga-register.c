@@ -15,10 +15,20 @@ const struct VGARegisterPort _vga_reg_external_fc = {
     .data_register    = 0x3DA,
 };
 
+// Mono use 0x3B4-0x3B5 instead
+const struct VGARegisterPort _vga_reg_crt_controller = {
+    .address_register = 0x3D4,
+    .data_register    = 0x3D5,
+};
+
 
 
 // Video Mode 13h register values
-const struct VGAMiscOutputRegisterData _vga_reg_mode13h_misc = {
+const struct VGACRTControllerHorizontalTotalData _vga_reg_mode13h_horizontal_total = {
+    .horizontal_total = 3,
+};
+
+const struct VGAExternalOutputRegisterData _vga_reg_mode13h_output = {
     .ioas             = 1,
     .ram_enable       = 1,
     .clock_select     = 0,
@@ -27,7 +37,7 @@ const struct VGAMiscOutputRegisterData _vga_reg_mode13h_misc = {
     .vertical_sync    = 0,
 };
 
-const struct VGAMiscFeatureControlData _vga_reg_mode13h_fc = {
+const struct VGAExternalFeatureControlData _vga_reg_mode13h_fc = {
     .feature_control0 = 0,
     .feature_control1 = 0,
 };
