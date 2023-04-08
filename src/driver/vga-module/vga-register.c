@@ -1,18 +1,9 @@
 #include "lib-header/vga-register.h"
 
-// static const struct VGARegister graphics_register = {
-//     .address_register = 0x3CE,
-//     .data_register    = 0x3CF,
-// };
-
-// VGA Register port
-const struct VGARegisterPort _vga_reg_external_output = {
-    .data_register    = 0x3C2,
-};
-
-// Assuming color mode is used, for mono use 0x3BA
-const struct VGARegisterPort _vga_reg_external_fc = {
-    .data_register    = 0x3DA,
+// VGA Register port - Indexed register
+const struct VGARegisterPort _vga_reg_sequencer = {
+    .address_register = 0x3C4,
+    .data_register    = 0x3C5,
 };
 
 // Mono use 0x3B4-0x3B5 instead
@@ -22,8 +13,48 @@ const struct VGARegisterPort _vga_reg_crt_controller = {
 };
 
 
+// VGA Register port - External registers
+const struct VGARegisterPort _vga_reg_external_output = {
+    .data_register    = 0x3C2,
+};
+
+// Assuming color mode is used, for mono use 0x3BA
+const struct VGARegisterPort _vga_reg_external_fc = {
+    .data_register    = 0x3DA,
+};
+
+
 
 // Video Mode 13h register values
+const struct VGASequencerResetData _vga_reg_mode13h_reset = {
+    .asynchronous_reset = 1,
+    .synchronous_reset  = 1,
+};
+
+const struct VGASequencerClockingModeData _vga_reg_mode13h_clocking_mode = {
+    .dot_9_8_mode    = 1,
+    .shift_load_rate = 0,
+    .dot_clock_rate  = 0,
+    .shift_four_mode = 0,
+    .screen_disable  = 0,
+};
+
+const struct VGASequencerMapMaskData _vga_reg_mode13h_map_mask = {
+    .enable_memory_plane_0 = 1,
+    .enable_memory_plane_1 = 1,
+    .enable_memory_plane_2 = 1,
+    .enable_memory_plane_3 = 1,
+};
+
+const struct VGASequencerCharacterMapData _vga_reg_mode13h_character_map = {
+    .character_set_b      = 0,
+    .character_set_a      = 0,
+    .second_bit_charset_b = 0,
+    .second_bit_charset_a = 0,
+};
+
+
+// FIXME : CRT Controller
 const struct VGACRTControllerHorizontalTotalData _vga_reg_mode13h_horizontal_total = {
     .horizontal_total = 3,
 };
