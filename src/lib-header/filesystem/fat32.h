@@ -1,7 +1,7 @@
 #ifndef _FAT32_H
 #define _FAT32_H
 
-#include "disk.h"
+#include "lib-header/driver/disk.h"
 
 /* -- IF2230 File System constants -- */
 #define BOOT_SECTOR                 0

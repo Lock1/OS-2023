@@ -1,5 +1,5 @@
-#include "lib-header/idt.h"
-#include "lib-header/gdt.h"
+#include "lib-header/cpu/idt.h"
+#include "lib-header/cpu/gdt.h"
 
 static struct InterruptDescriptorTable interrupt_descriptor_table = {
     .table = {{0}},

@@ -9,8 +9,18 @@ https://github.com/Lock1/OS-2023-Manim
 
 [Dev Repository untuk kit](https://github.com/Lock1/kit-OS-2023)
 
-# Planned Roadmap
-## Milestone 1
+
+## Coding convention
+- Yes, i have problem with my kind-of-insane-verbosity, but i like it anyway
+- Global variable use `_<filename>_<variable name>`
+- Assembly filename: `<filename>-asm.s`, with `filename` is same with C counterpart (ex. `interrupt.c` and `interrupt-asm.s`)
+- Both `<filename>-asm.s` and `<filename>.c` will use single header `<filename>.h`
+- Special exception for `kernel.c` and `kernel-entrypoint.s`, with single header `kernel.h`
+
+
+
+## Planned Roadmap
+### Milestone 1
 1-5
 Notes - [Milestone 1 Notes](/other/notes/Milestone%201%20Notes.md)
 - [x] Initial setup & toolchain install
@@ -20,26 +30,26 @@ Notes - [Milestone 1 Notes](/other/notes/Milestone%201%20Notes.md)
 - [x] Initial kit / template milestone 1
 
 
-## Milestone 2
+### Milestone 2
 6-11
 - [x] Interrupt (IRQ kaya keyboard)
 - [x] Filesystem
 - [-] ~~Basic process + monotasking~~ Dropped for milestone 2
 
-## Milestone 3
+### Milestone 3
 12-End
 - [x] Paging
 - [x] User mode
 - [x] Basic shell
 
 
-## Dropped
+### Dropped
 Seems too hard?
 - [-] ~~Memory management (memcpy, malloc, etc)~~
 - [-] ~~Multitasking~~
 
 
-# Resources
+## Resources
 32 bit Resources
 
 - Bootloader & GRUB : http://www.jamesmolloy.co.uk/tutorial_html/index.html + https://littleosbook.github.io/

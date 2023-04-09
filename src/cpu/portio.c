@@ -1,5 +1,5 @@
+#include "lib-header/cpu/portio.h"
 #include "lib-header/stdtype.h"
-#include "lib-header/portio.h"
 
 /** x86 inb/outb - inw/outw - inl/outl (8 / 16 / 32-bit data):
  * @param dx target port 

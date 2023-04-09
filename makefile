@@ -1,11 +1,16 @@
 # Object files & root temporaty folder
 OBJECTS = kernel-entrypoint.o kernel.o \
 	generic-lib/stdmem.o \
-	driver/framebuffer.o driver/keyboard.o driver/disk.o \
-	cpu/portio.o cpu/gdt.o cpu/idt.o cpu/interrupt.o cpu/interrupt-setup.o \
+	driver/framebuffer.o driver/keyboard.o driver/disk.o driver/vga.o \
+	cpu/portio.o cpu/gdt.o cpu/idt.o cpu/interrupt.o cpu/interrupt-asm.o \
 	filesystem/fat32.o \
 	memory/paging.o \
-	driver/text-io-module/textio.o
+	driver/text-io-module/textio.o \
+	driver/vga/vga-register-programmer.o \
+	driver/vga/register/sequencer.o driver/vga/register/crt-controller.o driver/vga/register/external.o \
+	driver/vga/register/graphics.o driver/vga/register/attribute-controller.o driver/vga/register/color.o \
+	driver/vga/text/font.o driver/vga/text/font-preset/bubach-font8x16.o \
+	driver/vga/video-mode-preset/mode-13h.o driver/vga/video-mode-preset/mode-3h.o 
 FOLDERS = cpu memory driver filesystem generic-lib
 
 # Compiler & linker

@@ -1,8 +1,8 @@
-#include "lib-header/textio.h"
-#include "lib-header/framebuffer.h"
+#include "lib-header/driver/text-io-module/textio.h"
+#include "lib-header/driver/framebuffer.h"
 
 void puts(char *buf, int32_t count, uint8_t color) {
-    uint16_t cursor_location = framebuffer_get_cursor();
+    uint16_t cursor_location = framebuffer_text_get_cursor();
     uint8_t row = cursor_location / 80;
     uint8_t col = cursor_location % 80;
     int i = 0;
@@ -11,9 +11,9 @@ void puts(char *buf, int32_t count, uint8_t color) {
             row++;
             col = 0;
         } else if (0x1F < buf[i] && buf[i] < 0x7F) {
-            framebuffer_write(row, col++, buf[i], color, 0); // Only printables
+            framebuffer_text_write(row, col++, buf[i], color, 0); // Only printables
         }
         i++;
     }
-    framebuffer_set_cursor(row, col);
+    framebuffer_text_set_cursor(row, col);
 }
