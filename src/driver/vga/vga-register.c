@@ -5,6 +5,10 @@ uint8_t register_const_serialize(const void *struct_ptr) {
     return *((uint8_t *) struct_ptr);
 }
 
+uint8_t vga_read_unindexed_register(struct VGARegisterPort vga_reg) {
+    return in(vga_reg.data_register);
+}
+
 void vga_set_unindexed_register(struct VGARegisterPort vga_reg, uint8_t data) {
     out(vga_reg.data_register, data);
 }

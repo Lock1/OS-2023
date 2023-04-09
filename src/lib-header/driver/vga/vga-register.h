@@ -18,6 +18,7 @@ struct VGARegisterPort {
 } __attribute__((packed));
 
 uint8_t register_const_serialize(const void *struct_ptr);
+uint8_t vga_read_unindexed_register(struct VGARegisterPort vga_reg);
 void vga_set_unindexed_register(struct VGARegisterPort vga_reg, uint8_t data);
 void vga_set_index_register(struct VGARegisterPort vga_reg, uint8_t index, uint8_t data);
 void set_indexed_register(struct VGARegisterPort vga_reg, uint8_t *indexes, uint8_t *datas, uint32_t count);
