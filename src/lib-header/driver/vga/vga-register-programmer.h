@@ -7,6 +7,8 @@
 
 // TODO : VGA Doxygen
 // TODO : Second pass + formatting
+// TODO : Currently only assuming color mode, all port is written like that (all port shifted)
+// By default GRUB use video mode 3 (text mode, 80x25)
 
 struct VGARegisterPort {
     uint16_t   address_register;

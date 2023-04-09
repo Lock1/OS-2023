@@ -7,7 +7,8 @@
 #define CURSOR_PORT_DATA       0x03D5
 
 
-
+// TODO : Need to recheck all framebuffer doxygen & add more
+void framebuffer_graphic_put_pixel(uint32_t x, uint32_t y, uint8_t color);
 
 /**
  * Set framebuffer character and color with corresponding parameter values.

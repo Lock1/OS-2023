@@ -10,6 +10,10 @@ enum cursor_command {
 };
 
 // TODO : Fancy text for mode 13h
+void framebuffer_graphic_put_pixel(uint32_t x, uint32_t y, uint8_t color) {
+    uint8_t *addr = (uint8_t *) 0xC00A0000 + (320*y) + x;
+    *addr = color;
+}
 
 void framebuffer_text_set_cursor(uint8_t r, uint8_t c) {
     if (_vga_current_video_mode == 3) {

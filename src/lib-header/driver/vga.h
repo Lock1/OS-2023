@@ -13,16 +13,16 @@
 void vga_use_video_mode_13h(void);
 
 /**
- * Terminal framebuffer
- * Resolution: 80x25
- * Starting at MEMORY_FRAMEBUFFER,
+ * Change VGA video mode to 3h
+ * Text mode with resolution: 80x25
+ * Starting at MODE_3H_MEMORY_FRAMEBUFFER,
  * - Even number memory: Character, 8-bit
  * - Odd number memory:  Character color lower 4-bit, Background color upper 4-bit
 */
-// TODO : Switch back to mode 3
-// TODO : Currently only assuming color mode, all port is written like that (all port shifted)
+void vga_use_video_mode_3h(void);
 
-// By default GRUB use video mode 3 (text mode, 80x25)
+
+
 extern uint8_t _vga_current_video_mode;
 
 #endif
