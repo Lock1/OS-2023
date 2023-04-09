@@ -4,7 +4,7 @@ const struct VGAExternalRegister _vga_preset_mode_3h_external = {
     .output          = {
         .ioas             = 1,
         .ram_enable       = 1,
-        .clock_select     = 0,
+        .clock_select     = 1,
         .odd_even_page    = 1,
         .horizontal_sync  = 1,
         .vertical_sync    = 0,
@@ -23,7 +23,7 @@ const struct VGASequencerRegister _vga_preset_mode_3h_sequencer = {
         .synchronous_reset       = 1,
     },
     .clocking_mode = {
-        .dot_9_8_mode            = 1,
+        .dot_9_8_mode            = 0,
         .shift_load_rate         = 0,
         .dot_clock_rate          = 0,
         .shift_four_mode         = 0,
@@ -32,8 +32,8 @@ const struct VGASequencerRegister _vga_preset_mode_3h_sequencer = {
     .map_mask = {
         .enable_memory_plane_0   = 1,
         .enable_memory_plane_1   = 1,
-        .enable_memory_plane_2   = 1,
-        .enable_memory_plane_3   = 1,
+        .enable_memory_plane_2   = 0,
+        .enable_memory_plane_3   = 0,
     },
     .character_map = {
         .character_set_b         = 0,
@@ -43,8 +43,8 @@ const struct VGASequencerRegister _vga_preset_mode_3h_sequencer = {
     },
     .sequencer_memory_mode = {
         .extended_memory         = 1,
-        .disable_odd_even_memory = 1,
-        .enable_chain_four       = 1,
+        .disable_odd_even_memory = 0,
+        .enable_chain_four       = 0,
     },
 };
 
@@ -66,11 +66,11 @@ const struct VGACRTControllerRegister _vga_preset_mode_3h_crt_controller = {
         .vertical_rectrace         = 1,
     },
     .start_horizontal_retrace = {
-        .start_horizontal_retrace  = 0x54,
+        .start_horizontal_retrace  = 0x55,
     },
 
     .end_horizontal_retrace = {
-        .end_horizontal_retrace    = 0,
+        .end_horizontal_retrace    = 1,
         .horizontal_retrace_skew   = 0,
         .end_horizontal_blanking_5 = 1,
     },
@@ -92,18 +92,18 @@ const struct VGACRTControllerRegister _vga_preset_mode_3h_crt_controller = {
         .preset_row_scan           = 0,
     },
     .maximum_scanline = {
-        .maximum_scanline          = 0b00001,
+        .maximum_scanline          = 0b01111,
         .start_vertical_blanking_9 = 0,
         .line_compare_9            = 1,
         .scan_doubling             = 0,
     },
 
     .cursor_start = {
-        .cursor_scanline_start     = 0,
+        .cursor_scanline_start     = 0xE,
         .cursor_disable            = 0,
     },
     .cursor_end = {
-        .cursor_scanline_end       = 0,
+        .cursor_scanline_end       = 0xF,
         .ega_cursor_skew           = 0,
     },
     .start_address_high = {
@@ -135,9 +135,9 @@ const struct VGACRTControllerRegister _vga_preset_mode_3h_crt_controller = {
     },
 
     .underline_location = {
-        .underline_location        = 0,
+        .underline_location        = 1,
         .divide_4_address_clock    = 0,
-        .double_word_addressing    = 1,
+        .double_word_addressing    = 0,
     },
     .start_vertical_blanking = {
         .start_vertical_blanking   = 0x96,
@@ -191,20 +191,20 @@ const struct VGAGraphicsRegister _vga_preset_mode_3h_graphics = {
     .graphics_mode = {
         .write_mode               = 0,
         .read_mode                = 0,
-        .host_even_odd            = 0,
+        .host_even_odd            = 1,
         .interleave_register      = 0,
-        .color_shift_256          = 1,
+        .color_shift_256          = 0,
     },
     .miscellaneous_graphics = {
-        .alphanumeric_disable     = 1,
-        .chain_even_odd           = 0,
-        .memory_map_select        = 1,
+        .alphanumeric_disable     = 0,
+        .chain_even_odd           = 1,
+        .memory_map_select        = 0b11,
     },
     .color_dont_care = {
-        .plane_0_color_dont_care  = 1,
-        .plane_1_color_dont_care  = 1,
-        .plane_2_color_dont_care  = 1,
-        .plane_3_color_dont_care  = 1,
+        .plane_0_color_dont_care  = 0,
+        .plane_1_color_dont_care  = 0,
+        .plane_2_color_dont_care  = 0,
+        .plane_3_color_dont_care  = 0,
     },
     .bit_mask = {
         .bit_mask                 = 0xFF,
@@ -221,24 +221,24 @@ const struct VGAAttributeControllerRegister _vga_preset_mode_3h_attribute_contro
         [3]  = {.internal_palette_index = 0x3},
         [4]  = {.internal_palette_index = 0x4},
         [5]  = {.internal_palette_index = 0x5},
-        [6]  = {.internal_palette_index = 0x6},
+        [6]  = {.internal_palette_index = 0x14},
         [7]  = {.internal_palette_index = 0x7},
-        [8]  = {.internal_palette_index = 0x8},
-        [9]  = {.internal_palette_index = 0x9},
-        [10] = {.internal_palette_index = 0xA},
-        [11] = {.internal_palette_index = 0xB},
-        [12] = {.internal_palette_index = 0xC},
-        [13] = {.internal_palette_index = 0xD},
-        [14] = {.internal_palette_index = 0xE},
-        [15] = {.internal_palette_index = 0xF},
+        [8]  = {.internal_palette_index = 0x38},
+        [9]  = {.internal_palette_index = 0x39},
+        [10] = {.internal_palette_index = 0x3A},
+        [11] = {.internal_palette_index = 0x3B},
+        [12] = {.internal_palette_index = 0x3C},
+        [13] = {.internal_palette_index = 0x3D},
+        [14] = {.internal_palette_index = 0x3E},
+        [15] = {.internal_palette_index = 0x3F},
     },
     .attribute_mode_control = {
-        .attribute_controller_graphics_enable = 1,
+        .attribute_controller_graphics_enable = 0,
         .monochrome_emulation                 = 0,
-        .line_graphics                        = 0,
-        .blink_enable                         = 0,
+        .line_graphics                        = 1,
+        .blink_enable                         = 1,
         .pixel_panning_mode                   = 0,
-        .color_8_bit_mode                     = 1,
+        .color_8_bit_mode                     = 0,
         .palette_bit_5_4                      = 0,
     },
     .overscan_color = {
@@ -251,7 +251,7 @@ const struct VGAAttributeControllerRegister _vga_preset_mode_3h_attribute_contro
         .plane_3_color_plane_enable           = 1,
     },
     .horizontal_pixel_panning = {
-        .pixel_shift_count                    = 0,
+        .pixel_shift_count                    = 8,
     },
     .color_select = {
         .color_select_5_4                     = 0,
