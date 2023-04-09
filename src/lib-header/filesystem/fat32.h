@@ -228,15 +228,15 @@ uint32_t get_cluster_from_entry(struct FAT32DirectoryEntry entry);
 int32_t driver_dir_table_linear_scan(char name[8], char ext[3], bool find_empty);
 
 /**
- * Mark empty cluster_map (up to 16 clusters) and put cluster_number in empty_buf.
+ * Mark empty cluster_map (up to CLUSTER_MARK_MAX clusters) and put cluster_number in empty_buf.
  * Will try to search cluster_count-many empty FAT entry.
  * Note : Stateful - Require fat32driver_state.dirtable already loaded properly
  *
- * @param empty_buf     Pointer into array with size at least uint32_t[16]
+ * @param empty_buf     Pointer into array with size at least uint32_t[CLUSTER_MARK_MAX]
  * @param cluster_count How many empty cluster to search
  * @return int8_t Error code, returning -1 if empty cluster found is < than cluster_count
  */
-int8_t driver_fat_mark_empty_cluster(uint32_t empty_buf[16], uint32_t cluster_count);
+int8_t driver_fat_mark_empty_cluster(uint32_t empty_buf[CLUSTER_MARK_MAX], uint32_t cluster_count);
 
 /**
  * Check whether pointed dirtable is empty or not
