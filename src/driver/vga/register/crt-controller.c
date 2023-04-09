@@ -1,5 +1,5 @@
 #include "lib-header/driver/vga/register/crt-controller.h"
-#include "lib-header/driver/vga/vga-register.h"
+#include "lib-header/driver/vga/vga-register-programmer.h"
 
 // Mono use 0x3B4-0x3B5 instead
 const struct VGARegisterPort _vga_reg_port_crt_controller = {
@@ -74,7 +74,7 @@ void vga_set_crt_controller_register(const struct VGACRTControllerRegister *crt_
     };
 
     // Not sure why it need to be set first
-    vga_set_index_register(_vga_reg_port_crt_controller, CRT_CONTROLLER_INDEX_VERTICAL_RETRACE_END, 0x0E);
+    vga_set_double_port_register(_vga_reg_port_crt_controller, CRT_CONTROLLER_INDEX_VERTICAL_RETRACE_END, 0x0E);
 
     set_indexed_register(_vga_reg_port_crt_controller, crt_controller_index, crt_controller_data, CRT_CONTROLLER_REGISTER_COUNT);
 }

@@ -1,6 +1,6 @@
 #include "lib-header/driver/vga/register/attribute-controller.h"
 #include "lib-header/driver/vga/register/external.h"
-#include "lib-header/driver/vga/vga-register.h"
+#include "lib-header/driver/vga/vga-register-programmer.h"
 
 // VGA Register port - Attribute controller registers - indexed
 const struct VGARegisterPort _vga_reg_port_attribute_controller = {
@@ -48,13 +48,13 @@ void vga_set_attribute_controller_register(const struct VGAAttributeControllerRe
         attribute_controller_data[i] = register_const_serialize(&attribute->palette_array[i]);
 
     // Read external register 0x3DA to force attribute controller switch into index state
-    vga_read_unindexed_register(_vga_reg_port_external_fc);
+    vga_read_single_port_register(_vga_reg_port_external_fc);
 
     for (uint32_t i = 0; i < ATTRIBUTE_CONTROLLER_REGISTER_COUNT; i++) {
-        vga_read_unindexed_register(_vga_reg_port_attribute_controller);
+        vga_read_single_port_register(_vga_reg_port_attribute_controller);
         // Send index first then data on exact same port
-        vga_set_unindexed_register(_vga_reg_port_attribute_controller, register_const_serialize(&_vga_reg_attribute_controller_index_array[i]));
-        vga_set_unindexed_register(_vga_reg_port_attribute_controller, attribute_controller_data[i]);
+        vga_set_single_port_register(_vga_reg_port_attribute_controller, register_const_serialize(&_vga_reg_attribute_controller_index_array[i]));
+        vga_set_single_port_register(_vga_reg_port_attribute_controller, attribute_controller_data[i]);
     }
     
     // Tell VGA controller to load palette register and lock any change to register
@@ -62,5 +62,5 @@ void vga_set_attribute_controller_register(const struct VGAAttributeControllerRe
         .attribute_address      = 0,
         .palette_address_source = 1,
     };
-    vga_set_unindexed_register(_vga_reg_port_attribute_controller, register_const_serialize(&load_palette_index));
+    vga_set_single_port_register(_vga_reg_port_attribute_controller, register_const_serialize(&load_palette_index));
 }

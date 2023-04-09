@@ -1,7 +1,7 @@
 #ifndef _VGA_SEQUENCER_REGISTER_H
 #define _VGA_SEQUENCER_REGISTER_H
 
-#include "lib-header/driver/vga/vga-register.h"
+#include "lib-header/driver/vga/vga-register-programmer.h"
 #include "lib-header/stdtype.h"
 
 

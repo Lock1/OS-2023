@@ -1,5 +1,5 @@
 #include "lib-header/driver/vga/register/graphics.h"
-#include "lib-header/driver/vga/vga-register.h"
+#include "lib-header/driver/vga/vga-register-programmer.h"
 
 // VGA Register port - Indexed register
 const struct VGARegisterPort _vga_reg_port_graphics = {
