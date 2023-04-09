@@ -210,8 +210,8 @@ void vga_set_crt_controller_register(void) {
         register_const_serialize(&_vga_reg_mode13h_line_compare),
     };
 
-    // TODO : Need to check whether my interpretation of out16(0x0E11) is correct
+    // Not sure why it need to be set first
     vga_set_index_register(_vga_reg_port_crt_controller, CRT_CONTROLLER_INDEX_VERTICAL_RETRACE_END, 0x0E);
 
-    set_indexed_register(_vga_reg_port_crt_controller, crt_controller_index, crt_controller_data, 4);
+    set_indexed_register(_vga_reg_port_crt_controller, crt_controller_index, crt_controller_data, 25);
 }
