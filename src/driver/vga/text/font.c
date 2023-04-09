@@ -2,10 +2,9 @@
 #include "lib-header/driver/vga/register/sequencer.h"
 #include "lib-header/driver/vga/video-mode-preset/vga-video-preset.h"
 #include "lib-header/driver/vga/text/font.h"
-#include "lib-header/driver/vga/text/bubach-font8x16.h"
 #include "lib-header/stdmem.h"
 
-void vga_load_standard_vga_font(void) {
+void vga_load_standard_8x16_vga_font(const uint8_t *font_bitmap_8x16) {
     // Need to change register to access font plane (plane number 2)
     // Graphics register
     uint8_t graphics_register = vga_read_double_port_register(_vga_reg_port_graphics, GRAPHICS_INDEX_GRAPHICS_MODE);
@@ -36,7 +35,7 @@ void vga_load_standard_vga_font(void) {
     // Copying font
     uint32_t font_address = VGA_LOWEST_FRAMEBUFFER_ADDRESS;
     for (uint32_t i = 0; i < 256; i++) {
-        memcpy((void*) font_address, bubach_font_8x16 + i*16, 16);
+        memcpy((void*) font_address, font_bitmap_8x16 + i*16, 16);
         font_address += 32; // Due every char is 32 bytes (first 16 bytes is bitmap), we need to jump per 32 bytes
     }
 

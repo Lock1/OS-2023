@@ -3,6 +3,6 @@
 
 #include "lib-header/stdtype.h"
 
-extern const uint8_t bubach_font_8x16[256*16];
+extern const uint8_t _bubach_font_8x16[256*16];
 
 #endif
