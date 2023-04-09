@@ -101,4 +101,10 @@ void vga_set_attribute_controller_register(void) {
         vga_set_unindexed_register(_vga_reg_port_attribute_controller, register_const_serialize(&_vga_reg_attribute_controller_index_array[i]));
         vga_set_unindexed_register(_vga_reg_port_attribute_controller, attribute_controller_data[i]);
     }
+    
+    struct VGAAttributeControllerIndexData load_palette_index = {
+        .attribute_address      = 0,
+        .palette_address_source = 1,
+    };
+    vga_set_unindexed_register(_vga_reg_port_attribute_controller, register_const_serialize(&load_palette_index));
 }
