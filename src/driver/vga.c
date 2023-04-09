@@ -6,6 +6,7 @@
 #include "lib-header/driver/vga/register/graphics.h"
 #include "lib-header/driver/vga/register/attribute-controller.h"
 #include "lib-header/driver/vga/register/color.h"
+#include "lib-header/driver/vga/register/text/font.h"
 #include "lib-header/driver/vga/video-mode-preset/vga-video-preset.h"
 #include "lib-header/stdmem.h"
 
@@ -28,6 +29,7 @@ void vga_use_video_mode_3h(void) {
     vga_set_crt_controller_register(&_vga_preset_mode_3h_crt_controller);
     vga_set_graphics_register(&_vga_preset_mode_3h_graphics);
     vga_set_attribute_controller_register(&_vga_preset_mode_3h_attribute_controller);
+    vga_load_standard_vga_font();
     vga_set_palette(_vga_preset_mode_3h_color_palette, MODE_3H_COLOR);
     _vga_current_video_mode = 0x03;
 }

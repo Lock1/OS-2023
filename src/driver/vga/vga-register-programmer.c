@@ -9,6 +9,11 @@ uint8_t vga_read_single_port_register(struct VGARegisterPort vga_reg) {
     return in(vga_reg.data_register);
 }
 
+uint8_t vga_read_double_port_register(struct VGARegisterPort vga_reg, uint8_t index) {
+    out(vga_reg.address_register, index);
+    return in(vga_reg.data_register);
+}
+
 void vga_set_single_port_register(struct VGARegisterPort vga_reg, uint8_t data) {
     out(vga_reg.data_register, data);
 }

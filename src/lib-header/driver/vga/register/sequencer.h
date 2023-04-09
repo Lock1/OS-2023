@@ -67,7 +67,7 @@ struct VGASequencerRegister {
 
 
 
-extern const struct VGARegisterPort vga_reg_port_sequencer;
+extern const struct VGARegisterPort _vga_reg_port_sequencer;
 
 
 
