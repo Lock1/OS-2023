@@ -1,4 +1,4 @@
-#include "lib-header/driver/vga/register/text/bubach-font8x16.h"
+#include "lib-header/driver/vga/text/bubach-font8x16.h"
 
 // Font attribution: BOS - Christoffer Bubach, 2004-2005
 const uint8_t bubach_font_8x16[256*16] = {

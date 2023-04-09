@@ -6,7 +6,7 @@
 #include "lib-header/driver/vga/register/graphics.h"
 #include "lib-header/driver/vga/register/attribute-controller.h"
 #include "lib-header/driver/vga/register/color.h"
-#include "lib-header/driver/vga/register/text/font.h"
+#include "lib-header/driver/vga/text/font.h"
 #include "lib-header/driver/vga/video-mode-preset/vga-video-preset.h"
 #include "lib-header/stdmem.h"
 

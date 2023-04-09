@@ -1,8 +1,8 @@
-#include "lib-header/driver/vga/video-mode-preset/vga-video-preset.h"
-#include "lib-header/driver/vga/register/text/font.h"
-#include "lib-header/driver/vga/register/text/bubach-font8x16.h"
 #include "lib-header/driver/vga/register/graphics.h"
 #include "lib-header/driver/vga/register/sequencer.h"
+#include "lib-header/driver/vga/video-mode-preset/vga-video-preset.h"
+#include "lib-header/driver/vga/text/font.h"
+#include "lib-header/driver/vga/text/bubach-font8x16.h"
 #include "lib-header/stdmem.h"
 
 void vga_load_standard_vga_font(void) {
