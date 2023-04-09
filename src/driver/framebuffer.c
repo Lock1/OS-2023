@@ -15,6 +15,34 @@ void framebuffer_graphic_put_pixel(uint32_t x, uint32_t y, uint8_t color) {
     *addr = color;
 }
 
+void draw_8x8_box(uint32_t x, uint32_t y, uint8_t color) {
+    for (uint32_t i = 0; i < 8; i++)
+        for (uint32_t j = 0; j < 8; j++)
+            framebuffer_graphic_put_pixel(x + i, y + j, color);
+}
+
+void framebuffer_draw_256_color_palette() {
+    for (uint32_t i = 0; i < 16; i++)
+        for (uint32_t j = 0; j < 16; j++)
+            draw_8x8_box(j*8, i*8, i*8 + j);
+}
+
+void framebuffer_draw_sis_image(void *buffer, uint32_t res_x, uint32_t res_y) {
+    vga_use_video_mode_13h();
+    framebuffer_clear();
+    framebuffer_draw_256_color_palette();
+
+    __asm__("hlt");
+    uint8_t *image_ptr = (uint8_t*) buffer;
+
+    // FIXME : This res_x & y probably broken
+    for (uint32_t i = 0; i < res_x; i++) {
+        for (uint32_t j = 0; j < res_y; j++) {
+            framebuffer_graphic_put_pixel(i, j, image_ptr[j*320 + i]);
+        }
+    }
+}
+
 void framebuffer_text_set_cursor(uint8_t r, uint8_t c) {
     if (_vga_current_video_mode == 3) {
         uint16_t location = (r * 0x50 + c) % MODE_3H_RESOLUTION;

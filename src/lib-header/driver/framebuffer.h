@@ -10,6 +10,10 @@
 // TODO : Need to recheck all framebuffer doxygen & add more
 void framebuffer_graphic_put_pixel(uint32_t x, uint32_t y, uint8_t color);
 
+// FIXME : Temporary and quick solution
+void framebuffer_draw_sis_image(void *buffer, uint32_t res_x, uint32_t res_y);
+
+
 /**
  * Set framebuffer character and color with corresponding parameter values.
  * More details: https://en.wikipedia.org/wiki/BIOS_color_attributes
