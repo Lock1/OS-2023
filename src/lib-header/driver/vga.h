@@ -20,6 +20,7 @@ void vga_use_video_mode_13h(void);
  * - Odd number memory:  Character color lower 4-bit, Background color upper 4-bit
 */
 // TODO : Switch back to mode 3
+// TODO : Currently only assuming color mode, all port is written like that (all port shifted)
 
 // By default GRUB use video mode 3 (text mode, 80x25)
 extern uint8_t _vga_current_video_mode;

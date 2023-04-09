@@ -13,7 +13,7 @@ const struct VGARegisterPort _vga_reg_port_external_fc = {
 
 
 
-void vga_set_mode_13h_external_register(const struct VGAExternalRegister *external) {
+void vga_set_external_register(const struct VGAExternalRegister *external) {
     vga_set_unindexed_register(_vga_reg_port_external_output, register_const_serialize(&external->output));
     vga_set_unindexed_register(_vga_reg_port_external_fc, register_const_serialize(&external->feature_control));
 }

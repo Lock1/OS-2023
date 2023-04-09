@@ -4,7 +4,10 @@
 #include "lib-header/driver/vga/vga-register.h"
 #include "lib-header/stdtype.h"
 
-// Indexes
+
+// Constant & indices
+#define SEQUENCER_REGISTER_COUNT      5
+
 #define SEQUENCER_INDEX_RESET         0
 #define SEQUENCER_INDEX_CLOCKING_MODE 1
 #define SEQUENCER_INDEX_MAP_MASK      2
@@ -13,7 +16,7 @@
 
 
 
-// Register datas
+// Register data
 struct VGASequencerResetData {
     uint8_t asynchronous_reset: 1;
     uint8_t synchronous_reset:  1;
@@ -54,18 +57,20 @@ struct VGASequencerMemoryModeData {
     uint8_t _reserved_2:             4;
 } __attribute__((packed));
 
+struct VGASequencerRegister {
+    struct VGASequencerResetData        reset;
+    struct VGASequencerClockingModeData clocking_mode;
+    struct VGASequencerMapMaskData      map_mask;
+    struct VGASequencerCharacterMapData character_map;
+    struct VGASequencerMemoryModeData   sequencer_memory_mode;
+} __attribute__((packed));
 
 
-// VGA register port
-extern const struct VGARegisterPort              _vga_reg_port_sequencer;
 
-// Video Mode 13h values
-extern const struct VGASequencerResetData        _vga_reg_mode_13h_reset;
-extern const struct VGASequencerClockingModeData _vga_reg_mode_13h_clocking_mode;
-extern const struct VGASequencerMapMaskData      _vga_reg_mode_13h_map_mask;
-extern const struct VGASequencerCharacterMapData _vga_reg_mode_13h_character_map;
-extern const struct VGASequencerMemoryModeData   _vga_reg_mode_13h_sequencer_memory_mode;
+extern const struct VGARegisterPort vga_reg_port_sequencer;
 
-void vga_set_mode_13h_sequencer_register(void);
+
+
+void vga_set_sequencer_register(const struct VGASequencerRegister *sequencer);
 
 #endif

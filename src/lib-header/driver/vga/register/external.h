@@ -5,6 +5,7 @@
 #include "lib-header/stdtype.h"
 
 // Note: Not all external misc register listed here
+// Unindexed register
 // Register datas
 struct VGAExternalOutputRegisterData {
     uint8_t ioas:            1;
@@ -27,12 +28,14 @@ struct VGAExternalRegister {
     struct VGAExternalFeatureControlData feature_control;
 } __attribute__((packed));
 
-// Unindexed register
-// VGA register port
-extern const struct VGARegisterPort               _vga_reg_port_external_output;
-extern const struct VGARegisterPort               _vga_reg_port_external_fc;
 
-void vga_set_mode_13h_external_register(const struct VGAExternalRegister *external_register);
+
+extern const struct VGARegisterPort _vga_reg_port_external_output;
+extern const struct VGARegisterPort _vga_reg_port_external_fc;
+
+
+
+void vga_set_external_register(const struct VGAExternalRegister *external_register);
 
 #endif
 
