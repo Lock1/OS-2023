@@ -19,27 +19,27 @@ const struct VGAExternalRegister _vga_preset_mode_13h_external = {
 
 const struct VGASequencerRegister _vga_preset_mode_13h_sequencer = {
     .reset = {
-        .asynchronous_reset = 1,
-        .synchronous_reset  = 1,
+        .asynchronous_reset      = 1,
+        .synchronous_reset       = 1,
     },
     .clocking_mode = {
-        .dot_9_8_mode    = 1,
-        .shift_load_rate = 0,
-        .dot_clock_rate  = 0,
-        .shift_four_mode = 0,
-        .screen_disable  = 0,
+        .dot_9_8_mode            = 1,
+        .shift_load_rate         = 0,
+        .dot_clock_rate          = 0,
+        .shift_four_mode         = 0,
+        .screen_disable          = 0,
     },
     .map_mask = {
-        .enable_memory_plane_0 = 1,
-        .enable_memory_plane_1 = 1,
-        .enable_memory_plane_2 = 1,
-        .enable_memory_plane_3 = 1,
+        .enable_memory_plane_0   = 1,
+        .enable_memory_plane_1   = 1,
+        .enable_memory_plane_2   = 1,
+        .enable_memory_plane_3   = 1,
     },
     .character_map = {
-        .character_set_b      = 0,
-        .character_set_a      = 0,
-        .second_bit_charset_b = 0,
-        .second_bit_charset_a = 0,
+        .character_set_b         = 0,
+        .character_set_a         = 0,
+        .second_bit_charset_b    = 0,
+        .second_bit_charset_a    = 0,
     },
     .sequencer_memory_mode = {
         .extended_memory         = 1,
@@ -156,5 +156,57 @@ const struct VGACRTControllerRegister _vga_preset_mode_13h_crt_controller = {
     },
     .line_compare = {
         .line_compare_register     = 0xFF,
+    },
+};
+
+
+
+const struct VGAGraphicsRegister _vga_preset_mode_13h_graphics = {
+    .set_reset = {
+        .plane_0_set_reset        = 0,
+        .plane_1_set_reset        = 0,
+        .plane_2_set_reset        = 0,
+        .plane_3_set_reset        = 0,
+    },
+    .enable_set_reset = {
+        .plane_0_enable_set_reset = 0,
+        .plane_1_enable_set_reset = 0,
+        .plane_2_enable_set_reset = 0,
+        .plane_3_enable_set_reset = 0,
+    },
+    .color_compare = {
+        .plane_0_color_compare    = 0,
+        .plane_1_color_compare    = 0,
+        .plane_2_color_compare    = 0,
+        .plane_3_color_compare    = 0,
+    },
+    .data_rotate = {
+        .logical_operation        = 0,
+        .rotate_count             = 0,
+    },
+    .read_map_select = {
+        .read_map_select          = 0,
+    },
+
+    .graphics_mode = {
+        .write_mode               = 0,
+        .read_mode                = 0,
+        .host_even_odd            = 0,
+        .interleave_register      = 0,
+        .color_shift_256          = 1,
+    },
+    .miscellaneous_graphics = {
+        .alphanumeric_disable     = 1,
+        .chain_even_odd           = 0,
+        .memory_map_select        = 1,
+    },
+    .color_dont_care = {
+        .plane_0_color_dont_care  = 1,
+        .plane_1_color_dont_care  = 1,
+        .plane_2_color_dont_care  = 1,
+        .plane_3_color_dont_care  = 1,
+    },
+    .bit_mask = {
+        .bit_mask                 = 0xFF,
     },
 };

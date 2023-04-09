@@ -4,7 +4,9 @@
 #include "lib-header/driver/vga/vga-register.h"
 #include "lib-header/stdtype.h"
 
-// Indexes
+// Constant & indices
+#define GRAPHICS_REGISTER_COUNT               9
+
 #define GRAPHICS_INDEX_SET_RESET              0
 #define GRAPHICS_INDEX_ENABLE_SET_RESET       1
 #define GRAPHICS_INDEX_COLOR_COMPARE          2
@@ -82,26 +84,26 @@ struct VGAGraphicsBitMaskData {
     uint8_t bit_mask;
 } __attribute__((packed));
 
+struct VGAGraphicsRegister {
+    struct VGAGraphicsSetResetData              set_reset;
+    struct VGAGraphicsEnableSetResetData        enable_set_reset;
+    struct VGAGraphicsColorCompareData          color_compare;
+    struct VGAGraphicsDataRotateData            data_rotate;
+    struct VGAGraphicsReadMapSelectData         read_map_select;
+
+    struct VGAGraphicsGraphicsModeData          graphics_mode;
+    struct VGAGraphicsMiscellaneousGraphicsData miscellaneous_graphics;
+    struct VGAGraphicsColorDontCareData         color_dont_care;
+    struct VGAGraphicsBitMaskData               bit_mask;
+} __attribute__((packed));
 
 
 
-// VGA register port
 extern const struct VGARegisterPort                      _vga_reg_port_graphics;
 
 
-// Video Mode 13h values
-extern const struct VGAGraphicsSetResetData              _vga_reg_mode_13h_set_reset;
-extern const struct VGAGraphicsEnableSetResetData        _vga_reg_mode_13h_enable_set_reset;
-extern const struct VGAGraphicsColorCompareData          _vga_reg_mode_13h_color_compare;
-extern const struct VGAGraphicsDataRotateData            _vga_reg_mode_13h_data_rotate;
-extern const struct VGAGraphicsReadMapSelectData         _vga_reg_mode_13h_read_map_select;
 
-extern const struct VGAGraphicsGraphicsModeData          _vga_reg_mode_13h_graphics_mode;
-extern const struct VGAGraphicsMiscellaneousGraphicsData _vga_reg_mode_13h_miscellaneous_graphics;
-extern const struct VGAGraphicsColorDontCareData         _vga_reg_mode_13h_color_dont_care;
-extern const struct VGAGraphicsBitMaskData               _vga_reg_mode_13h_bit_mask;
-
-void vga_set_mode_13h_graphics_register(void);
+void vga_set_graphics_register(const struct VGAGraphicsRegister *graphics);
 
 #endif
 

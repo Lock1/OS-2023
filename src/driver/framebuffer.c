@@ -56,6 +56,6 @@ void framebuffer_clear(void) {
     else if (_vga_current_video_mode == 0x13) {
         for (size_t i = 0; i < 320; i++)
             for (size_t j = 0; j < 200; j++)
-                memset(MODE_13H_MEMORY_FRAMEBUFFER + i + 320*j, 1, 1);
+                memset(MODE_13H_MEMORY_FRAMEBUFFER + i + 320*j, 0, 1);
     }
 }

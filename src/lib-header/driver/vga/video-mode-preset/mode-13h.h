@@ -14,5 +14,6 @@
 extern const struct VGAExternalRegister      _vga_preset_mode_13h_external;
 extern const struct VGASequencerRegister     _vga_preset_mode_13h_sequencer;
 extern const struct VGACRTControllerRegister _vga_preset_mode_13h_crt_controller;
+extern const struct VGAGraphicsRegister      _vga_preset_mode_13h_graphics;
 
 #endif
