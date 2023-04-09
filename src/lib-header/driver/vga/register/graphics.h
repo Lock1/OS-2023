@@ -86,22 +86,22 @@ struct VGAGraphicsBitMaskData {
 
 
 // VGA register port
-extern const struct VGARegisterPort                _vga_reg_graphics;
+extern const struct VGARegisterPort                      _vga_reg_port_graphics;
 
 
 // Video Mode 13h values
-extern const struct VGAGraphicsSetResetData              _vga_reg_mode13h_set_reset;
-extern const struct VGAGraphicsEnableSetResetData        _vga_reg_mode13h_enable_set_reset;
-extern const struct VGAGraphicsColorCompareData          _vga_reg_mode13h_color_compare;
-extern const struct VGAGraphicsDataRotateData            _vga_reg_mode13h_data_rotate;
-extern const struct VGAGraphicsReadMapSelectData         _vga_reg_mode13h_read_map_select;
+extern const struct VGAGraphicsSetResetData              _vga_reg_mode_13h_set_reset;
+extern const struct VGAGraphicsEnableSetResetData        _vga_reg_mode_13h_enable_set_reset;
+extern const struct VGAGraphicsColorCompareData          _vga_reg_mode_13h_color_compare;
+extern const struct VGAGraphicsDataRotateData            _vga_reg_mode_13h_data_rotate;
+extern const struct VGAGraphicsReadMapSelectData         _vga_reg_mode_13h_read_map_select;
 
-extern const struct VGAGraphicsGraphicsModeData          _vga_reg_mode13h_graphics_mode;
-extern const struct VGAGraphicsMiscellaneousGraphicsData _vga_reg_mode13h_miscellaneous_graphics;
-extern const struct VGAGraphicsColorDontCareData         _vga_reg_mode13h_color_dont_care;
-extern const struct VGAGraphicsBitMaskData               _vga_reg_mode13h_bit_mask;
+extern const struct VGAGraphicsGraphicsModeData          _vga_reg_mode_13h_graphics_mode;
+extern const struct VGAGraphicsMiscellaneousGraphicsData _vga_reg_mode_13h_miscellaneous_graphics;
+extern const struct VGAGraphicsColorDontCareData         _vga_reg_mode_13h_color_dont_care;
+extern const struct VGAGraphicsBitMaskData               _vga_reg_mode_13h_bit_mask;
 
-void vga_set_graphics_register(void);
+void vga_set_mode_13h_graphics_register(void);
 
 #endif
 

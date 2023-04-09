@@ -28,10 +28,10 @@ extern const struct VGARegisterPort               _vga_reg_port_external_output;
 extern const struct VGARegisterPort               _vga_reg_port_external_fc;
 
 // Video Mode 13h values
-extern const struct VGAExternalOutputRegisterData _vga_reg_mode13h_output;
-extern const struct VGAExternalFeatureControlData _vga_reg_mode13h_fc;
+extern const struct VGAExternalOutputRegisterData _vga_reg_mode_13h_output;
+extern const struct VGAExternalFeatureControlData _vga_reg_mode_13h_fc;
 
-void vga_set_external_register(void);
+void vga_set_mode_13h_external_register(void);
 
 #endif
 

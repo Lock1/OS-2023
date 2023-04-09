@@ -60,12 +60,12 @@ struct VGASequencerMemoryModeData {
 extern const struct VGARegisterPort              _vga_reg_port_sequencer;
 
 // Video Mode 13h values
-extern const struct VGASequencerResetData        _vga_reg_mode13h_reset;
-extern const struct VGASequencerClockingModeData _vga_reg_mode13h_clocking_mode;
-extern const struct VGASequencerMapMaskData      _vga_reg_mode13h_map_mask;
-extern const struct VGASequencerCharacterMapData _vga_reg_mode13h_character_map;
-extern const struct VGASequencerMemoryModeData   _vga_reg_mode13h_sequencer_memory_mode;
+extern const struct VGASequencerResetData        _vga_reg_mode_13h_reset;
+extern const struct VGASequencerClockingModeData _vga_reg_mode_13h_clocking_mode;
+extern const struct VGASequencerMapMaskData      _vga_reg_mode_13h_map_mask;
+extern const struct VGASequencerCharacterMapData _vga_reg_mode_13h_character_map;
+extern const struct VGASequencerMemoryModeData   _vga_reg_mode_13h_sequencer_memory_mode;
 
-void vga_set_sequencer_register(void);
+void vga_set_mode_13h_sequencer_register(void);
 
 #endif

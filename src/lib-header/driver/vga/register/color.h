@@ -9,8 +9,8 @@
 extern const struct VGARegisterPort _vga_reg_port_color_write_mode;
 extern const struct VGARegisterPort _vga_reg_port_color_data;
 
-extern const uint8_t _vga_reg_mode13h_color_palette[256*3];
+extern const uint8_t _vga_reg_mode_13h_color_palette[256*3];
 
-void vga_set_palette(void);
+void vga_set_mode_13h_palette(void);
 
 #endif

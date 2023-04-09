@@ -1,7 +1,7 @@
 #include "lib-header/driver/vga/register/color.h"
 #include "lib-header/driver/vga/vga-register.h"
 
-const uint8_t _vga_reg_mode13h_color_palette[256*3] = {
+const uint8_t _vga_reg_mode_13h_color_palette[256*3] = {
     00, 00, 00, 00, 10, 41, 12, 28, 18,  2, 43, 22, 35, 19,  9, 58, 
     00, 00, 57, 35, 12, 43, 43, 47, 24, 24, 28, 20, 24, 60, 10, 60, 
     15, 31, 47, 63, 62, 56, 20, 60, 56, 22, 63, 61, 36, 63, 63, 63, 
@@ -60,12 +60,12 @@ const struct VGARegisterPort _vga_reg_port_color_data = {
     .data_register    = 0x3C9,
 };
 
-void vga_set_palette(void) {
+void vga_set_mode_13h_palette(void) {
     for (uint32_t i = 0; i < 256; i++) {
         vga_set_unindexed_register(_vga_reg_port_color_write_mode, (uint8_t) i);
 
-        vga_set_unindexed_register(_vga_reg_port_color_data, _vga_reg_mode13h_color_palette[i*3 + 0]);
-        vga_set_unindexed_register(_vga_reg_port_color_data, _vga_reg_mode13h_color_palette[i*3 + 1]);
-        vga_set_unindexed_register(_vga_reg_port_color_data, _vga_reg_mode13h_color_palette[i*3 + 2]);
+        vga_set_unindexed_register(_vga_reg_port_color_data, _vga_reg_mode_13h_color_palette[i*3 + 0]);
+        vga_set_unindexed_register(_vga_reg_port_color_data, _vga_reg_mode_13h_color_palette[i*3 + 1]);
+        vga_set_unindexed_register(_vga_reg_port_color_data, _vga_reg_mode_13h_color_palette[i*3 + 2]);
     }
 }
