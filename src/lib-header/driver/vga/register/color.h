@@ -11,7 +11,6 @@ extern const struct VGARegisterPort _vga_reg_port_color_data;
 
 
 
-// TODO : It seems mode 3 will differ
 // TODO : Insane? Struct for palette
 // Color count is how many triplet of RGB
 void vga_set_palette(const uint8_t *palette_array, uint32_t color_count);

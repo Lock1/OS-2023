@@ -7,6 +7,10 @@ const struct VGARegisterPort _vga_reg_port_attribute_controller = {
     .data_register    = 0x3C0,
 };
 
+const struct VGARegisterPort _vga_reg_port_attribute_controller_read = {
+    .data_register    = 0x3C1,
+};
+
 const struct VGAAttributeControllerIndexData _vga_reg_attribute_controller_index_array[ATTRIBUTE_CONTROLLER_REGISTER_COUNT] = {
     [0]  = {.attribute_address = ATTRIBUTE_CONTROLLER_INDEX_PALLETE_0,                .palette_address_source = 0},
     [1]  = {.attribute_address = ATTRIBUTE_CONTROLLER_INDEX_PALLETE_1,                .palette_address_source = 0},

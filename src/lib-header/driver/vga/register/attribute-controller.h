@@ -93,8 +93,8 @@ struct VGAAttributeControllerRegister {
 
 
 extern const struct VGARegisterPort                 _vga_reg_port_attribute_controller;
+extern const struct VGARegisterPort                 _vga_reg_port_attribute_controller_read;
 extern const struct VGAAttributeControllerIndexData _vga_reg_attribute_controller_index_array[ATTRIBUTE_CONTROLLER_REGISTER_COUNT];
-
 
 
 void vga_set_attribute_controller_register(const struct VGAAttributeControllerRegister *attribute);

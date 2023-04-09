@@ -1,3 +1,4 @@
+#include "lib-header/driver/vga/video-mode-preset/vga-video-preset.h"
 #include "lib-header/driver/vga/register/text/font.h"
 #include "lib-header/driver/vga/register/text/bubach-font8x16.h"
 #include "lib-header/driver/vga/register/graphics.h"
@@ -32,6 +33,10 @@ void vga_load_standard_vga_font(void) {
 
     // Font
     // TODO : Set font
+    // memcpy((void*) VGA_LOWEST_FRAMEBUFFER_ADDRESS, bubach_font_8x16, 16);
+    // for (uint32_t i = 0; i < 256; i++)
+    //     memcpy((void*) VGA_LOWEST_FRAMEBUFFER_ADDRESS, bubach_font_8x16 + i*16, 16);
+
 
     // Restore original register
     vga_set_double_port_register(_vga_reg_port_graphics, GRAPHICS_INDEX_GRAPHICS_MODE, graphics_register);
