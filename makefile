@@ -6,7 +6,7 @@ OBJECTS = kernel-entrypoint.o kernel.o \
 	filesystem/fat32.o \
 	memory/paging.o \
 	driver/text-io-module/textio.o \
-	driver/vga/vga-register.o \
+	driver/vga/vga-register-programmer.o \
 	driver/vga/register/sequencer.o driver/vga/register/crt-controller.o driver/vga/register/external.o \
 	driver/vga/register/graphics.o driver/vga/register/attribute-controller.o driver/vga/register/color.o \
 	driver/vga/video-mode-preset/mode-13h.o driver/vga/video-mode-preset/mode-3h.o
