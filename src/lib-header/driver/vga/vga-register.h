@@ -6,6 +6,11 @@
 // Note : Naming convention directly follow from http://www.osdever.net/FreeVGA/vga/vga.htm
 
 // TODO : VGA Doxygen
+
+// TODO : Second pass + formatting
+// TODO : REGISTER_COUNT for all register
+// External & Attribute is unindexed
+
 // VGA Register: avoiding raw bytes and use struct as much as possible, even if somewhat feel stupid
 struct VGARegisterPort {
     uint16_t   address_register;
