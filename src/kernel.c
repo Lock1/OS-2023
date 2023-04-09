@@ -26,7 +26,7 @@ static void setup_cpu_interrupt_system(void) {
 }
 
 static void setup_video_output(void) {
-    // vga_use_video_mode_13h();
+    vga_use_video_mode_13h();
     framebuffer_clear();
 }
 

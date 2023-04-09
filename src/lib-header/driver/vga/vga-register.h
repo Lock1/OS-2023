@@ -8,7 +8,6 @@
 // TODO : VGA Doxygen
 
 // TODO : Second pass + formatting
-// TODO : REGISTER_COUNT for all register
 // External & Attribute is unindexed
 // TODO : Rename indexed -> single port / multi
 // TODO : Rename this to vga-register-programming
