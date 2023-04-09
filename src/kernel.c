@@ -18,8 +18,8 @@ void kernel_setup(void) {
     pic_remap();
     initialize_idt();
     activate_keyboard_interrupt();
+    vga_use_video_mode_13h();
     framebuffer_clear();
-    framebuffer_set_cursor(0, 0);
     initialize_filesystem_fat32();
     gdt_install_tss();
     set_tss_register();
@@ -36,7 +36,6 @@ void kernel_setup(void) {
         .buffer_size           = 0x100000,
     };
     read(request);
-    vga_use_video_mode_13h();
     // TODO : Audio
     // TODO : Video format
     // TODO : Encoder-decoder + Player
