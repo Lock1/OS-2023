@@ -22,7 +22,7 @@ struct VGAExternalFeatureControlData {
 } __attribute__((packed));
 
 
-
+// Unindexed register
 // VGA register port
 extern const struct VGARegisterPort               _vga_reg_port_external_output;
 extern const struct VGARegisterPort               _vga_reg_port_external_fc;

@@ -10,6 +10,7 @@
 // TODO : Second pass + formatting
 // TODO : REGISTER_COUNT for all register
 // External & Attribute is unindexed
+// TODO : Rename indexed -> single port / multi
 
 // VGA Register: avoiding raw bytes and use struct as much as possible, even if somewhat feel stupid
 struct VGARegisterPort {

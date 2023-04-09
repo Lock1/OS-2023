@@ -8,7 +8,7 @@ OBJECTS = kernel-entrypoint.o kernel.o \
 	driver/text-io-module/textio.o \
 	driver/vga/vga-register.o \
 	driver/vga/register/sequencer.o driver/vga/register/crt-controller.o driver/vga/register/external.o \
-	driver/vga/register/graphics.o driver/vga/register/attribute-controller.o driver/vga/register/palette.o
+	driver/vga/register/graphics.o driver/vga/register/attribute-controller.o driver/vga/register/color.o
 FOLDERS = cpu memory driver filesystem generic-lib
 
 # Compiler & linker
