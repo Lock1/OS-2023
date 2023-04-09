@@ -24,7 +24,7 @@ void vga_mode_13h_put_pixel(uint32_t x, uint32_t y, uint8_t color) {
 void vga_use_video_mode_13h(void) {
     vga_set_external_register(&_vga_preset_mode_13h_external);
     vga_set_sequencer_register(&_vga_preset_mode_13h_sequencer);
-    vga_set_mode_13h_crt_controller_register();
+    vga_set_crt_controller_register(&_vga_preset_mode_13h_crt_controller);
     vga_set_mode_13h_graphics_register();
     vga_set_mode_13h_attribute_controller_register();
     vga_set_mode_13h_palette();
