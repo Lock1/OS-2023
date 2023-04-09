@@ -2,7 +2,7 @@
 #include "lib-header/driver/vga/vga-register.h"
 
 // VGA Register port - Indexed register
-const struct VGARegisterPort _vga_reg_sequencer = {
+const struct VGARegisterPort _vga_reg_port_sequencer = {
     .address_register = 0x3C4,
     .data_register    = 0x3C5,
 };
@@ -56,5 +56,5 @@ void vga_set_sequencer_register(void) {
         register_const_serialize(&_vga_reg_mode13h_character_map),
         register_const_serialize(&_vga_reg_mode13h_sequencer_memory_mode),
     };
-    set_indexed_register(_vga_reg_crt_controller, sequencer_index, sequencer_data, 5);
+    set_indexed_register(_vga_reg_port_sequencer, sequencer_index, sequencer_data, 5);
 }

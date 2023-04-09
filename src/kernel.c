@@ -37,6 +37,9 @@ void kernel_setup(void) {
     };
     read(request);
     vga_use_video_mode_13h();
+    // TODO : Audio
+    // TODO : Video format
+    // TODO : Encoder-decoder + Player
 
     // Set TSS $esp pointer and jump into shell 
     set_tss_kernel_current_stack();

@@ -57,7 +57,7 @@ struct VGASequencerMemoryModeData {
 
 
 // VGA register port
-extern const struct VGARegisterPort              _vga_reg_crt_controller;
+extern const struct VGARegisterPort              _vga_reg_port_sequencer;
 
 // Video Mode 13h values
 extern const struct VGASequencerResetData        _vga_reg_mode13h_reset;

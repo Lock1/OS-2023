@@ -170,7 +170,7 @@ struct VGACRTControllerLineCompareData {
 
 
 // VGA register port
-extern const struct VGARegisterPort                             _vga_reg_sequencer;
+extern const struct VGARegisterPort                             _vga_reg_port_sequencer;
 
 // Video Mode 13h values
 extern const struct VGACRTControllerHorizontalTotalData         _vga_reg_mode13h_horizontal_total;

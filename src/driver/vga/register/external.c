@@ -2,12 +2,12 @@
 #include "lib-header/driver/vga/vga-register.h"
 
 // VGA Register port - External registers
-const struct VGARegisterPort _vga_reg_external_output = {
+const struct VGARegisterPort _vga_reg_port_external_output = {
     .data_register    = 0x3C2,
 };
 
 // Assuming color mode is used, for mono use 0x3BA
-const struct VGARegisterPort _vga_reg_external_fc = {
+const struct VGARegisterPort _vga_reg_port_external_fc = {
     .data_register    = 0x3DA,
 };
 
@@ -26,6 +26,6 @@ const struct VGAExternalFeatureControlData _vga_reg_mode13h_fc = {
 };
 
 void vga_set_external_register(void) {
-    vga_set_unindexed_register(_vga_reg_external_output, register_const_serialize(&_vga_reg_mode13h_output));
-    vga_set_unindexed_register(_vga_reg_external_fc, register_const_serialize(&_vga_reg_mode13h_fc));
+    vga_set_unindexed_register(_vga_reg_port_external_output, register_const_serialize(&_vga_reg_mode13h_output));
+    vga_set_unindexed_register(_vga_reg_port_external_fc, register_const_serialize(&_vga_reg_mode13h_fc));
 }

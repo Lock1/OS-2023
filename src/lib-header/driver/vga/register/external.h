@@ -4,15 +4,6 @@
 #include "lib-header/driver/vga/vga-register.h"
 #include "lib-header/stdtype.h"
 
-// Indexes
-#define SEQUENCER_INDEX_RESET         0
-#define SEQUENCER_INDEX_CLOCKING_MODE 1
-#define SEQUENCER_INDEX_MAP_MASK      2
-#define SEQUENCER_INDEX_CHARACTER_MAP 3
-#define SEQUENCER_INDEX_MEMORY_MODE   4
-
-
-
 // Register datas
 struct VGAExternalOutputRegisterData {
     uint8_t ioas:            1;
@@ -33,8 +24,8 @@ struct VGAExternalFeatureControlData {
 
 
 // VGA register port
-extern const struct VGARegisterPort               _vga_reg_external_output;
-extern const struct VGARegisterPort               _vga_reg_external_fc;
+extern const struct VGARegisterPort               _vga_reg_port_external_output;
+extern const struct VGARegisterPort               _vga_reg_port_external_fc;
 
 // Video Mode 13h values
 extern const struct VGAExternalOutputRegisterData _vga_reg_mode13h_output;

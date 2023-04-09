@@ -8,4 +8,6 @@ void vga_use_video_mode_13h(void) {
     vga_set_external_register();
     vga_set_sequencer_register();
     vga_set_crt_controller_register();
+    // TODO : Graphic Register : vga_set_mode_13h_ (rename to underscore)
+    // TODO : Attribute Register
 }
