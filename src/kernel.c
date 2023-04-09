@@ -13,17 +13,24 @@
 #include "lib-header/stdtype.h"
 #include "lib-header/stdmem.h"
 
-void kernel_setup(void) {
+static void setup_gdt_and_tss(void) {
     enter_protected_mode(&_gdt_gdtr);
+    gdt_install_tss();
+    set_tss_register();
+}
+
+static void setup_cpu_interrupt_system(void) {
     pic_remap();
     initialize_idt();
     activate_keyboard_interrupt();
-    vga_use_video_mode_13h();
-    framebuffer_clear();
-    initialize_filesystem_fat32();
-    gdt_install_tss();
-    set_tss_register();
+}
 
+static void setup_video_output(void) {
+    // vga_use_video_mode_13h();
+    framebuffer_clear();
+}
+
+static void execute_user_shell(void) {
     // Allocate first 4 MiB virtual memory
     allocate_single_user_page_frame((uint8_t*) 0);
 
@@ -36,13 +43,21 @@ void kernel_setup(void) {
         .buffer_size           = 0x100000,
     };
     read(request);
-    // TODO : Audio
-    // TODO : Video format
-    // TODO : Encoder-decoder + Player
 
     // Set TSS $esp pointer and jump into shell 
     set_tss_kernel_current_stack();
     kernel_execute_user_program((uint8_t *) 0);
+}
 
-    while (TRUE);
+
+
+// TODO : Audio
+// TODO : Video format
+// TODO : Encoder-decoder + Player
+void kernel_setup(void) {
+    setup_gdt_and_tss();           // Setup GDT and flush segment registers
+    setup_cpu_interrupt_system();  // IDT, Interrupt & PIC setup
+    setup_video_output();          // OS video output setup
+    initialize_filesystem_fat32(); // Initialize FAT32 filesystem driver
+    execute_user_shell();          // Start user space shell
 }
