@@ -11,6 +11,7 @@ https://github.com/Lock1/OS-2023-Manim
 
 
 ## Coding convention
+- Yes, i have problem with my kind-of-insane-verbosity, but i like it anyway
 - Global variable use `_<filename>_<variable name>`
 - Assembly filename: `<filename>-asm.s`, with `filename` is same with C counterpart (ex. `interrupt.c` and `interrupt-asm.s`)
 - Both `<filename>-asm.s` and `<filename>.c` will use single header `<filename>.h`

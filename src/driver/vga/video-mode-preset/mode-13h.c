@@ -210,3 +210,51 @@ const struct VGAGraphicsRegister _vga_preset_mode_13h_graphics = {
         .bit_mask                 = 0xFF,
     },
 };
+
+
+
+const struct VGAAttributeControllerRegister _vga_preset_mode_13h_attribute_controller = {
+    .palette_array = {
+        [0]  = {.internal_palette_index = 0x0},
+        [1]  = {.internal_palette_index = 0x1},
+        [2]  = {.internal_palette_index = 0x2},
+        [3]  = {.internal_palette_index = 0x3},
+        [4]  = {.internal_palette_index = 0x4},
+        [5]  = {.internal_palette_index = 0x5},
+        [6]  = {.internal_palette_index = 0x6},
+        [7]  = {.internal_palette_index = 0x7},
+        [8]  = {.internal_palette_index = 0x8},
+        [9]  = {.internal_palette_index = 0x9},
+        [10] = {.internal_palette_index = 0xA},
+        [11] = {.internal_palette_index = 0xB},
+        [12] = {.internal_palette_index = 0xC},
+        [13] = {.internal_palette_index = 0xD},
+        [14] = {.internal_palette_index = 0xE},
+        [15] = {.internal_palette_index = 0xF},
+    },
+    .attribute_mode_control = {
+        .attribute_controller_graphics_enable = 1,
+        .monochrome_emulation                 = 0,
+        .line_graphics                        = 0,
+        .blink_enable                         = 0,
+        .pixel_panning_mode                   = 0,
+        .color_8_bit_mode                     = 1,
+        .palette_bit_5_4                      = 0,
+    },
+    .overscan_color = {
+        .overscan_palette_index               = 0,
+    },
+    .color_plane_enable = {
+        .plane_0_color_plane_enable           = 1,
+        .plane_1_color_plane_enable           = 1,
+        .plane_2_color_plane_enable           = 1,
+        .plane_3_color_plane_enable           = 1,
+    },
+    .horizontal_pixel_panning = {
+        .pixel_shift_count                    = 0,
+    },
+    .color_select = {
+        .color_select_5_4                     = 0,
+        .color_select_7_6                     = 0,
+    },
+};

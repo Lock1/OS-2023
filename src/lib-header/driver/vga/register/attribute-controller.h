@@ -81,22 +81,23 @@ struct VGAAttributeControllerColorSelectData {
     uint8_t _reserved:        4;
 } __attribute__((packed));
 
+struct VGAAttributeControllerRegister {
+    struct VGAAttributeControllerPaletteData                palette_array[ATTRIBUTE_CONTROLLER_PALETTE_COUNT];
+    struct VGAAttributeControllerAttributeModeControlData   attribute_mode_control;
+    struct VGAAttributeControllerOverscanColorData          overscan_color;
+    struct VGAAttributeControllerColorPlaneEnableData       color_plane_enable;
+    struct VGAAttributeControllerHorizontalPixelPanningData horizontal_pixel_panning;
+    struct VGAAttributeControllerColorSelectData            color_select;
+} __attribute__((packed));
 
 
-// VGA register port
-extern const struct VGARegisterPort                                  _vga_reg_port_attribute_controller;
 
-// Video Mode 13h values
-extern const struct VGAAttributeControllerIndexData                  _vga_reg_mode_13h_index_array[ATTRIBUTE_CONTROLLER_REGISTER_COUNT];
-extern const struct VGAAttributeControllerPaletteData                _vga_reg_mode_13h_palette_array[ATTRIBUTE_CONTROLLER_PALETTE_COUNT];
+extern const struct VGARegisterPort                 _vga_reg_port_attribute_controller;
+extern const struct VGAAttributeControllerIndexData _vga_reg_attribute_controller_index_array[ATTRIBUTE_CONTROLLER_REGISTER_COUNT];
 
-extern const struct VGAAttributeControllerAttributeModeControlData   _vga_reg_mode_13h_attribute_mode_control;
-extern const struct VGAAttributeControllerOverscanColorData          _vga_reg_mode_13h_overscan_color;
-extern const struct VGAAttributeControllerColorPlaneEnableData       _vga_reg_mode_13h_color_plane_enable;
-extern const struct VGAAttributeControllerHorizontalPixelPanningData _vga_reg_mode_13h_horizontal_pixel_panning;
-extern const struct VGAAttributeControllerColorSelectData            _vga_reg_mode_13h_color_select;
 
-void vga_set_mode_13h_attribute_controller_register(void);
+
+void vga_set_attribute_controller_register(const struct VGAAttributeControllerRegister *attribute);
 
 #endif
 
