@@ -1,5 +1,5 @@
-#ifndef _VGA_PRESET_MODE_13H
-#define _VGA_PRESET_MODE_13H
+#ifndef _VGA_PRESET_MODE_3H
+#define _VGA_PRESET_MODE_3H
 
 #include "lib-header/driver/vga/register/external.h"
 #include "lib-header/driver/vga/register/sequencer.h"
@@ -8,9 +8,8 @@
 #include "lib-header/driver/vga/register/attribute-controller.h"
 #include "lib-header/driver/vga/register/color.h"
 
-#define MODE_13H_MEMORY_FRAMEBUFFER (uint8_t *) 0xC00A0000
-#define MODE_13H_RESOLUTION         (320*200)
+#define MODE_3H_MEMORY_FRAMEBUFFER  (uint8_t *) 0xC00B8000
+#define MODE_3H_RESOLUTION          (80*25)
 
-extern const struct VGAExternalRegister _vga_preset_mode_13h_external;
 
 #endif

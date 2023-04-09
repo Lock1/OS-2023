@@ -4,6 +4,7 @@
 #include "lib-header/driver/vga/vga-register.h"
 #include "lib-header/stdtype.h"
 
+// Note: Not all external misc register listed here
 // Register datas
 struct VGAExternalOutputRegisterData {
     uint8_t ioas:            1;
@@ -21,17 +22,17 @@ struct VGAExternalFeatureControlData {
     uint8_t _reserved:        6;
 } __attribute__((packed));
 
+struct VGAExternalRegister {
+    struct VGAExternalOutputRegisterData output;
+    struct VGAExternalFeatureControlData feature_control;
+} __attribute__((packed));
 
 // Unindexed register
 // VGA register port
 extern const struct VGARegisterPort               _vga_reg_port_external_output;
 extern const struct VGARegisterPort               _vga_reg_port_external_fc;
 
-// Video Mode 13h values
-extern const struct VGAExternalOutputRegisterData _vga_reg_mode_13h_output;
-extern const struct VGAExternalFeatureControlData _vga_reg_mode_13h_fc;
-
-void vga_set_mode_13h_external_register(void);
+void vga_set_mode_13h_external_register(const struct VGAExternalRegister *external_register);
 
 #endif
 

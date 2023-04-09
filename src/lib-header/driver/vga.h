@@ -2,11 +2,7 @@
 #define _VGA_H
 
 #include "lib-header/stdtype.h"
-
-#define MODE_3H_MEMORY_FRAMEBUFFER  (uint8_t *) 0xC00B8000
-#define MODE_3H_RESOLUTION          (80*25)
-#define MODE_13H_MEMORY_FRAMEBUFFER (uint8_t *) 0xC00A0000
-#define MODE_13H_RESOLUTION         (320*200)
+#include "lib-header/driver/vga/video-mode-preset/vga-video-preset.h"
 
 /** 
  * Change VGA video mode to 13h
