@@ -6,6 +6,7 @@
 #include "lib-header/driver/vga/register/graphics.h"
 #include "lib-header/driver/vga/register/attribute-controller.h"
 #include "lib-header/driver/vga/register/color.h"
+#include "lib-header/driver/vga/video-mode-preset/mode-13h.h"
 #include "lib-header/stdmem.h"
 
 // Default video mode is 3
