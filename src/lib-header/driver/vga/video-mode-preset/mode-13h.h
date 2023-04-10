@@ -18,5 +18,6 @@ extern const struct VGACRTControllerRegister       _vga_preset_mode_13h_crt_cont
 extern const struct VGAGraphicsRegister            _vga_preset_mode_13h_graphics;
 extern const struct VGAAttributeControllerRegister _vga_preset_mode_13h_attribute_controller;
 extern const uint8_t                               _vga_preset_mode_13h_color_palette[MODE_13H_COLOR*3];
+extern const uint8_t                               _vga_preset_mode_13h_bubach_color_palette[MODE_13H_COLOR*3];
 
 #endif
