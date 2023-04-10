@@ -6,6 +6,7 @@ import struct
 
 # Mode 13h : 320x200
 src        = Image.open(sys.argv[1])
+color_mode = sys.argv[3] if len(sys.argv) == 4 else "rgb"
 src        = src.resize((320, 200)).convert(mode="HSV")
 pixelarray = src.load()
 output     = open(sys.argv[2], "wb")
@@ -35,7 +36,7 @@ for j in range(src.height):
         byte_to_write          = 0
         if value < CUTOFF_BLACK:
             byte_to_write = 0   # Assuming the 0 index is black
-        elif saturation < CUTOFF_SATURATION_GRAYSCALE:
+        elif color_mode == "grayscale" or saturation < CUTOFF_SATURATION_GRAYSCALE:
             byte_to_write = 0x10 + (value//16)
         else:
             intensity_index  = (255-value) // INTENSITY_DIVISOR
