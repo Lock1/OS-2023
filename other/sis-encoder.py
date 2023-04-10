@@ -37,11 +37,11 @@ for j in range(src.height):
         else:
             intensity_index  = (255-value) // INTENSITY_DIVISOR
             saturation_index = (255-saturation) // SATURATION_DIVISOR
-            hue_index        = (255-hue) // HUE_DIVISOR
+            hue_index        = hue // HUE_DIVISOR
             assert 0 <= hue_index        <= 24, f"{hue_index}"
             assert 0 <= saturation_index <   3, f"{saturation_index}"
             assert 0 <= intensity_index  <   3, f"{intensity_index}"
-            print(f"{hue_index}, {saturation_index}, {intensity_index}")
+            # print(f"{hue_index}, {saturation_index}, {intensity_index}")
             byte_to_write    = 0x20 + 0x48*intensity_index + 0x18*saturation_index + hue_index 
 
         output.write(struct.pack("B", byte_to_write))

@@ -30,15 +30,13 @@ void framebuffer_draw_256_color_palette() {
 void framebuffer_draw_sis_image(void *buffer, uint32_t res_x, uint32_t res_y) {
     vga_use_video_mode_13h();
     framebuffer_clear();
-    // framebuffer_draw_256_color_palette();
-
-    // __asm__("hlt");
     uint8_t *image_ptr = (uint8_t*) buffer;
 
     // FIXME : This res_x & y probably broken
     for (uint32_t i = 0; i < res_x; i++) {
         for (uint32_t j = 0; j < res_y; j++) {
-            framebuffer_graphic_put_pixel(i, j, image_ptr[j*320 + i]);
+            uint8_t color = image_ptr[j*320 + i];
+            framebuffer_graphic_put_pixel(i, j, color);
         }
     }
 }

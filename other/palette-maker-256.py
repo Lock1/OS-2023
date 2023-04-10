@@ -4,7 +4,7 @@ import sys
 
 src        = Image.new(mode="HSV", size=(256, 256), color=(0, 0, 0))
 pixelarray = src.load()
-output     = open(sys.argv[1], "w")
+output     = open(sys.argv[1], "w") if len(sys.argv) > 1 and "__name__" == "__main__" else open("palette.c", "w")
 
 # Mode 13h - Palette mapping
 # Warning : VGA is only 6-bit, need to compress
