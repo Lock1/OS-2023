@@ -22,10 +22,11 @@ output     = open(sys.argv[2], "wb")
 
 
 # Using HSV color space
-CUTOFF_BLACK       = 10
-INTENSITY_DIVISOR  = 86  # 256 / 3
-SATURATION_DIVISOR = 86  # 256 / 3
-HUE_DIVISOR        = 11  # 256 / 24
+CUTOFF_BLACK                = 10
+CUTOFF_SATURATION_GRAYSCALE = 35
+INTENSITY_DIVISOR           = 86  # 256 / 3
+SATURATION_DIVISOR          = 86  # 256 / 3
+HUE_DIVISOR                 = 11  # 256 / 24
 
 
 for j in range(src.height):
@@ -34,6 +35,8 @@ for j in range(src.height):
         byte_to_write          = 0
         if value < CUTOFF_BLACK:
             byte_to_write = 0   # Assuming the 0 index is black
+        elif saturation < CUTOFF_SATURATION_GRAYSCALE:
+            byte_to_write = 0x10 + (value//16)
         else:
             intensity_index  = (255-value) // INTENSITY_DIVISOR
             saturation_index = (255-saturation) // SATURATION_DIVISOR

@@ -4,7 +4,7 @@ import sys
 
 src        = Image.new(mode="HSV", size=(256, 256), color=(0, 0, 0))
 pixelarray = src.load()
-output     = open(sys.argv[1], "w") if len(sys.argv) > 1 and "__name__" == "__main__" else open("palette.c", "w")
+output     = open(sys.argv[1], "w") if len(sys.argv) > 1 and __name__ == "__main__" else open("palette.c", "w")
 
 # Mode 13h - Palette mapping
 # Warning : VGA is only 6-bit, need to compress
@@ -30,12 +30,14 @@ def set_box(x, y, color):
         for j in range(16):
             pixelarray[x + i, y + j] = color
 
+# Creating image in HSV color space
 for i in range(16):
     for j in range(16):
         index = i*16 + j
-        if not (0x20 <= index < 0xF8):
-            color = (0, 0, 0)
-        else:
+        if 0x10 <= index < 0x20:
+            # Plain grayscale
+            color = (0, 0, (index-0x10)*16)
+        elif 0x20 <= index < 0xF8:
             temp       = index - 0x20
             value      = temp // 0x48
             temp       = temp % 0x48
@@ -45,8 +47,11 @@ for i in range(16):
             saturation = 0.5 if saturation == 0 else saturation 
             value      = 0.5 if value == 0 else value 
             color      = ((170+int(hue*11)) % 256, 255-int(saturation*86), 255-int(value*86))
+        else:
+            color = (0, 0, 0)
         set_box(16*j, 16*i, color)
 
+# Writing and compressing 8-bit RGB image to 6-bit color space
 src        = src.convert(mode="RGB")
 pixelarray = src.load()
 for i in range(16):
@@ -57,5 +62,5 @@ for i in range(16):
         line += f"0x{r//4:=02X}, 0x{g//4:=02X}, 0x{b//4:=02X}, "
     output.write(f"{line}\n")
 
-if "__name__" == "__main__":
+if __name__ == "__main__":
     src.show()
