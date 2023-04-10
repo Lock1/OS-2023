@@ -22,7 +22,7 @@ output     = open(sys.argv[2], "wb")
 
 
 # Using HSV color space
-CUTOFF_BLACK       = 4
+CUTOFF_BLACK       = 10
 INTENSITY_DIVISOR  = 86  # 256 / 3
 SATURATION_DIVISOR = 86  # 256 / 3
 HUE_DIVISOR        = 11  # 256 / 24
@@ -33,11 +33,11 @@ for j in range(src.height):
         hue, saturation, value = pixelarray[i,j]
         byte_to_write          = 0
         if value < CUTOFF_BLACK:
-            byte_to_write = 0
+            byte_to_write = 0   # Assuming the 0 index is black
         else:
             intensity_index  = (255-value) // INTENSITY_DIVISOR
             saturation_index = (255-saturation) // SATURATION_DIVISOR
-            hue_index        = hue // HUE_DIVISOR
+            hue_index        = ((130-hue) % 256) // HUE_DIVISOR
             assert 0 <= hue_index        <= 24, f"{hue_index}"
             assert 0 <= saturation_index <   3, f"{saturation_index}"
             assert 0 <= intensity_index  <   3, f"{intensity_index}"

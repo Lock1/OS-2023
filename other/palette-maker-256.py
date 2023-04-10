@@ -44,7 +44,7 @@ for i in range(16):
             
             saturation = 0.5 if saturation == 0 else saturation 
             value      = 0.5 if value == 0 else value 
-            color = ((170+int(hue*11)) % 256, 255-int(saturation*86), 255-int(value*86))
+            color      = ((170+int(hue*11)) % 256, 255-int(saturation*86), 255-int(value*86))
         set_box(16*j, 16*i, color)
 
 src        = src.convert(mode="RGB")
@@ -56,4 +56,6 @@ for i in range(16):
         # Divided by 4, 8-bit color space -> 6-bit color space map
         line += f"0x{r//4:=02X}, 0x{g//4:=02X}, 0x{b//4:=02X}, "
     output.write(f"{line}\n")
-src.show()
+
+if "__name__" == "__main__":
+    src.show()

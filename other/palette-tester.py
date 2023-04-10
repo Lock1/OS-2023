@@ -11,8 +11,8 @@ pixelarray    = drawn_image.load()
 
 for j in range(200):
     for i in range(320):
-        encoded_byte = struct.unpack("B", target.read(1))[0]
-        color        = palette_maker.pixelarray[16*(encoded_byte%16), 16*(encoded_byte//16)]
+        encoded_byte     = struct.unpack("B", target.read(1))[0]
+        color            = palette_maker.pixelarray[16*(encoded_byte%16), 16*(encoded_byte//16)]
         pixelarray[i, j] = color
 
 drawn_image.show()
