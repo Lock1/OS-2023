@@ -12,6 +12,7 @@ void framebuffer_graphic_put_pixel(uint32_t x, uint32_t y, uint8_t color);
 
 // FIXME : Temporary and quick solution
 void framebuffer_draw_sis_image(void *buffer, uint32_t res_x, uint32_t res_y);
+void framebuffer_draw_256_color_palette(void);
 
 
 /**

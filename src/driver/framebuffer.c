@@ -24,15 +24,15 @@ void draw_8x8_box(uint32_t x, uint32_t y, uint8_t color) {
 void framebuffer_draw_256_color_palette() {
     for (uint32_t i = 0; i < 16; i++)
         for (uint32_t j = 0; j < 16; j++)
-            draw_8x8_box(j*8, i*8, i*8 + j);
+            draw_8x8_box(j*8, i*8, i*16 + j);
 }
 
 void framebuffer_draw_sis_image(void *buffer, uint32_t res_x, uint32_t res_y) {
     vga_use_video_mode_13h();
     framebuffer_clear();
-    framebuffer_draw_256_color_palette();
+    // framebuffer_draw_256_color_palette();
 
-    __asm__("hlt");
+    // __asm__("hlt");
     uint8_t *image_ptr = (uint8_t*) buffer;
 
     // FIXME : This res_x & y probably broken

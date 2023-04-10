@@ -7,6 +7,7 @@ pixelarray = src.load()
 output     = open(sys.argv[1], "w")
 
 # Mode 13h - Palette mapping
+# Warning : VGA is only 6-bit, need to compress
 # 0: BIOS color attribute row
 # 1: Monochrome row
 
@@ -51,6 +52,8 @@ pixelarray = src.load()
 for i in range(16):
     line = ""
     for j in range(16):
-        line += f"0x{pixelarray[16*j, 16*i][0]:=02X}, 0x{pixelarray[16*j, 16*i][1]:=02X}, 0x{pixelarray[16*j, 16*i][2]:=02X}, "
+        r, g, b = pixelarray[16*j, 16*i]
+        # Divided by 4, 8-bit color space -> 6-bit color space map
+        line += f"0x{r//4:=02X}, 0x{g//4:=02X}, 0x{b//4:=02X}, "
     output.write(f"{line}\n")
 src.show()
