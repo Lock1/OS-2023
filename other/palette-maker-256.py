@@ -6,7 +6,7 @@ src        = Image.new(mode="HSV", size=(256, 256), color=(0, 0, 0))
 pixelarray = src.load()
 output     = open(sys.argv[1], "w") if len(sys.argv) > 1 and __name__ == "__main__" else open("palette.c", "w")
 
-# Mode 13h - Palette mapping
+# Mode 13h - Palette mapping'
 # Warning : VGA is only 6-bit, need to compress
 # 0: BIOS color attribute row
 # 1: Monochrome row
@@ -18,6 +18,7 @@ output     = open(sys.argv[1], "w") if len(sys.argv) > 1 and __name__ == "__main
 # 0xF8 to 0xFF - Unused / Black
 
 # TODO : This is quick solution, better just make purely custom palette
+# TODO : Modular & arbitrary custom font & color palette support
 
 # Using HSV color space
 CUTOFF_BLACK       = 4

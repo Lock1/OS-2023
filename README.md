@@ -10,8 +10,10 @@ https://github.com/Lock1/OS-2023-Manim
 [Dev Repository untuk kit](https://github.com/Lock1/kit-OS-2023)
 
 
-## Coding convention
+## Coding Convention
 - Yes, i have problem with my kind-of-insane-verbosity, but i like it anyway
+- Verbose >>> Random `out()` call that do something important but undocumented then forget about it
+- Do, not, use, `typedef`, for `struct` (except function pointer and pointer mumbo jumbo if needed)
 - Global variable use `_<filename>_<variable name>`
 - Assembly filename: `<filename>-asm.s`, with `filename` is same with C counterpart (ex. `interrupt.c` and `interrupt-asm.s`)
 - Both `<filename>-asm.s` and `<filename>.c` will use single header `<filename>.h`

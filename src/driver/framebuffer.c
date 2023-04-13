@@ -10,6 +10,7 @@ enum cursor_command {
 };
 
 // TODO : Fancy text for mode 13h
+// Completely software acceleration
 void framebuffer_graphic_put_pixel(uint32_t x, uint32_t y, uint8_t color) {
     uint8_t *addr = (uint8_t *) 0xC00A0000 + (320*y) + x;
     *addr = color;
@@ -32,6 +33,7 @@ void framebuffer_draw_sis_image(void *buffer, uint32_t res_x, uint32_t res_y) {
     framebuffer_clear();
     uint8_t *image_ptr = (uint8_t*) buffer;
 
+    // TODO : Theres still a lot to cleanup on OS side
     // FIXME : This res_x & y probably broken
     for (uint32_t i = 0; i < res_x; i++) {
         for (uint32_t j = 0; j < res_y; j++) {

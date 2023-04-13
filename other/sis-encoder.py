@@ -39,6 +39,7 @@ for j in range(src.height):
         elif color_mode == "grayscale" or saturation < CUTOFF_SATURATION_GRAYSCALE:
             byte_to_write = 0x10 + (value//16)
         else:
+            # FIXME : Color mapping still bad
             intensity_index  = (255-value) // INTENSITY_DIVISOR
             saturation_index = (255-saturation) // SATURATION_DIVISOR
             hue_index        = ((130-hue) % 256) // HUE_DIVISOR
