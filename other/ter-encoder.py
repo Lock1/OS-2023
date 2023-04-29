@@ -27,7 +27,9 @@ def frame_ter_encoder(frame) -> bytes:
             length       += 1
             total_length += 1
         if linear_frame[i] != current_color or length == 2**15-1 or i == 320*200-1:
+            assert length != 0
             raw_byte     = min(current_color, 1) << 15 | length
+            print(f"{current_color} + {length} = {hex(raw_byte)}")
             result_frame += struct.pack("<H", raw_byte)
             # Reset
             length = 0
@@ -65,7 +67,7 @@ logger.start()
 
 
 with open(sys.argv[2], "wb") as file:
-    for i in range(1000, 2500, 5):
+    for i in range(1000, 1001, 1):
         elapsed_time  = int(time.time() - start_time)
         current_frame = i + 1
         progress      = current_frame * 100 / framecount

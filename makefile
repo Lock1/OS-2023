@@ -35,7 +35,7 @@ LFLAGS        = -T $(SOURCE_FOLDER)/external-linker-iso/linker.ld -melf_i386
 
 
 run: all
-	@qemu-system-i386 -s -S -drive file=$(OUTPUT_FOLDER)/$(DISK_NAME).bin,format=raw,if=ide,index=0,media=disk -cdrom $(ISO_NAME).iso 
+	@qemu-system-i386 -s -S -drive file=$(OUTPUT_FOLDER)/$(DISK_NAME).bin,format=raw,if=ide,index=0,media=disk -cdrom $(OUTPUT_FOLDER)/$(ISO_NAME).iso 
 all: build
 build: iso
 clean: delete-temp
@@ -59,11 +59,12 @@ inserter:
 user-shell:
 	@$(ASM) $(AFLAGS) $(SOURCE_FOLDER)/external-program/user-entry.s -o user-entry.o
 	@$(CC)  $(CFLAGS) -fno-pie $(SOURCE_FOLDER)/external-program/user-shell.c -o user-shell.o
+	@$(CC)  $(CFLAGS) -fno-pie $(SOURCE_FOLDER)/generic-lib/stdmem.c -o stdmem.o
 	@$(LIN) -T $(SOURCE_FOLDER)/external-program/user-linker.ld -melf_i386 \
-		user-entry.o user-shell.o -o $(OUTPUT_FOLDER)/shell
+		user-entry.o user-shell.o stdmem.o -o $(OUTPUT_FOLDER)/shell
 	@echo Linking object shell object files and generate flat binary...
 	@$(LIN) -T $(SOURCE_FOLDER)/external-program/user-linker.ld -melf_i386 --oformat=elf32-i386\
-		user-entry.o user-shell.o -o $(OUTPUT_FOLDER)/shell_elf
+		user-entry.o user-shell.o stdmem.o -o $(OUTPUT_FOLDER)/shell_elf
 	@echo Linking object shell object files and generate ELF32 for debugging...
 	@size --target=binary bin/shell
 	@rm -f *.o
@@ -73,6 +74,7 @@ insert-shell: inserter user-shell
 	@cd bin; ./inserter shell 2 $(DISK_NAME).bin
 	@cd bin; ./inserter ikanaide 2 $(DISK_NAME).bin
 	@cd bin; ./inserter uwu 2 $(DISK_NAME).bin
+	@cd bin; ./inserter vid 2 $(DISK_NAME).bin
 
 kernel: $(OBJECTS)
 	@$(LIN) $(LFLAGS) $(OBJECTS) -o $(OUTPUT_FOLDER)/kernel

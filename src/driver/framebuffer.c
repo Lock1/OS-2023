@@ -43,6 +43,29 @@ void framebuffer_draw_sis_image(void *buffer, uint32_t res_x, uint32_t res_y) {
     }
 }
 
+void framebuffer_play_ter_video(void *buffer) {
+    vga_use_video_mode_13h();
+    framebuffer_clear();
+    uint16_t *ter_buf = (uint16_t*) buffer;
+    uint32_t current_pixel_count = 0;
+    uint32_t current_frame       = 1;
+    for (uint32_t i = 0; i < 100000; i++) {
+        uint8_t color  = 0;
+        if (ter_buf[i] & 0x80)
+            color = 0x1F;
+        uint16_t length = ter_buf[i] & 0x7F;
+        current_pixel_count += length;
+        for (uint32_t j = 0; j < length; j++) {
+            uint32_t pos = current_pixel_count + j;
+            framebuffer_graphic_put_pixel(pos % 320, pos / 320, color);
+        }
+        if (current_pixel_count > 64000) {
+            current_pixel_count = 0;
+            current_frame++;
+        }
+    }
+}
+
 void framebuffer_text_set_cursor(uint8_t r, uint8_t c) {
     if (_vga_current_video_mode == 3) {
         uint16_t location = (r * 0x50 + c) % MODE_3H_RESOLUTION;

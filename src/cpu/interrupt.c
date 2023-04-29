@@ -57,10 +57,16 @@ void syscall(struct CPURegister cpu, __attribute__((unused)) struct InterruptSta
     } else if (cpu.eax == 6) {
         struct FAT32DriverRequest request = *(struct FAT32DriverRequest*) cpu.ebx;
         *((int8_t*) cpu.ecx) = read(request);
-        // TODO : Drawer & Parser
         framebuffer_draw_sis_image(request.buf, 320, 200);
 
         __asm__("hlt"); // FIXME : Yes, very quick solution
+    } else if (cpu.eax == 7) {
+        struct FAT32DriverRequest request = *(struct FAT32DriverRequest*) cpu.ebx;
+        *((int8_t*) cpu.ecx) = read(request);
+        // TODO : Drawer & Parser
+        framebuffer_play_ter_video(request.buf);
+
+        __asm__("hlt"); // FIXME : Another quick solution
     }
 }
 
