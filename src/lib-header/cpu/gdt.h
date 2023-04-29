@@ -25,7 +25,7 @@ extern struct GDTR _gdt_gdtr;
  * @param privilege  2-bit privilege level field, PL0 = Maximum, PL3 = User / minimum privilege
  * @param valid_bit  1-bit indicating whether segment is valid
  */
-struct SDAccessByte {
+struct SegmentDescriptorAccessByte {
     uint8_t type_bit   : 4;
     uint8_t non_system : 1;
     uint8_t privilege  : 2;
@@ -54,8 +54,8 @@ struct SegmentDescriptor {
     uint16_t base_low;
 
     // Next 16-bit (Bit 32 to 47)
-    uint8_t             base_mid;
-    struct SDAccessByte access;
+    uint8_t                            base_mid;
+    struct SegmentDescriptorAccessByte access;
 
     // Next 8-bit (Bit 48 to 55)
     uint8_t segment_high : 4;
