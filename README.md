@@ -1,9 +1,14 @@
 # OS 2023
-Repository untuk testing spesifikasi IF2230 Sistem Operasi ITB 2023. Mengambil beberapa ide utama dari [littleosbook - Erik Helin, Adam Renberg](https://littleosbook.github.io/), [tugas besar OS-2022](https://github.com/Sister19/OS-2022), dan [pengerjaan OS sebelumnya](https://github.com/Lock1/IF2230-OS). Dibuat sepenuhnya dari scratch dan diadjust untuk keperluan tugas besar IF2230. Kit dan spesifikasi pengerjaan dapat diakses pada [Sister20/kit-OS-2023](https://github.com/Sister20/kit-OS-2023)
+Repository untuk testing spesifikasi IF2230 Sistem Operasi ITB 2023
 
+Mengambil beberapa ide utama dari [littleosbook - Erik Helin, Adam Renberg](https://littleosbook.github.io/), [tugas besar OS-2022](https://github.com/Sister19/OS-2022), dan [pengerjaan OS sebelumnya](https://github.com/Lock1/IF2230-OS). Dibuat sepenuhnya dari scratch dan diadjust untuk keperluan tugas besar IF2230. Kit dan spesifikasi pengerjaan dapat diakses pada [Sister20/kit-OS-2023](https://github.com/Sister20/kit-OS-2023)
 
+---
+
+*Mock-up* shell (yang ada pada spesifikasi)
 
 ![Shell sample](other/img/shell-sample.gif)
+
 
 Karena ada sedikit masalah dengan directory name length dengan manim (temporary file biasanya relatif panjang filenamenya), untuk source code animasi manim dipindah ke separate repository:
 
