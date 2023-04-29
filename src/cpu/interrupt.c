@@ -3,6 +3,7 @@
 #include "lib-header/cpu/gdt.h"
 #include "lib-header/driver/keyboard.h"
 #include "lib-header/driver/text-io-module/textio.h"
+#include "lib-header/driver/framebuffer.h"
 #include "lib-header/filesystem/fat32.h"
 #include "lib-header/stdmem.h"
 
@@ -53,6 +54,13 @@ void syscall(struct CPURegister cpu, __attribute__((unused)) struct InterruptSta
         memcpy((char *) cpu.ebx, buf, cpu.ecx);
     } else if (cpu.eax == 5) {
         puts((char *) cpu.ebx, cpu.ecx, cpu.edx);
+    } else if (cpu.eax == 6) {
+        struct FAT32DriverRequest request = *(struct FAT32DriverRequest*) cpu.ebx;
+        *((int8_t*) cpu.ecx) = read(request);
+        // TODO : Drawer & Parser
+        framebuffer_draw_sis_image(request.buf, 320, 200);
+
+        __asm__("hlt"); // FIXME : Yes, very quick solution
     }
 }
 

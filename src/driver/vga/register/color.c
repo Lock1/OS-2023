@@ -12,7 +12,7 @@ const struct VGARegisterPort _vga_reg_port_color_data = {
 };
 
 
-
+// TODO : It seems color is weird?
 void vga_set_palette(const uint8_t *palette_array, uint32_t color_count) {
     for (uint32_t i = 0; i < color_count; i++) {
         uint8_t index = 0;

@@ -1,5 +1,5 @@
+#include "lib-header/filesystem/fat32.h"
 #include "lib-header/stdtype.h"
-#include "lib-header/fat32.h"
 
 #define BIOS_BLACK         0x0
 #define BIOS_BLUE          0x1
@@ -74,7 +74,7 @@ int main(void) {
     struct ClusterBuffer cl           = {0};
     struct FAT32DriverRequest request = {
         .buf                   = &cl,
-        .name                  = "ikanaide",
+        .name                  = "uwu\0\0\0\0\0",
         .ext                   = "\0\0\0",
         .parent_cluster_number = 2,
         .buffer_size           = CLUSTER_SIZE,
@@ -93,6 +93,13 @@ int main(void) {
             // *Kind* of mockup, but still working properly
             puts((char*) &cl, BIOS_YELLOW);
             puts("\n", BIOS_YELLOW);
+        }
+        else if (!strcmp(buf, "draw")) {
+            uint32_t retcode = -1;
+            struct ClusterBuffer image[32];
+            request.buf = image;
+            request.buffer_size = CLUSTER_SIZE * 32;
+            syscall(6, (uint32_t) &request, (uint32_t) &retcode, 0);
         }
     }
 
