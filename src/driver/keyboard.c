@@ -57,10 +57,10 @@ void keyboard_state_deactivate(void) {
 }
 
 void keyboard_isr(void) {
+    uint8_t  scancode    = in(KEYBOARD_DATA_PORT);
     if (!keyboard_state.keyboard_input_on)
         keyboard_state.buffer_index = 0;
     else {
-        uint8_t  scancode    = in(KEYBOARD_DATA_PORT);
         char     mapped_char = keyboard_scancode_1_to_ascii_map[scancode];
         uint16_t position    = framebuffer_text_get_cursor();
         uint16_t row         = position / 80;
