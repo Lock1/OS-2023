@@ -1,5 +1,7 @@
-# OS-2023
-Testing spesifikasi IF2230 Sistem Operasi 2023
+# OS 2023
+Repository untuk testing spesifikasi IF2230 Sistem Operasi ITB 2023. Mengambil beberapa ide utama dari [littleosbook - Erik Helin, Adam Renberg](https://littleosbook.github.io/), [tugas besar OS-2022](https://github.com/Sister19/OS-2022), dan [pengerjaan OS sebelumnya](https://github.com/Lock1/IF2230-OS). Dibuat sepenuhnya dari scratch dan diadjust untuk keperluan tugas besar IF2230. Kit dan spesifikasi pengerjaan dapat diakses pada [Sister20/kit-OS-2023](https://github.com/Sister20/kit-OS-2023)
+
+
 
 ![Shell sample](other/img/shell-sample.gif)
 
@@ -11,9 +13,8 @@ https://github.com/Lock1/OS-2023-Manim
 
 
 ## Coding Convention
-- Yes, i have problem with my kind-of-insane-verbosity, but i like it anyway
-- Verbose >>> Random `out()` call that do something important but undocumented then forget about it
-- Do, not, use, `typedef`, for `struct` (except function pointer and pointer mumbo jumbo if needed)
+- Yes, insane verbosity, but i like it anyway
+- 0 `typedef` use for `struct` (except function pointer and pointer mumbo jumbo if needed)
 - Global variable use `_<filename>_<variable name>`
 - Assembly filename: `<filename>-asm.s`, with `filename` is same with C counterpart (ex. `interrupt.c` and `interrupt-asm.s`)
 - Both `<filename>-asm.s` and `<filename>.c` will use single header `<filename>.h`
@@ -24,7 +25,6 @@ https://github.com/Lock1/OS-2023-Manim
 ## Planned Roadmap
 ### Milestone 1
 1-5
-Notes - [Milestone 1 Notes](/other/notes/Milestone%201%20Notes.md)
 - [x] Initial setup & toolchain install
 - [x] Bootloader
 - [x] I/O Memory Map (VGA)
@@ -36,7 +36,7 @@ Notes - [Milestone 1 Notes](/other/notes/Milestone%201%20Notes.md)
 6-11
 - [x] Interrupt (IRQ kaya keyboard)
 - [x] Filesystem
-- [-] ~~Basic process + monotasking~~ Dropped for milestone 2
+- [ ] ~~Basic process + monotasking~~ Dropped for milestone 2
 
 ### Milestone 3
 12-End
@@ -47,16 +47,17 @@ Notes - [Milestone 1 Notes](/other/notes/Milestone%201%20Notes.md)
 
 ### Dropped
 Seems too hard?
-- [-] ~~Memory management (memcpy, malloc, etc)~~
-- [-] ~~Multitasking~~
+- [ ] ~~Memory management (memcpy, malloc, etc)~~
+- [ ] ~~Multitasking~~
 
 
 ## Resources
-32 bit Resources
-
+- Most of the main idea : https://littleosbook.github.io/
 - Bootloader & GRUB : http://www.jamesmolloy.co.uk/tutorial_html/index.html + https://littleosbook.github.io/
 
-Possibly main resource : https://littleosbook.github.io/
+
+
+Other reference
 - https://539kernel.com/
 - https://github.com/tuhdo/os01
 - https://github.com/HazemGabr232/Simple_OS
