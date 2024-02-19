@@ -96,15 +96,19 @@ kernel_execute_user_program:
     mov  fs, ax
     mov  gs, ax
 
-    mov  ecx, [esp+4] ; Save this for last push
-    push eax ; Stack segment selector (GDT_USER_DATA_SELECTOR), user privilege
+    mov  ecx, [esp+4]   ; Save the parameter for return address
+    push eax   ; Stack segment selector (GDT_USER_DATA_SELECTOR), user privilege
+
     mov  eax, ecx
     add  eax, 0x400000 - 4
-    push eax ; User space stack pointer (esp), move it into last 4 MiB
-    pushf    ; eflags register when at user program
-    mov  eax, 0x18 | 0x3
-    push eax ; Code segment selector (GDT_USER_CODE_SELECTOR)
-    mov  eax, ecx
-    push eax ; eip register to jump back
+    push eax   ; User space stack pointer (esp), move it into last 4 MiB
 
-    iret
+    pushfd     ; eflags register when at user program
+
+    mov  eax, 0x18 | 0x3
+    push eax   ; Code segment selector (GDT_USER_CODE_SELECTOR)
+
+    mov  eax, ecx
+    push eax   ; eip register to jump back
+
+    iretd
