@@ -149,7 +149,11 @@ struct InterruptStack {
 
 
 /**
- * InterruptFrame, entirety of general CPU states exactly before interrupt
+ * InterruptFrame, entirety of general CPU states exactly before interrupt.
+ * 
+ * @param cpu        CPU state when before the interrupt
+ * @param int_number Interrupt vector value
+ * @param int_stack  Hardware-defined (x86) stack state, note: will not access interprivilege ss and esp
  */
 struct InterruptFrame {
     struct CPURegister    cpu;

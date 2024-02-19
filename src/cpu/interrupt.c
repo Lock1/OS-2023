@@ -81,17 +81,11 @@ void pic_ack(uint8_t irq) {
 }
 
 void activate_keyboard_interrupt(void) {
-    out(PIC1_DATA, PIC_DISABLE_ALL_MASK ^ (1 << IRQ_KEYBOARD) ^ (1 << IRQ_TIMER));
-    out(PIC2_DATA, PIC_DISABLE_ALL_MASK);
+    // TODO: Split this timer
+    out(PIC1_DATA, in(PIC1_DATA) & ~(1 << IRQ_KEYBOARD) & ~(1 << IRQ_TIMER));
 }
 
 void pic_remap(void) {
-    uint8_t a1, a2;
-
-    // Save masks
-    a1 = in(PIC1_DATA); 
-    a2 = in(PIC2_DATA);
-
     // Starts the initialization sequence in cascade mode
     out(PIC1_COMMAND, ICW1_INIT | ICW1_ICW4); 
     io_wait();
@@ -112,6 +106,6 @@ void pic_remap(void) {
     io_wait();
 
     // Restore masks
-    out(PIC1_DATA, a1);
-    out(PIC2_DATA, a2);
+    out(PIC1_DATA, PIC_DISABLE_ALL_MASK);
+    out(PIC2_DATA, PIC_DISABLE_ALL_MASK);
 }

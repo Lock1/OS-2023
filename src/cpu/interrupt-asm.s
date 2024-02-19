@@ -58,7 +58,6 @@ call_generic_handler:
 
 
 ; Macro for creating interrupt handler that only push interrupt number
-
 ; Stack will have these value that pushed automatically by CPU
 ; [esp + 20] ss  (Only for inter-privilege)
 ; [esp + 16] esp (Only for inter-privilege)
