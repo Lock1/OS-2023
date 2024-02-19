@@ -8,7 +8,7 @@
 #include "lib-header/driver/vga/register/attribute-controller.h"
 #include "lib-header/driver/vga/register/color.h"
 
-#define MODE_3H_MEMORY_FRAMEBUFFER  (uint8_t *) 0xC00B8000
+#define MODE_3H_MEMORY_FRAMEBUFFER  ((uint8_t *) 0xC00B8000)
 #define MODE_3H_RESOLUTION          (80*25)
 #define MODE_3H_COLOR               16
 

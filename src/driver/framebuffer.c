@@ -92,9 +92,9 @@ void framebuffer_text_write(uint8_t row, uint8_t col, char c, uint8_t fg, uint8_
     if (_vga_current_video_mode == 3) {
         uint8_t  back_color = (bg & 0xF) << 4;
         uint8_t  char_color = (fg & 0xF);
-        uint16_t offset     = 2*(80*row + col);
-        memset(MODE_3H_MEMORY_FRAMEBUFFER + offset, c, 1);
-        memset(MODE_3H_MEMORY_FRAMEBUFFER + offset + 1, back_color | char_color, 1);
+        uint16_t offset     = (80*row + col) << 1;
+        MODE_3H_MEMORY_FRAMEBUFFER[offset]   = c;
+        MODE_3H_MEMORY_FRAMEBUFFER[offset+1] = back_color | char_color;
     }
 }
 

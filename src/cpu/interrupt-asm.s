@@ -18,7 +18,6 @@ call_generic_handler:
     push    ebx
     push    eax
 
-
     ; call the C function
     call    main_interrupt_handler
 
