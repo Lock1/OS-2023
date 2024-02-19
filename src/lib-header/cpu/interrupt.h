@@ -99,29 +99,46 @@ extern struct TSSEntry _interrupt_tss_entry;
 /**
  * CPURegister, store CPU registers that can be used for interrupt handler / ISRs
  * 
- * @param gp_register    CPU general purpose register (a, b, c, d)
- * @param stack_register CPU stack register (bp, sp)
+ * @param index   CPU index register (di, si)
+ * @param stack   CPU stack register (bp, sp)
+ * @param general CPU general purpose register (a, b, c, d)
+ * @param segment CPU extra segment register (gs, fs, es, ds)
  */
 struct CPURegister {
-    uint32_t eax;
-    uint32_t ebx;
-    uint32_t ecx;
-    uint32_t edx;
-    uint32_t ebp;
-    uint32_t esp;
+    struct {
+        uint32_t edi;
+        uint32_t esi;
+    } __attribute__((packed)) index;
+    struct {
+        uint32_t esp;
+        uint32_t ebp;
+    } __attribute__((packed)) stack;
+    struct {
+        uint32_t ebx;
+        uint32_t edx;
+        uint32_t ecx;
+        uint32_t eax;
+    } __attribute__((packed)) general;
+    struct {
+        uint32_t gs;
+        uint32_t fs;
+        uint32_t es;
+        uint32_t ds;
+    } __attribute__((packed)) segment;
 } __attribute__((packed));
 
 /**
- * InterruptInfo, data pushed by CPU when interrupt / exception is raised.
+ * InterruptStack, data pushed by CPU when interrupt / exception is raised.
  * Refer to Intel x86 Vol 3a: Figure 6-4 Stack usage on transfer to Interrupt.
  * 
  * Note, when returning from interrupt handler with iret, esp must be pointing to eip pushed before 
  * or in other words, CPURegister, int_number and error_code should be pop-ed from stack.
  * 
  * @param error_code Error code that pushed with the exception
- * @param eip        Instruction pointer where interrupt is raised
- * @param cs         Code segment selector where interrupt is raised
- * @param eflags     CPU eflags register when interrupt is raised
+ * These parameter is information where interrupt is raised and some CPU states pre-interrupt
+ * @param eip        Instruction pointer
+ * @param cs         Code segment register (GDT selector in protected mode)
+ * @param eflags     eflags register
  */
 struct InterruptStack {
     uint32_t error_code;
@@ -129,6 +146,17 @@ struct InterruptStack {
     uint32_t cs;
     uint32_t eflags;
 } __attribute__((packed));
+
+
+/**
+ * InterruptFrame, entirety of general CPU states exactly before interrupt
+ */
+struct InterruptFrame {
+    struct CPURegister    cpu;
+    uint32_t              int_number;
+    struct InterruptStack int_stack;
+} __attribute((packed));
+
 
 /**
  * TSSEntry, Task State Segment. Used when jumping back to ring 0 / kernel
@@ -168,11 +196,9 @@ void pic_remap(void);
  * parameter. Can be checked with ((int*) info) + 4 for user $esp, 5 for user $ss
  * 
  * Again, this function is not for normal function call, all parameter will be automatically set when interrupt is called.
- * @param cpu        CPU register when interrupt is raised
- * @param int_number Interrupt number that trigger interrupt exception
- * @param info       Information about interrupt that pushed automatically by CPU
+ * @param frame Information about CPU during interrupt is raised
  */
-void main_interrupt_handler(struct CPURegister cpu, uint32_t int_number, struct InterruptStack info);
+void main_interrupt_handler(struct InterruptFrame frame);
 
 // Set kernel stack in TSS
 void set_tss_kernel_current_stack(void);

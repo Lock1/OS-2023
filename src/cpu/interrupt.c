@@ -21,8 +21,8 @@ void set_tss_kernel_current_stack(void) {
     _interrupt_tss_entry.esp0 = stack_ptr + 8; 
 }
 
-void main_interrupt_handler(struct CPURegister cpu, uint32_t int_number, struct InterruptStack info) {
-    switch (int_number) {
+void main_interrupt_handler(struct InterruptFrame frame) {
+    switch (frame.int_number) {
         case PAGE_FAULT:
             __asm__("hlt");
             break;
@@ -33,36 +33,36 @@ void main_interrupt_handler(struct CPURegister cpu, uint32_t int_number, struct 
             keyboard_isr();
             break;
         case 0x30:
-            syscall(cpu, info);
+            syscall(frame.cpu, frame.int_stack);
             break;
     }
 }
 
 void syscall(struct CPURegister cpu, __attribute__((unused)) struct InterruptStack info) {
-    if (cpu.eax == 0) {
-        struct FAT32DriverRequest request = *(struct FAT32DriverRequest*) cpu.ebx;
-        *((int8_t*) cpu.ecx) = read(request);
-    } else if (cpu.eax == 1) {
-        struct FAT32DriverRequest request = *(struct FAT32DriverRequest*) cpu.ebx;
-        *((int8_t*) cpu.ecx) = read_directory(request);
-    } else if (cpu.eax == 4) {
+    if (cpu.general.eax == 0) {
+        struct FAT32DriverRequest request = *(struct FAT32DriverRequest*) cpu.general.ebx;
+        *((int8_t*) cpu.general.ecx) = read(request);
+    } else if (cpu.general.eax == 1) {
+        struct FAT32DriverRequest request = *(struct FAT32DriverRequest*) cpu.general.ebx;
+        *((int8_t*) cpu.general.ecx) = read_directory(request);
+    } else if (cpu.general.eax == 4) {
         keyboard_state_activate();
         __asm__("sti"); // Due IRQ is disabled when main_interrupt_handler() called
         while (is_keyboard_blocking());
         char buf[KEYBOARD_BUFFER_SIZE];
         get_keyboard_buffer(buf);
-        memcpy((char *) cpu.ebx, buf, cpu.ecx);
-    } else if (cpu.eax == 5) {
-        puts((char *) cpu.ebx, cpu.ecx, cpu.edx);
-    } else if (cpu.eax == 6) {
-        struct FAT32DriverRequest request = *(struct FAT32DriverRequest*) cpu.ebx;
-        *((int8_t*) cpu.ecx) = read(request);
+        memcpy((char *) cpu.general.ebx, buf, cpu.general.ecx);
+    } else if (cpu.general.eax == 5) {
+        puts((char *) cpu.general.ebx, cpu.general.ecx, cpu.general.edx);
+    } else if (cpu.general.eax == 6) {
+        struct FAT32DriverRequest request = *(struct FAT32DriverRequest*) cpu.general.ebx;
+        *((int8_t*) cpu.general.ecx) = read(request);
         framebuffer_draw_sis_image(request.buf, 320, 200);
 
         __asm__("hlt"); // FIXME : Yes, very quick solution
-    } else if (cpu.eax == 7) {
-        struct FAT32DriverRequest request = *(struct FAT32DriverRequest*) cpu.ebx;
-        *((int8_t*) cpu.ecx) = read(request);
+    } else if (cpu.general.eax == 7) {
+        struct FAT32DriverRequest request = *(struct FAT32DriverRequest*) cpu.general.ebx;
+        *((int8_t*) cpu.general.ecx) = read(request);
         // TODO : Drawer & Parser
         framebuffer_play_ter_video(request.buf);
 
