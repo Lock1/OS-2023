@@ -1,4 +1,5 @@
-#include "lib-header/stdtype.h"
+#include <stdint.h>
+#include <stdbool.h>
 #include "lib-header/stdmem.h"
 
 void* memset(void *s, int c, size_t n) {

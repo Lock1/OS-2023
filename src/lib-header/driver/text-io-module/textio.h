@@ -1,7 +1,8 @@
 #ifndef _TEXTIO_H
 #define _TEXTIO_H
 
-#include "lib-header/stdtype.h"
+#include <stdint.h>
+#include <stdbool.h>
 
 /**
  * Simply write null-terminated string to framebuffer at current position

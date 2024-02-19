@@ -1,5 +1,6 @@
+#include <stdint.h>
+#include <stdbool.h>
 #include "lib-header/filesystem/fat32.h"
-#include "lib-header/stdtype.h"
 #include "lib-header/stdmem.h"
 
 #define BIOS_BLACK         0x0
@@ -83,7 +84,7 @@ int main(void) {
     readfs(request);
 
     char buf[16];
-    while (TRUE) {
+    while (true) {
         puts("Brush@OS-IF2230", BIOS_LIGHT_GREEN);
         puts(":", BIOS_GRAY);
         puts("/", BIOS_LIGHT_BLUE);

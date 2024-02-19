@@ -1,5 +1,6 @@
+#include <stdint.h>
+#include <stdbool.h>
 #include "lib-header/filesystem/fat32.h"
-#include "lib-header/stdtype.h"
 #include "lib-header/stdmem.h"
 
 static struct FAT32DriverState fat32driver_state = {0};
@@ -116,8 +117,8 @@ int8_t driver_fat_mark_empty_cluster(uint32_t empty_buf[CLUSTER_MARK_MAX], uint3
 bool is_dirtable_empty(struct FAT32DirectoryTable *dirtable) {
     for (uint32_t i = 1; i < DIRECTORY_TABLE_ENTRY_COUNT; i++) // Skipping index 0
         if (dirtable->table[i].user_attribute & UATTR_NOT_EMPTY)
-            return FALSE;
-    return TRUE;
+            return false;
+    return true;
 }
 
 
@@ -132,7 +133,7 @@ int8_t read(struct FAT32DriverRequest request) {
         return -1; // Parent cluster number is not directory
 
     // Linear scan for entry in dir table
-    int32_t entry_index = driver_dir_table_linear_scan(request.name, request.ext, FALSE);
+    int32_t entry_index = driver_dir_table_linear_scan(request.name, request.ext, false);
 
     if (entry_index == -1)
         return 3; // File not found
@@ -162,7 +163,7 @@ int8_t read_directory(struct FAT32DriverRequest request) {
     if (!is_loaded_dir_table_valid())
         return -1; // Parent cluster number is not directory
 
-    int32_t entry_index = driver_dir_table_linear_scan(request.name, "\0\0\0", FALSE);
+    int32_t entry_index = driver_dir_table_linear_scan(request.name, "\0\0\0", false);
 
     if (entry_index == -1)
         return 2; // Directory not found
@@ -184,8 +185,8 @@ int8_t write(struct FAT32DriverRequest request) {
     if (!is_loaded_dir_table_valid())
         return -1; // Parent cluster number is not directory
 
-    int32_t same_name_index   = driver_dir_table_linear_scan(request.name, request.ext, FALSE);
-    int32_t empty_entry_index = driver_dir_table_linear_scan(request.name, request.ext, TRUE);
+    int32_t same_name_index   = driver_dir_table_linear_scan(request.name, request.ext, false);
+    int32_t empty_entry_index = driver_dir_table_linear_scan(request.name, request.ext, true);
 
     if (same_name_index != -1)
         return 1; // Entry with same name already exist
@@ -247,7 +248,7 @@ int8_t delete(struct FAT32DriverRequest request) {
         return -1; // Parent cluster number is not directory
 
     // Linear scan for entry in dir table
-    int32_t entry_index = driver_dir_table_linear_scan(request.name, request.ext, FALSE);
+    int32_t entry_index = driver_dir_table_linear_scan(request.name, request.ext, false);
 
     if (entry_index == -1)
         return 1; // File not found

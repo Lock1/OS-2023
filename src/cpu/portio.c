@@ -1,5 +1,6 @@
+#include <stdint.h>
+#include <stdbool.h>
 #include "lib-header/cpu/portio.h"
-#include "lib-header/stdtype.h"
 
 /** x86 inb/outb - inw/outw - inl/outl (8 / 16 / 32-bit data):
  * @param dx target port 

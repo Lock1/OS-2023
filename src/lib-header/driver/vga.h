@@ -1,7 +1,8 @@
 #ifndef _VGA_H
 #define _VGA_H
 
-#include "lib-header/stdtype.h"
+#include <stdint.h>
+#include <stdbool.h>
 #include "lib-header/driver/vga/video-mode-preset/vga-video-preset.h"
 
 /** 

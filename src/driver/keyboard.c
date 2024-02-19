@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include "lib-header/cpu/portio.h"
 #include "lib-header/cpu/interrupt.h"
 #include "lib-header/driver/keyboard.h"
@@ -5,8 +6,8 @@
 #include "lib-header/stdmem.h"
 
 static struct KeyboardDriverState keyboard_state = {
-    .read_extended_mode   = FALSE,
-    .keyboard_input_on    = FALSE,
+    .read_extended_mode   = false,
+    .keyboard_input_on    = false,
     .keyboard_buffer      = {0},
     .buffer_index         = 0,
 };
@@ -49,11 +50,11 @@ bool is_keyboard_blocking(void) {
 }
 
 void keyboard_state_activate(void) {
-    keyboard_state.keyboard_input_on = TRUE;
+    keyboard_state.keyboard_input_on = true;
 }
 
 void keyboard_state_deactivate(void) {
-    keyboard_state.keyboard_input_on = FALSE;
+    keyboard_state.keyboard_input_on = false;
 }
 
 void keyboard_isr(void) {
@@ -76,9 +77,9 @@ void keyboard_isr(void) {
                     keyboard_state.buffer_index++;
                     break;
             }
-            keyboard_state.read_extended_mode = FALSE;
+            keyboard_state.read_extended_mode = false;
         } else if (scancode == EXTENDED_SCANCODE_BYTE) {
-            keyboard_state.read_extended_mode = TRUE;
+            keyboard_state.read_extended_mode = true;
         } else if (printable_scancode(scancode)) {
             framebuffer_text_write(row, column, mapped_char, 0xF, 0);
             framebuffer_text_set_cursor(row, column + 1);

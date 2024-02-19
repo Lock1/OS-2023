@@ -1,3 +1,6 @@
+#include <stdint.h>
+#include <stdbool.h>
+#include <stddef.h>
 #include "lib-header/cpu/portio.h"
 #include "lib-header/cpu/gdt.h"
 #include "lib-header/cpu/idt.h"
@@ -10,7 +13,6 @@
 #include "lib-header/filesystem/fat32.h"
 #include "lib-header/memory/paging.h"
 #include "lib-header/kernel.h"
-#include "lib-header/stdtype.h"
 #include "lib-header/stdmem.h"
 
 static void setup_gdt_and_tss(void) {

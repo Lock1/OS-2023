@@ -1,8 +1,9 @@
 #ifndef _VGA_CRT_CONTROLLER_REGISTER_H
 #define _VGA_CRT_CONTROLLER_REGISTER_H
 
+#include <stdint.h>
+#include <stdbool.h>
 #include "lib-header/driver/vga/vga-register-programmer.h"
-#include "lib-header/stdtype.h"
 
 // Mono use 0x3B4-0x3B5 instead
 // Constant & indices

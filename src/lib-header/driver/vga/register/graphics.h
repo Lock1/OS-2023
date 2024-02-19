@@ -1,8 +1,9 @@
 #ifndef _VGA_GRAPHICS_REGISTER_H
 #define _VGA_GRAPHICS_REGISTER_H
 
+#include <stdint.h>
+#include <stdbool.h>
 #include "lib-header/driver/vga/vga-register-programmer.h"
-#include "lib-header/stdtype.h"
 
 // Constant & indices
 #define GRAPHICS_REGISTER_COUNT               9

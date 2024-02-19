@@ -1,7 +1,7 @@
 #ifndef _STDMEM_H
 #define _STDMEM_H
 
-#include "stdtype.h"
+#include <stddef.h>
 
 /**
  * C standard memset, check man memset or

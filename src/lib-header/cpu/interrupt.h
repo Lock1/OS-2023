@@ -1,7 +1,8 @@
 #ifndef _INTERRUPT_H
 #define _INTERRUPT_H
 
-#include "lib-header/stdtype.h"
+#include <stdint.h>
+#include <stdbool.h>
 
 /* -- PIC constants -- */
 

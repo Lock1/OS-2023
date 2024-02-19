@@ -1,6 +1,7 @@
+#include <stdint.h>
+#include <stdbool.h>
 #include "lib-header/cpu/gdt.h"
 #include "lib-header/cpu/interrupt.h"
-#include "lib-header/stdtype.h"
 
 /**
  * global_descriptor_table, predefined GDT.

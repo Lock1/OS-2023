@@ -1,8 +1,9 @@
 #ifndef _VGA_COLOR_REGISTER_H
 #define _VGA_COLOR_REGISTER_H
 
+#include <stdint.h>
+#include <stdbool.h>
 #include "lib-header/driver/vga/vga-register-programmer.h"
-#include "lib-header/stdtype.h"
 
 // Indexed register but only 1 port
 

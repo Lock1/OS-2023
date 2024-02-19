@@ -1,7 +1,8 @@
 #ifndef _VGA_REGISTER_PROGRAMMER_H
 #define _VGA_REGISTER_PROGRAMMER_H
 
-#include "lib-header/stdtype.h"
+#include <stdint.h>
+#include <stdbool.h>
 
 // Note : Naming convention directly follow from http://www.osdever.net/FreeVGA/vga/vga.htm
 

@@ -1,7 +1,8 @@
 #ifndef _FRAMEBUFFER_H
 #define _FRAMEBUFFER_H
 
-#include "lib-header/stdtype.h"
+#include <stdint.h>
+#include <stdbool.h>
 
 #define CURSOR_PORT_CMD        0x03D4
 #define CURSOR_PORT_DATA       0x03D5

@@ -1,7 +1,8 @@
+#include <stdint.h>
+#include <stdbool.h>
 #include "lib-header/cpu/portio.h"
 #include "lib-header/driver/framebuffer.h"
 #include "lib-header/driver/vga.h"
-#include "lib-header/stdtype.h"
 #include "lib-header/stdmem.h"
 
 enum cursor_command {
