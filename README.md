@@ -1,7 +1,12 @@
 # OS 2023
 Repository untuk testing spesifikasi IF2230 Sistem Operasi ITB 2023
 
-Mengambil beberapa ide utama dari [littleosbook - Erik Helin, Adam Renberg](https://littleosbook.github.io/), [tugas besar OS-2022](https://github.com/Sister19/OS-2022), dan [pengerjaan OS sebelumnya](https://github.com/Lock1/IF2230-OS). Dibuat sepenuhnya dari scratch dan diadjust untuk keperluan tugas besar IF2230. Kit dan spesifikasi pengerjaan dapat diakses pada [Sister20/kit-OS-2023](https://github.com/Sister20/kit-OS-2023)
+Mengambil beberapa ide utama dari [littleosbook - Erik Helin, Adam Renberg](https://littleosbook.github.io/), [tugas besar OS-2022](https://github.com/Sister19/OS-2022), dan [pengerjaan OS sebelumnya](https://github.com/Lock1/IF2230-OS). Dibuat sepenuhnya dari scratch dan diadjust untuk keperluan tugas besar IF2230. Kit, spesifikasi, dan guidebook pengerjaan dapat diakses pada [Sister20/kit-OS-2023](https://github.com/Sister20/kit-OS-2023)
+
+Links
+- [OS-2022](https://github.com/Sister19/OS-2022) - Dibuat sebagai asisten lab Sister '19
+- [OS-2023](https://github.com/Lock1/OS-2023) - Dibuat untuk membantu asisten Sister '20 & mengubah spesifikasi secara drastis
+- [OS-2024 WIP](https://github.com/Lock1/Full-Test-OS-2024) - Dibuat untuk membantu asisten Sister '21 & menambah process + rewrite total guide menjadi buku
 
 ---
 
