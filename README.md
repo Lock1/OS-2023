@@ -22,13 +22,13 @@ https://github.com/Lock1/OS-2023-Manim
 [Dev Repository untuk kit](https://github.com/Lock1/kit-OS-2023)
 
 
-## Coding Convention
-- Yes, insane verbosity, but i like it anyway
-- 0 `typedef` use for `struct` (except function pointer and pointer mumbo jumbo if needed)
-- Global variable use `_<filename>_<variable name>`
+## Code Style
+- Yes, verbose
+- No `typedef` for `struct` (except function pointer and some magic if needed)
+- Global variable will use `_<filename>_<variable name>`
 - Assembly filename: `<filename>-asm.s`, with `filename` is same with C counterpart (ex. `interrupt.c` and `interrupt-asm.s`)
-- Both `<filename>-asm.s` and `<filename>.c` will use single header `<filename>.h`
-- Special exception for `kernel.c` and `kernel-entrypoint.s`, with single header `kernel.h`
+- Both `<filename>-asm.s` and `<filename>.c` will share single header `<filename>.h`
+- `kernel.c` and `kernel-entrypoint.s` will share `kernel.h` instead
 
 
 
