@@ -1,31 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 
-// Usual gcc fixed width integer type 
-typedef u_int32_t uint32_t;
-typedef u_int8_t  uint8_t;
-
-// Manual import from fat32.h, disk.h, & stdmem.h due some issue with size_t
-#define BLOCK_SIZE      512
-
-struct FAT32DriverRequest {
-    void     *buf;
-    char      name[8];
-    char      ext[3];
-    uint32_t  parent_cluster_number;
-    uint32_t  buffer_size;
-} __attribute__((packed));
-
-void*  memcpy(void* restrict dest, const void* restrict src, size_t n);
-
-void   initialize_filesystem_fat32(void);
-int8_t read(struct FAT32DriverRequest request);
-int8_t read_directory(struct FAT32DriverRequest request);
-int8_t write(struct FAT32DriverRequest request);
-int8_t delete(struct FAT32DriverRequest request);
-
-
-
+#include "lib-header/filesystem/fat32.h"
+#include "lib-header/driver/disk.h"
+#include "lib-header/stdmem.h"
 
 // Global variable
 uint8_t *image_storage;
@@ -33,12 +12,20 @@ uint8_t *file_buffer;
 
 void read_blocks(void *ptr, uint32_t logical_block_address, uint8_t block_count) {
     for (int i = 0; i < block_count; i++)
-        memcpy((uint8_t*) ptr + BLOCK_SIZE*i, image_storage + BLOCK_SIZE*(logical_block_address+i), BLOCK_SIZE);
+        memcpy(
+            (uint8_t*) ptr + BLOCK_SIZE*i, 
+            image_storage + BLOCK_SIZE*(logical_block_address+i), 
+            BLOCK_SIZE
+        );
 }
 
 void write_blocks(const void *ptr, uint32_t logical_block_address, uint8_t block_count) {
     for (int i = 0; i < block_count; i++)
-        memcpy(image_storage + BLOCK_SIZE*(logical_block_address+i), (uint8_t*) ptr + BLOCK_SIZE*i, BLOCK_SIZE);
+        memcpy(
+            image_storage + BLOCK_SIZE*(logical_block_address+i),
+            (uint8_t*) ptr + BLOCK_SIZE*i, 
+            BLOCK_SIZE
+        );
 }
 
 

@@ -1,5 +1,4 @@
 ENTRY(_start)
-OUTPUT_FORMAT("binary")
 
 SECTIONS {
     . = 0x00000000;    /* Assuming OS will load this program at virtual address 0x00000000 */

@@ -1,4 +1,4 @@
-# Object files & root temporaty folder
+# Object files & root temporary folder
 OBJECTS = kernel-entrypoint.o kernel.o \
 	generic-lib/stdmem.o \
 	driver/framebuffer.o driver/keyboard.o driver/disk.o driver/vga.o \
@@ -60,7 +60,7 @@ user-shell:
 	@$(ASM) $(AFLAGS) $(SOURCE_FOLDER)/external-program/user-entry.s -o user-entry.o
 	@$(CC)  $(CFLAGS) -fno-pie $(SOURCE_FOLDER)/external-program/user-shell.c -o user-shell.o
 	@$(CC)  $(CFLAGS) -fno-pie $(SOURCE_FOLDER)/generic-lib/stdmem.c -o stdmem.o
-	@$(LIN) -T $(SOURCE_FOLDER)/external-program/user-linker.ld -melf_i386 \
+	@$(LIN) -T $(SOURCE_FOLDER)/external-program/user-linker.ld -melf_i386 --oformat=binary\
 		user-entry.o user-shell.o stdmem.o -o $(OUTPUT_FOLDER)/shell
 	@echo Linking object shell object files and generate flat binary...
 	@$(LIN) -T $(SOURCE_FOLDER)/external-program/user-linker.ld -melf_i386 --oformat=elf32-i386\

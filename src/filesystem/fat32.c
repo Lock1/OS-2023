@@ -40,6 +40,12 @@ void init_directory_table(struct FAT32DirectoryTable *dir_table, char *name, uin
     dir_table->table[0].user_attribute = UATTR_NOT_EMPTY;
     dir_table->table[0].attribute      = ATTR_SUBDIRECTORY;
     memcpy(dir_table->table[0].name, name, 8);
+
+    dir_table->table[1].cluster_high   = 0xFFFF & (parent_dir_cluster >> 16);
+    dir_table->table[1].cluster_low    = 0xFFFF & parent_dir_cluster;
+    dir_table->table[1].user_attribute = UATTR_NOT_EMPTY;
+    dir_table->table[1].attribute      = ATTR_SUBDIRECTORY;
+    memcpy(dir_table->table[1].name, p_name, 8);
 }
 
 
